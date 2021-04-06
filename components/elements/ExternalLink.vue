@@ -8,6 +8,7 @@
     :href="to"
     target="_blank"
     :rel="rel"
+    v-bind="additionalAttrs"
   >
     <slot />
     <FontAwesomeIcon
@@ -51,6 +52,11 @@ export default {
       type: Boolean,
       default: false,
     },
+    label: {
+      type: String,
+      required: false,
+      default: null,
+    },
   },
 
   computed: {
@@ -70,6 +76,15 @@ export default {
       }
 
       return rels.join(' ')
+    },
+    additionalAttrs () {
+      if (this.label == null) {
+        return {}
+      }
+
+      return {
+        'aria-label': this.label,
+      }
     },
   },
 }

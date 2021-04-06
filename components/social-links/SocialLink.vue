@@ -4,6 +4,7 @@
       :to="to"
       :light="light"
       :dark="dark"
+      :label="iconLabel"
       no-follow
       no-referrer
     >
@@ -38,6 +39,12 @@ export default {
       type: Boolean,
       required: false,
       default: false,
+    },
+  },
+
+  computed: {
+    iconLabel () {
+      return `Newcastle City Juniors on ${this.icon.charAt(0).toUpperCase() + this.icon.split('-')[0].slice(1)}`
     },
   },
 }
