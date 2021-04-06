@@ -25,15 +25,14 @@ module.exports = {
         'sans-serif',
       ],
     },
-    minHeight: {
-      0: '0',
-      '1/4': '25vh',
-      '1/2': '50vh',
-      '3/4': '75vh',
-      full: '100vh',
-      500: '500px',
+    extend: {
+      listStyleType: {
+        'lower-alpha': 'lower-alpha',
+      },
+      minHeight: {
+        500: '500px',
+      },
     },
-    extend: {},
   },
   variants: {
     extend: {},

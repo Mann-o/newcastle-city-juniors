@@ -36,6 +36,10 @@ a {
   }
 }
 
+p a {
+  @apply underline;
+}
+
 .page-enter-active,
 .page-leave-active {
   @apply transition-opacity;
