@@ -7,6 +7,7 @@ import { googleFonts } from './config/google-fonts'
 import { head } from './config/head'
 import { modules } from './config/modules'
 import { plugins } from './config/plugins'
+import { privateRuntimeConfig } from './config/private-runtime-config'
 import { publicRuntimeConfig } from './config/public-runtime-config'
 import { pwa } from './config/pwa'
 import { render } from './config/render'
@@ -29,6 +30,7 @@ const config: NuxtConfig = {
   modern: process.env.NODE_ENV === 'production',
   modules,
   plugins,
+  privateRuntimeConfig,
   publicRuntimeConfig,
   pwa,
   render,
