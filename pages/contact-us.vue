@@ -1,14 +1,12 @@
 <template>
   <div>
-    <ClientOnly>
-      <GmapMap
-        :style="{ height: map.height }"
-        :center="map.center"
-        :zoom="map.zoom"
-      >
-        <GmapMarker :position="map.center" />
-      </GmapMap>
-    </ClientOnly>
+    <GmapMap
+      :style="{ height: map.height }"
+      :center="map.center"
+      :zoom="map.zoom"
+    >
+      <GmapMarker :position="map.center" />
+    </GmapMap>
 
     <ContactInfo />
   </div>

@@ -15,4 +15,8 @@ export const build: NuxtOptionsBuild = {
   //     '@babel/plugin-proposal-nullish-coalescing-operator',
   //   ],
   // },
+
+  transpile: [
+    /^vue2-google-maps($|\/)/,
+  ]
 }
