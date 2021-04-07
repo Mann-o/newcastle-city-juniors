@@ -8,6 +8,8 @@
 export default {
   name: 'PageAboutUsIndex',
 
+  scrollToTop: true,
+
   head: () => ({
     title: 'About Us',
   }),

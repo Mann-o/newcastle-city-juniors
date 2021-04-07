@@ -19,6 +19,8 @@ export default {
     CommitteeCard: () => import('@/components/committee/CommitteeCard.vue'),
   },
 
+  scrollToTop: true,
+
   data: () => ({
     committeeMembers: [
       {

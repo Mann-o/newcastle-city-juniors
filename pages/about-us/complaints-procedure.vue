@@ -6,6 +6,8 @@
 export default {
   name: 'PageAboutUsComplaints',
 
+  scrollToTop: true,
+
   head: () => ({
     title: 'Complaints Procedure',
   }),

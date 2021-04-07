@@ -6,6 +6,8 @@
 export default {
   name: 'PageAboutUsClubPhilosophy',
 
+  scrollToTop: true,
+
   head: () => ({
     title: 'Club Philosophy',
   }),

@@ -183,6 +183,8 @@
 export default {
   name: 'PageAboutUsSafeguarding',
 
+  scrollToTop: true,
+
   head: () => ({
     title: 'Safeguarding Children',
   }),

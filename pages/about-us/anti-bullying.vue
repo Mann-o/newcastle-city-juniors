@@ -6,6 +6,8 @@
 export default {
   name: 'PageAboutUsClubAntiBullying',
 
+  scrollToTop: true,
+
   head: () => ({
     title: 'Anti-Bullying',
   }),
