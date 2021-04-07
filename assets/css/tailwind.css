@@ -7,11 +7,23 @@
     @apply border-b-2 border-grey relative mb-8 pb-2 text-3xl uppercase;
   }
 
+  h2 {
+    @apply border-b-2 border-grey relative mb-4 text-xl uppercase inline-block;
+  }
+
   h4 {
     @apply border-b-2 border-grey relative mb-4 pb-2;
   }
 
   h1::after {
+    @apply absolute left-0 bg-gold;
+    height: 2px;
+    width: 50px;
+    bottom: -2px;
+    content: '';
+  }
+
+  h2::after {
     @apply absolute left-0 bg-gold;
     height: 2px;
     width: 50px;

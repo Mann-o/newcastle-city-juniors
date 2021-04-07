@@ -146,19 +146,19 @@
           Further advice on Safeguarding Children matters can be obtained from:
         </p>
         <p class="mb-4">
-          Newcastle City Juniors Welfare Officer:<br>Name: Keith Morris<br>Telephone: <a href="tel:+447914118197">07914 118197</a><br>Email: <a href="mailto:keithmorris_cyd@hotmail.co.uk">keithmorris_cyd@hotmail.co.uk</a>
+          <strong>Newcastle City Juniors Welfare Officer:</strong><br>Name: Keith Morris<br>Telephone: <a href="tel:+447914118197">07914 118197</a><br>Email: <a href="mailto:keithmorris_cyd@hotmail.co.uk">keithmorris_cyd@hotmail.co.uk</a>
         </p>
         <p class="mb-4">
-          Newcastle City Juniors Assistant Welfare Officer:<br>Name: Adam Jones<br>Telephone: <a href="tel:+447518389898">07518 389898</a><br>Email: <a href="mailto:ncj.adamjones@hotmail.com">ncj.adamjones@hotmail.com</a>
+          <strong>Newcastle City Juniors Assistant Welfare Officer:</strong><br>Name: Adam Jones<br>Telephone: <a href="tel:+447518389898">07518 389898</a><br>Email: <a href="mailto:ncj.adamjones@hotmail.com">ncj.adamjones@hotmail.com</a>
         </p>
         <p class="mb-4">
-          Newcastle City Juniors Assistant Welfare Officer:<br>Name: Jack Foalle<br>Telephone: <a href="tel:+447432079000">07432 079000</a><br>Email: <a href="mailto:jackfoalle1994@yahoo.co.uk">jackfoalle1994@yahoo.co.uk</a>
+          <strong>Newcastle City Juniors Assistant Welfare Officer:</strong><br>Name: Jack Foalle<br>Telephone: <a href="tel:+447432079000">07432 079000</a><br>Email: <a href="mailto:jackfoalle1994@yahoo.co.uk">jackfoalle1994@yahoo.co.uk</a>
         </p>
         <p class="mb-4">
           If at any time you are not able to contact your Club Welfare Officer or the matter is clearly serious then you can either:
         </p>
         <p class="mb-4">
-          Northumberland County Football Association’s Welfare Officers:<br>Name: Ray Johnstone<br>Telephone: <a href="tel:+441912700700">0191 2700 700</a><br>Email: <a href="mailto:ray.johnstone@northumberlandfa.com">ray.johnstone@northumberlandfa.com</a>
+          <strong>Northumberland County Football Association’s Welfare Officers:</strong><br>Name: Ray Johnstone<br>Telephone: <a href="tel:+441912700700">0191 2700 700</a><br>Email: <a href="mailto:ray.johnstone@northumberlandfa.com">ray.johnstone@northumberlandfa.com</a>
         </p>
         <ul
           class="list-disc pl-5"
