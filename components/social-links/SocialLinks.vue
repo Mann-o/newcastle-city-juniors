@@ -13,6 +13,12 @@
         :light="light"
         :dark="dark"
       />
+      <SocialLink
+        to="https://www.instagram.com/newcastlecityjuniorsfc/"
+        icon="instagram"
+        :light="light"
+        :dark="dark"
+      />
     </ul>
   </nav>
 </template>

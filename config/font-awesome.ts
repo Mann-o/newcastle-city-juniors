@@ -2,6 +2,7 @@ export const fontawesome = {
   icons: {
     brands: [
       'faFacebookF',
+      'faInstagram',
       'faTwitter',
     ],
   },
