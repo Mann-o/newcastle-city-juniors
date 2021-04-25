@@ -1,5 +1,5 @@
 <template>
-  <div class="px-8 pb-16 md:px-0 md:pb-0">
+  <div class="px-8 pb-16 lg:px-0 lg:pb-0">
     <h4>About Us</h4>
     <p class="pb-4">
       FA CHARTER STANDARD CLUB

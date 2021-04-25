@@ -1,5 +1,5 @@
 <template>
-  <li class="border-b border-dark-grey py-1 first:pt-0 last:pb-0 last:border-b-0 text-grey hover:text-white transition-colors">
+  <li class="border-b border-grey-600 py-1 first:pt-0 last:pb-0 last:border-b-0 text-grey-400 hover:text-white transition-colors">
     <ExternalLink
       v-if="external"
       :to="to"

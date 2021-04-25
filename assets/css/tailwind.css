@@ -2,17 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  @apply font-poppins;
+}
+
 @layer base {
   h1 {
-    @apply border-b-2 border-grey relative mb-8 pb-2 text-3xl uppercase;
+    @apply border-b-2 border-grey-400 relative mb-8 pb-2 text-3xl uppercase;
   }
 
   h2 {
-    @apply border-b-2 border-grey relative mb-4 text-xl uppercase inline-block;
+    @apply border-b-2 border-grey-400 relative mb-4 text-xl uppercase inline-block;
   }
 
   h4 {
-    @apply border-b-2 border-grey relative mb-4 pb-2;
+    @apply border-b-2 border-grey-400 relative mb-4 pb-2;
   }
 
   h1::after {

@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-gold py-3 px-4 text-xs md:px-0 md:text-sm">
+  <div class="bg-gold py-3 px-4 text-xs lg:px-0 lg:text-sm">
     <div class="container mx-auto flex justify-between">
       <a
         class="text-black hover:text-black"

@@ -1,7 +1,6 @@
 <template>
-  <div class="py-80">
-    <p>Home</p>
-    <!-- <pre>{{ page }}</pre> -->
+  <div>
+    <HomeHero />
   </div>
 </template>
 
@@ -10,6 +9,12 @@
 
 export default {
   name: 'PageIndex',
+
+  components: {
+    HomeHero: () => import('@/components/home/HomeHero.vue'),
+  },
+
+  layout: 'full-bleed',
 
   head: () => ({
     title: 'Home',

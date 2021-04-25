@@ -1,14 +1,23 @@
 <template>
-  <li class="main-navigation-link border-b border-gray-800 lg:border-none lg:hover:text-gold transition-all lg:relative">
-    <NuxtLink
-      v-if="!$slots.default"
-      :to="route.to"
-      class="block py-4 pl-4 text-white lg:py-8"
-      active-class="text-gold"
-      exact
-    >
-      {{ route.label }}
-    </NuxtLink>
+  <li class="main-navigation-link border-b border-grey-800 lg:border-none lg:hover:text-gold transition-all lg:relative">
+    <template v-if="!$slots.default">
+      <a
+        v-if="isExternalLink"
+        :href="route.to"
+        class="block py-4 pl-4 text-white lg:py-8"
+      >
+        {{ route.label }}
+      </a>
+      <NuxtLink
+        v-else
+        :to="route.to"
+        class="block py-4 pl-4 text-white lg:py-8"
+        active-class="text-gold"
+        exact
+      >
+        {{ route.label }}
+      </NuxtLink>
+    </template>
     <template v-else>
       <div
         class="grid grid-cols-7 lg:flex lg:grid-cols-none cursor-pointer lg:hover:text-gold"
@@ -17,7 +26,7 @@
         <div class="col-span-6 py-4 pl-4 lg:py-8">
           {{ route.label }}
         </div>
-        <div class="text-center bg-gray-900 text-gray-700 py-4 lg:ml-2 lg:hover:text-gold lg:text-white lg:bg-opacity-0 lg:py-8">
+        <div class="text-center bg-grey-900 py-4 lg:ml-2 lg:hover:text-gold lg:bg-opacity-0 lg:py-8">
           <FontAwesomeIcon :icon="expanderIcon" />
         </div>
       </div>
@@ -53,6 +62,9 @@ export default {
         'fal',
         `angle-${this.route.expanded ? 'up' : 'down'}`,
       ]
+    },
+    isExternalLink () {
+      return this.route.to.startsWith('http://')
     },
   },
 

@@ -8,7 +8,9 @@ module.exports = {
     './plugins/**/*.{js,ts}',
     './nuxt.config.{js,ts}',
   ],
-  darkMode: false, // or 'media' or 'class'
+
+  darkMode: false,
+
   theme: {
     colors: {
       ...colors,
@@ -16,16 +18,31 @@ module.exports = {
       black: colors.black,
       blackish: '#222',
       white: colors.white,
-      grey: colors.gray['400'],
-      'dark-grey': colors.gray['600'],
-    },
-    fontFamily: {
-      sans: [
-        'Poppins',
-        'sans-serif',
-      ],
+      'grey-400': colors.gray['400'],
+      'grey-600': colors.gray['600'],
+      'grey-700': colors.gray['700'],
+      'grey-800': colors.gray['800'],
+      'grey-900': colors.gray['900'],
     },
     extend: {
+      fontFamily: {
+        poppins: [
+          'Poppins',
+          'sans-serif',
+        ],
+      },
+      height: {
+        '10v': '10vh',
+        '20v': '20vh',
+        '30v': '30vh',
+        '40v': '40vh',
+        '50v': '50vh',
+        '60v': '60vh',
+        '70v': '70vh',
+        '80v': '80vh',
+        '90v': '90vh',
+        '100v': '100vh',
+      },
       listStyleType: {
         'lower-alpha': 'lower-alpha',
       },
@@ -34,8 +51,10 @@ module.exports = {
       },
     },
   },
+
   variants: {
     extend: {},
   },
+
   plugins: [],
 }

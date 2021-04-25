@@ -5,7 +5,7 @@
       <UsefulLinks />
       <PlayerRegistration />
     </div>
-    <div class="container px-8 text-center mx-auto border-t border-grey pt-4 mt-16 text-sm md:px-0 md:flex md:justify-between">
+    <div class="container px-8 text-center mx-auto border-t border-grey-400 pt-4 mt-16 text-sm lg:px-0 lg:flex lg:justify-between">
       <CopyrightNotice />
       <SocialLinks />
     </div>
