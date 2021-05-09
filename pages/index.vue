@@ -1,36 +1,47 @@
 <template>
   <div>
-    <HomeHero />
+    <Hero
+      v-if="homepageConfig"
+      :hero="homepageHero"
+    />
+
+    <ProvenTrackRecord />
+    <div>Affiliations</div>
+    <div>Club Sponsors</div>
   </div>
 </template>
 
 <script>
-// import { createClient } from '@/plugins/contentful'
-
 export default {
   name: 'PageIndex',
 
   components: {
-    HomeHero: () => import('@/components/home/HomeHero.vue'),
+    Hero: () => import('@/components/contentful-blocks/Hero.vue'),
+    ProvenTrackRecord: () => import('@/components/home/ProvenTrackRecord.vue'),
   },
 
   layout: 'full-bleed',
+
+  async asyncData ({ $config, $contentful }) {
+    const homepageConfig = await $contentful.getEntry($config.contentfulHomepageConfig)
+    return { homepageConfig }
+  },
+
+  data: () => ({
+    hompageConfig: null,
+  }),
 
   head: () => ({
     title: 'Home',
   }),
 
-  // async asyncData ({ $config }) {
-  //   const client = createClient({
-  //     space: $config.contentfulSpace,
-  //     accessToken: $config.accessToken,
-  //   })
-
-  //   const page = await client.getEntry('1eqeDDZBR8gLF3HiFSy5o2')
-
-  //   return {
-  //     page,
-  //   }
-  // },
+  computed: {
+    /** @return {object} */
+    homepageHero () {
+      return {
+        ...(this.homepageConfig && this.homepageConfig.fields.homepageHero.fields),
+      }
+    },
+  },
 }
 </script>

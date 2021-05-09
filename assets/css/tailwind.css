@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  @apply font-poppins;
-}
-
 @layer base {
   h1 {
     @apply border-b-2 border-grey-400 relative mb-8 pb-2 text-3xl uppercase;
@@ -13,6 +9,14 @@ body {
 
   h2 {
     @apply border-b-2 border-grey-400 relative mb-4 text-xl uppercase inline-block;
+
+    &.central {
+      @apply text-center;
+
+      &:after {
+        @apply left-1/2 transform -translate-x-1/2;
+      }
+    }
   }
 
   h4 {

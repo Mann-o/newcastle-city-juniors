@@ -24,13 +24,19 @@ module.exports = {
       'grey-800': colors.gray['800'],
       'grey-900': colors.gray['900'],
     },
+    fontFamily: {
+      sans: [
+        'Poppins',
+        'sans-serif',
+      ],
+      serif: [
+        'TimesNewRoman',
+        'Times',
+        'Times New Roman',
+        'serif',
+      ],
+    },
     extend: {
-      fontFamily: {
-        poppins: [
-          'Poppins',
-          'sans-serif',
-        ],
-      },
       height: {
         '10v': '10vh',
         '20v': '20vh',

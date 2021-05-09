@@ -44,7 +44,7 @@
             <td>Dean Taylor</td>
             <td>-</td>
             <td>
-              <NuxtLink to="/teams/under-8-barca">
+              <NuxtLink to="/teams/under-8/barca">
                 View
               </NuxtLink>
             </td>
@@ -55,7 +55,7 @@
             <td>David Moore</td>
             <td>-</td>
             <td>
-              <NuxtLink to="/teams/under-8-sparta">
+              <NuxtLink to="/teams/under-8/sparta">
                 View
               </NuxtLink>
             </td>
@@ -66,7 +66,7 @@
             <td>Richard Howe</td>
             <td>-</td>
             <td>
-              <NuxtLink to="/teams/under-8-milan">
+              <NuxtLink to="/teams/under-8/milan">
                 View
               </NuxtLink>
             </td>
@@ -77,7 +77,7 @@
             <td>Chris O'Connell</td>
             <td>-</td>
             <td>
-              <NuxtLink to="/teams/under-8-roma">
+              <NuxtLink to="/teams/under-8/roma">
                 View
               </NuxtLink>
             </td>
@@ -88,7 +88,7 @@
             <td>Daniel Mehri</td>
             <td>-</td>
             <td>
-              <NuxtLink to="/teams/under-8-juve">
+              <NuxtLink to="/teams/under-8/juve">
                 View
               </NuxtLink>
             </td>
@@ -99,7 +99,7 @@
             <td>Mark Hewitson</td>
             <td>-</td>
             <td>
-              <NuxtLink to="/teams/under-8-inter">
+              <NuxtLink to="/teams/under-8/inter">
                 View
               </NuxtLink>
             </td>

@@ -1,9 +1,9 @@
 <template>
-  <p>Juve BAR &amp; KITCHEN</p>
+  <div>Under 8 - Barca</div>
 </template>
 
 <script>
 export default {
-  name: 'JuveLogo',
+  name: 'PageTeamsUnder8Barca',
 }
 </script>

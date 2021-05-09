@@ -9,14 +9,17 @@ export const build: NuxtOptionsBuild = {
       }
     : false,
 
-  // babel: {
-  //   plugins: [
-  //     '@babel/plugin-proposal-optional-chaining',
-  //     '@babel/plugin-proposal-nullish-coalescing-operator',
-  //   ],
-  // },
+  babel: {
+    plugins: [
+      ['@babel/plugin-proposal-private-methods', {
+        loose: true,
+      }],
+      '@babel/plugin-proposal-optional-chaining',
+      '@babel/plugin-proposal-nullish-coalescing-operator',
+    ],
+  },
 
   transpile: [
     /^vue2-google-maps($|\/)/,
-  ]
+  ],
 }

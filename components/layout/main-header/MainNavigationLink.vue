@@ -13,7 +13,7 @@
         :to="route.to"
         class="block py-4 pl-4 text-white lg:py-8"
         active-class="text-gold"
-        exact
+        :exact="isHomepageRoute"
       >
         {{ route.label }}
       </NuxtLink>
@@ -21,17 +21,20 @@
     <template v-else>
       <div
         class="grid grid-cols-7 lg:flex lg:grid-cols-none cursor-pointer lg:hover:text-gold"
+        :class="[
+          ...(isParentOfCurrentRoute ? ['text-gold'] : []),
+        ]"
         @click="toggleExpand(route)"
       >
         <div class="col-span-6 py-4 pl-4 lg:py-8">
           {{ route.label }}
         </div>
-        <div class="text-center bg-grey-900 py-4 lg:ml-2 lg:hover:text-gold lg:bg-opacity-0 lg:py-8">
+        <div class="text-center bg-grey-900 py-4 text-white lg:ml-2 lg:hover:text-gold lg:bg-opacity-0 lg:py-8">
           <FontAwesomeIcon :icon="expanderIcon" />
         </div>
       </div>
       <ul
-        class="border-t-4 border-b border-gold lg:transition-opacity lg:block lg:absolute lg:bg-black lg:border-b-0 lg:opacity-0 lg:z-50 lg:w-auto lg:pointer-events-none"
+        class="border-t-4 border-b border-gold lg:block lg:absolute lg:bg-black lg:border-b-0 lg:opacity-0 lg:z-50 lg:w-auto lg:pointer-events-none transition-all"
         :class="[
           ...(route.expanded ? ['block'] : ['hidden']),
         ]"
@@ -66,6 +69,12 @@ export default {
     isExternalLink () {
       return this.route.to.startsWith('http://')
     },
+    isHomepageRoute () {
+      return this.route.to === '/'
+    },
+    isParentOfCurrentRoute () {
+      return this.$route.path.startsWith(this.route.to)
+    },
   },
 
   methods: {
@@ -78,10 +87,16 @@ export default {
 
 <style lang="postcss">
 @screen lg {
-  .main-navigation-link:hover ul {
-    @apply opacity-100 pointer-events-auto;
+  .main-navigation-link {
+    ul {
+      top: 92px;
+    }
 
-    top: 84px;
+    &:hover ul {
+      @apply opacity-100 pointer-events-auto;
+
+      top: 84px;
+    }
   }
 }
 </style>

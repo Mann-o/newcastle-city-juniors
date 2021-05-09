@@ -1,8 +1,6 @@
 <template>
   <div class="pb-16 last:pb-0">
-    <div class="font-bold pb-2">
-      {{ age }}
-    </div>
+    <h2>{{ age }}</h2>
     <slot />
   </div>
 </template>
