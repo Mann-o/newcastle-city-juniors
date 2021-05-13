@@ -18,7 +18,7 @@
     "@nuxtjs/pwa": "3.3.5",
     "contentful": "8.3.5",
     "core-js": "3.12.1",
-    "nuxt": "2.15.5",
+    "nuxt": "2.15.6",
     "vue2-google-maps": "0.10.7"
   },
   "devDependencies": {
