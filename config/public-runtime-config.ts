@@ -6,4 +6,6 @@ export const publicRuntimeConfig = {
   contentfulEnvironment: process.env.CONTENTFUL_ENVIRONMENT || 'master',
 
   contentfulHomepageConfig: process.env.CONTENTFUL_HOMEPAGE_CONFIG,
+  contentfulAgeGroupContentType: process.env.CONTENTFUL_AGE_GROUP_CONTENT_TYPE || 'ageGroup',
+  contentfulTeamContentType: process.env.CONTENTFUL_TEAM_CONTENT_TYPE || 'team',
 }
