@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h1>Our Teams</h1>
     <div v-if="$fetchState.pending">
       <Loader />
     </div>
@@ -7,15 +8,12 @@
       An error occurred fetching age groups!
     </div>
     <div v-else>
+      <TeamsNavigation :age-groups="ageGroups" />
       <AgeGroup
-        v-for="({ fields: { title, slug } }) in ageGroups"
-        :key="title"
-        :age="title"
-      >
-        <NuxtLink :to="`/teams/${slug}`">
-          View
-        </NuxtLink>
-      </AgeGroup>
+        v-for="ageGroup in ageGroups"
+        :key="ageGroup.fields.title"
+        :age-group="ageGroup"
+      />
     </div>
   </div>
 </template>
@@ -27,6 +25,7 @@ export default {
   components: {
     AgeGroup: () => import('@/components/teams/AgeGroup.vue'),
     Loader: () => import('@/components/layout/Loader.vue'),
+    TeamsNavigation: () => import('@/components/teams/navigation/TeamsNavigation.vue'),
   },
 
   data: () => ({

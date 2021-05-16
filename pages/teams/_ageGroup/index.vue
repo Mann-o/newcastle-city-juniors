@@ -7,16 +7,11 @@
       An error occurred fetching age group + teams!
     </div>
     <div v-else>
-      <p
-        v-for="(team, index) in ageGroup.fields.teams"
-        :key="index"
-      >
-        {{ team.fields.name }}
-        -
-        <NuxtLink :to="`/teams/${ageGroup.fields.slug}/${team.fields.slug}`">
-          View
-        </NuxtLink>
-      </p>
+      <h1>{{ ageGroup.fields.title }}</h1>
+      <AgeGroup
+        :age-group="ageGroup"
+        no-header
+      />
     </div>
   </div>
 </template>
@@ -26,6 +21,7 @@ export default {
   name: 'PageTeamsAgeGroupIndex',
 
   components: {
+    AgeGroup: () => import('@/components/teams/AgeGroup.vue'),
     Loader: () => import('@/components/layout/Loader.vue'),
   },
 

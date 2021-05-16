@@ -51,7 +51,7 @@
 a {
   @apply text-black transition-all;
 
-  &:hover {
+  &:not(h1):not(h2):not(h3):not(h4):not(h5):not(h6):hover {
     @apply text-gold;
   }
 }
