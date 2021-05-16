@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="$fetchState.pending">
-      Fetching age groups...
+      <Loader />
     </div>
     <div v-else-if="$fetchState.error">
       An error occurred fetching age groups!
@@ -26,6 +26,7 @@ export default {
 
   components: {
     AgeGroup: () => import('@/components/teams/AgeGroup.vue'),
+    Loader: () => import('@/components/layout/Loader.vue'),
   },
 
   data: () => ({

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="$fetchState.pending">
-      Fetching age group + teams...
+      <Loader />
     </div>
     <div v-else-if="$fetchState.error">
       An error occurred fetching age group + teams!
@@ -15,6 +15,10 @@
 <script>
 export default {
   name: 'PageTeamsAgeGroupTeamIndex',
+
+  components: {
+    Loader: () => import('@/components/layout/Loader.vue'),
+  },
 
   data: () => ({
     team: {},

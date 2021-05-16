@@ -1,4 +1,7 @@
 const colors = require('tailwindcss/colors')
+const flatMap = require('lodash/flatMap')
+const omit = require('lodash/omit')
+const flattenColorPalette = require('tailwindcss/lib/util/flattenColorPalette').default
 
 module.exports = {
   purge: [
@@ -13,7 +16,7 @@ module.exports = {
 
   theme: {
     colors: {
-      ...colors,
+      // ...colors,
       gold: colors.amber['400'],
       black: colors.black,
       blackish: '#222',
@@ -37,6 +40,9 @@ module.exports = {
       ],
     },
     extend: {
+      borderRadius: {
+        half: '50%',
+      },
       height: {
         '10v': '10vh',
         '20v': '20vh',
@@ -62,5 +68,18 @@ module.exports = {
     extend: {},
   },
 
-  plugins: [],
+  plugins: [
+    ({ addUtilities, e, theme, variants }) => {
+      const colors = flattenColorPalette(theme('borderColor'))
+
+      const utilities = flatMap(omit(colors, 'default'), (value, modifier) => ({
+        [`.${e(`border-t-${modifier}`)}`]: { borderTopColor: `${value}` },
+        [`.${e(`border-r-${modifier}`)}`]: { borderRightColor: `${value}` },
+        [`.${e(`border-b-${modifier}`)}`]: { borderBottomColor: `${value}` },
+        [`.${e(`border-l-${modifier}`)}`]: { borderLeftColor: `${value}` },
+      }))
+
+      addUtilities(utilities, variants('borderColor'))
+    },
+  ],
 }
