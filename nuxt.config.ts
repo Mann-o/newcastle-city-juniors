@@ -8,6 +8,7 @@ import { head } from './config/head'
 import { modules } from './config/modules'
 import { plugins } from './config/plugins'
 import { privateRuntimeConfig } from './config/private-runtime-config'
+import { proxy } from './config/proxy'
 import { publicRuntimeConfig } from './config/public-runtime-config'
 import { pwa } from './config/pwa'
 import { render } from './config/render'
@@ -31,6 +32,7 @@ const config: NuxtConfig = {
   modules,
   plugins,
   privateRuntimeConfig,
+  proxy,
   publicRuntimeConfig,
   pwa,
   render,

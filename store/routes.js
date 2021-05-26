@@ -19,7 +19,7 @@ export const state = () => ({
     ]),
     link('/teams', 'Our Teams'),
     link('/news-and-events', 'News & Events'),
-    link('/newcastle-city-development-centre', 'Newcastle City Development Centre'),
+    link('/newcastle-city-development-centre', 'Development Centre'),
     link('/holiday-camps', 'Holiday Camps'),
     link('http://www.juvelounge.co.uk', 'Juve Lounge'),
     link('/contact-us', 'Contact Us'),

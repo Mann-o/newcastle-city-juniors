@@ -1,6 +1,8 @@
 export const publicRuntimeConfig = {
   googleApiKey: process.env.GOOGLE_API_KEY,
 
+  stripeApiKey: process.env.STRIPE_API_KEY,
+
   contentfulSpace: process.env.CONTENTFUL_SPACE,
   contentfulAccessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
   contentfulEnvironment: process.env.CONTENTFUL_ENVIRONMENT || 'master',

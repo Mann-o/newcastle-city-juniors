@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 @layer base {
+  /* body {
+    @apply bg-black;
+  } */
+
   h1 {
     @apply border-b-2 border-grey-400 relative mb-8 pb-2 text-3xl uppercase;
   }
