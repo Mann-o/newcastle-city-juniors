@@ -18,6 +18,7 @@ export const fontawesome = {
     ],
     duotone: [
       'faEnvelope',
+      'faExternalLinkAlt',
       'faFutbol',
       'faMapMarkerAlt',
       'faPhoneAlt',

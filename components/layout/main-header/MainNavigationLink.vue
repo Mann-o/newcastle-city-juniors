@@ -7,6 +7,10 @@
         class="block py-4 pl-4 text-white lg:py-8"
       >
         {{ route.label }}
+        <FontAwesomeIcon
+          class="ml-1"
+          :icon="['fad', 'external-link-alt']"
+        />
       </a>
       <NuxtLink
         v-else
@@ -34,7 +38,10 @@
         </div>
       </div>
       <ul
-        class="border-t-4 border-b border-gold lg:block lg:absolute lg:bg-black lg:border-b-0 lg:opacity-0 lg:z-50 lg:w-auto lg:pointer-events-none transition-all"
+        class="
+          border-t-4 border-b border-gold transition-all
+          lg:block lg:absolute lg:bg-black lg:border-b-0 lg:opacity-0 lg:z-50 lg:w-auto lg:pointer-events-none lg:top-36
+        "
         :class="[
           ...(route.expanded ? ['block'] : ['hidden']),
         ]"
@@ -87,16 +94,10 @@ export default {
 
 <style lang="postcss">
 @screen lg {
-  .main-navigation-link {
-    ul {
-      top: 92px;
-    }
+  .main-navigation-link:hover ul {
+    @apply opacity-100 pointer-events-auto;
 
-    &:hover ul {
-      @apply opacity-100 pointer-events-auto;
-
-      top: 84px;
-    }
+    top: 84px;
   }
 }
 </style>

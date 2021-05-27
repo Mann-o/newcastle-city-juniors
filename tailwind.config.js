@@ -77,6 +77,7 @@ module.exports = {
   },
 
   plugins: [
+    require('@tailwindcss/aspect-ratio'),
     ({ addUtilities, e, theme, variants }) => {
       const colors = flattenColorPalette(theme('borderColor'))
 

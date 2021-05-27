@@ -1,5 +1,5 @@
 <template>
-  <div class="committee-card p-4 bg-gold bg-opacity-75 text-sm lg:-bottom-20">
+  <div class="committee-card p-4 bg-gold text-sm lg:-bottom-20">
     <div class="font-bold uppercase mb-4">
       {{ name }}
     </div>

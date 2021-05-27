@@ -3,11 +3,11 @@
     <Hero
       v-if="homepageConfig"
       :hero="homepageHero"
+      is-on-homepage
     />
-
-    <ProvenTrackRecord />
+    <!-- <ProvenTrackRecord />
     <div>Affiliations</div>
-    <div>Club Sponsors</div>
+    <div>Club Sponsors</div> -->
   </div>
 </template>
 

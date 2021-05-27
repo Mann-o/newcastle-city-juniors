@@ -11,10 +11,10 @@
       label="Telephone"
     >
       <a
-        href="tel:+441912645531"
-        class="text-white hover:text-white"
+        href="tel:+447518389898"
+        class="text-white hover:text-gold"
       >
-        0191 264 5531
+        07518389898
       </a>
     </ContactInfoBlock>
     <ContactInfoBlock
@@ -22,10 +22,10 @@
       label="Email"
     >
       <a
-        href="mailto:info@newcastlecityjuniors.co.uk"
-        class="text-white hover:text-white"
+        href="mailto:ncj.adamjones@hotmail.com"
+        class="text-white hover:text-gold"
       >
-        info@newcastlecityjuniors.co.uk
+        ncj.adamjones@hotmail.com
       </a>
     </ContactInfoBlock>
   </div>
