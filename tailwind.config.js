@@ -29,7 +29,6 @@ module.exports = {
     },
     fontFamily: {
       sans: [
-        'Poppins',
         'sans-serif',
       ],
       serif: [
@@ -43,6 +42,12 @@ module.exports = {
       borderRadius: {
         half: '50%',
       },
+      fontFamily: {
+        poppins: [
+          'Poppins',
+          'sans-serif',
+        ],
+      },
       height: {
         '10v': '10vh',
         '20v': '20vh',
@@ -54,6 +59,9 @@ module.exports = {
         '80v': '80vh',
         '90v': '90vh',
         '100v': '100vh',
+      },
+      lineHeight: {
+        stripe: '16.8px',
       },
       listStyleType: {
         'lower-alpha': 'lower-alpha',

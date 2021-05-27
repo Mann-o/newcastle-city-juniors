@@ -3,10 +3,9 @@
 @tailwind utilities;
 
 @layer base {
-  /* body {
-    @apply bg-black;
-  } */
-
+  body {
+    @apply font-poppins;
+  }
   h1 {
     @apply border-b-2 border-grey-400 relative mb-8 pb-2 text-3xl uppercase;
   }
@@ -71,6 +70,15 @@ p a {
 .page-enter,
 .page-leave-to {
   @apply opacity-0;
+}
+
+input,
+textarea {
+  @apply p-2 text-sm font-poppins leading-stripe tracking-normal;
+}
+
+::placeholder {
+  @apply text-grey-400;
 }
 
 @screen lg {
