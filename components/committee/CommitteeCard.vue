@@ -1,27 +1,22 @@
 <template>
-  <div
-    class="committee-card relative w-full mb-8 bg-cover bg-center overflow-hidden min-h-500"
-    :style="committeeCardStyles"
-  >
-    <div class="committee-card__overlay p-4 absolute bottom-0 left-0 w-full transition-all bg-gold bg-opacity-75 text-sm lg:-bottom-20">
-      <div class="font-bold uppercase mb-4">
-        {{ name }}
-      </div>
-      <CommitteeCardRow
-        label="Role"
-        :value="member.fields.role"
-      />
-      <CommitteeCardRow
-        label="Telephone"
-        :value="member.fields.telephoneNumber"
-        :link="telephoneLink"
-      />
-      <CommitteeCardRow
-        label="Email"
-        :value="member.fields.emailAddress"
-        :link="emailLink"
-      />
+  <div class="committee-card p-4 bg-gold bg-opacity-75 text-sm lg:-bottom-20">
+    <div class="font-bold uppercase mb-4">
+      {{ name }}
     </div>
+    <CommitteeCardRow
+      label="Role"
+      :value="member.fields.role"
+    />
+    <CommitteeCardRow
+      label="Telephone"
+      :value="member.fields.telephoneNumber"
+      :link="telephoneLink"
+    />
+    <CommitteeCardRow
+      label="Email"
+      :value="member.fields.emailAddress"
+      :link="emailLink"
+    />
   </div>
 </template>
 
@@ -41,16 +36,6 @@ export default {
   },
 
   computed: {
-    /** @returns {object} */
-    committeeCardStyles () {
-      return {
-        backgroundImage: `url(${
-          this.member.fields.portraitImage != null
-            ? this.member.fields.portraitImage.url
-            : 'https://via.placeholder.com/400x500'
-        })`,
-      }
-    },
     /** @returns {string} */
     telephoneLink () {
       return `tel:+44${
@@ -76,11 +61,3 @@ export default {
   },
 }
 </script>
-
-<style lang="postcss">
-@screen lg {
-  .committee-card:hover .committee-card__overlay {
-    @apply opacity-100 bottom-0;
-  }
-}
-</style>

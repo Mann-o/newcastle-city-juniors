@@ -9,7 +9,7 @@
     </div>
     <div
       v-else
-      class="lg:grid lg:grid-cols-4 lg:gap-8"
+      class="grid gap-8 lg:grid-cols-4"
     >
       <CommitteeCard
         v-for="(member, index) in committeeMembers"

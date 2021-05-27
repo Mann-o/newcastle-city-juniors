@@ -4,7 +4,7 @@
     <a
       v-if="link"
       :href="link"
-      class="text-black hover:text-black"
+      class="text-black underline hover:text-black"
     >
       {{ value }}
     </a>
