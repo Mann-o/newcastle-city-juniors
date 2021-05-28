@@ -38,7 +38,7 @@
               class="mr-2"
             />
             <a
-              :href="manager.fields.telephoneNumber | telephoneLink"
+              :href="manager.fields.telephoneNumber | telephoneNumberLink"
               class="hover:text-black hover:underline"
             >
               {{ manager.fields.telephoneNumber }}
@@ -80,7 +80,7 @@
                 class="mr-2"
               />
               <a
-                :href="coach.fields.telephoneNumber | telephoneLink"
+                :href="coach.fields.telephoneNumber | telephoneNumberLink"
                 class="hover:text-black hover:underline"
               >
                 {{ coach.fields.telephoneNumber }}
