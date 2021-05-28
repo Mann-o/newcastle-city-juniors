@@ -21,6 +21,7 @@ module.exports = {
       black: colors.black,
       blackish: '#222',
       white: colors.white,
+      'grey-200': colors.gray['200'],
       'grey-400': colors.gray['400'],
       'grey-600': colors.gray['600'],
       'grey-700': colors.gray['700'],

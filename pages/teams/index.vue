@@ -8,7 +8,7 @@
       An error occurred fetching age groups!
     </div>
     <div v-else>
-      <TeamsNavigation :age-groups="ageGroups" />
+      <!-- <TeamsNavigation :age-groups="ageGroups" /> -->
       <AgeGroup
         v-for="ageGroup in ageGroups"
         :key="ageGroup.fields.title"
@@ -25,7 +25,7 @@ export default {
   components: {
     AgeGroup: () => import('@/components/teams/AgeGroup.vue'),
     Loader: () => import('@/components/layout/Loader.vue'),
-    TeamsNavigation: () => import('@/components/teams/navigation/TeamsNavigation.vue'),
+    // TeamsNavigation: () => import('@/components/teams/navigation/TeamsNavigation.vue'),
   },
 
   data: () => ({
@@ -37,6 +37,7 @@ export default {
       .getEntries({
         content_type: this.$config.contentfulAgeGroupContentType,
         order: 'fields.ageGroup',
+        include: 2,
       })
       .then(({ items: ageGroups }) => ageGroups)
   },

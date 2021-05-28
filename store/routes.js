@@ -21,7 +21,7 @@ export const state = () => ({
     link('/news-and-events', 'News & Events'),
     link('/newcastle-city-development-centre', 'Development Centre'),
     link('/holiday-camps', 'Holiday Camps'),
-    link('http://www.juvelounge.co.uk', 'Juve Lounge'),
+    // link('http://www.juvelounge.co.uk', 'Juve Lounge'),
     link('/contact-us', 'Contact Us'),
   ],
 })

@@ -60,12 +60,15 @@ export default {
   },
 
   computed: {
+    /** @returns {boolean} */
     mediaIsImage () {
       return this.hero.backgroundMedia?.fields?.file?.contentType?.startsWith('image')
     },
+    /** @returns {boolean} */
     mediaIsVideo () {
       return this.hero.backgroundMedia?.fields?.file?.contentType?.startsWith('video')
     },
+    /** @returns {boolean} */
     hasMedia () {
       return this.mediaIsVideo || this.mediaIsImage
     },

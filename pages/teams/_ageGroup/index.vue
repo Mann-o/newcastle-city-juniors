@@ -34,7 +34,7 @@ export default {
       .getEntries({
         content_type: this.$config.contentfulAgeGroupContentType,
         'fields.slug': this.$route.params.ageGroup,
-        include: 1,
+        include: 2,
       })
       .then(({ items: ageGroups }) => ageGroups[0])
   },

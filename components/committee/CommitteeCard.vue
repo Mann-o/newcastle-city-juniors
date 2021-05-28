@@ -10,12 +10,12 @@
     <CommitteeCardRow
       label="Telephone"
       :value="member.fields.telephoneNumber"
-      :link="telephoneLink"
+      :link="member.fields.telephoneNumber | telephoneNumberLink"
     />
     <CommitteeCardRow
       label="Email"
       :value="member.fields.emailAddress"
-      :link="emailLink"
+      :link="member.fields.emailAddress | emailAddressLink"
     />
   </div>
 </template>
@@ -37,26 +37,11 @@ export default {
 
   computed: {
     /** @returns {string} */
-    telephoneLink () {
-      return `tel:+44${
-        this.member.fields.telephoneNumber
-          .replace(/ /g, '')
-          .slice(1)
-      }`
-    },
-    /** @returns {string} */
-    emailLink () {
-      return `mailto:${this.member.fields.emailAddress}`
-    },
-    /** @returns {string} */
     name () {
-      let name = this.member.fields.firstNames
-
-      if (this.member.fields.lastNames) {
-        name += ` ${this.member.fields.lastNames}`
-      }
-
-      return name
+      return this.$options.filters.fullName(
+        this.member.fields.firstNames,
+        this.member.fields.lastNames
+      )
     },
   },
 }

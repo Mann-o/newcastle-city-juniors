@@ -22,6 +22,9 @@ export const fontawesome = {
       'faFutbol',
       'faMapMarkerAlt',
       'faPhoneAlt',
+      'faTshirt',
+      'faUsers',
+      'faUsersCrown',
     ],
   },
 }
