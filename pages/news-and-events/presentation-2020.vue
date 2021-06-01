@@ -11,8 +11,8 @@
     <h2 class="mt-8">Timetable</h2>
     <p class="font-bold">Football Development</p>
     <ul class="list-disc list-inside pb-4">
-      <li>Doors Open: 10:30am</li>
-      <li>Presentation: 11:00am - 12:00pm</li>
+      <li>Doors Open: 10:00am</li>
+      <li>Presentation: 10:30am - 11:30am</li>
     </ul>
     <p class="font-bold">Mini Soccer (Under 7s - Under 10s)</p>
     <ul class="list-disc list-inside pb-4">
@@ -24,7 +24,6 @@
       <li>Doors Open: 5:00pm</li>
       <li>Presentation: 5:30pm - 8:00pm</li>
     </ul>
-
 
     <div class="mt-8 md:max-w-lg">
       <FormSection label="Order Tickets">
@@ -72,7 +71,7 @@
           :total="totalCost"
         />
         <button
-          :disabled="!canCheckout"
+          :disabled="!canCheckout || checkingOut"
           class="
             mt-4 py-2 px-4 bg-gold border border-black text-black uppercase font-bold transition-all
             hover:bg-black hover:text-white
@@ -191,45 +190,60 @@ export default {
       this.stripe = window.Stripe(this.$config.stripeApiKey)
     },
     async checkout () {
-      if (this.canCheckout) {
-        this.$nuxt.$loading.start();
+      try {
+        if (this.canCheckout) {
+          this.error = null
 
-        const { data: { id: checkoutSessionId } } = await this.$axios.post('/api/stripe/create-checkout', {
-          customer_email: this.emailAddress,
-          line_items: [
-            ...(this.adultTicketsCount > 0 ? [{
-              price: 'price_1IxgxbJgy48auTmoWWoEfpmQ',
-              quantity: this.adultTicketsCount,
-            }] : []),
-            ...(this.childTicketsCount > 0 ? [{
-              price: 'price_1IxgxsJgy48auTmohIvUZjzR',
-              quantity: this.childTicketsCount,
-            }] : []),
-            ...(this.playerTicketsCount > 0 ? [{
-              price: 'price_1Ixgy6Jgy48auTmoM7iox1O3',
-              quantity: this.playerTicketsCount,
-            }] : []),
-          ],
-          metadata: {
-            event: 'presentation-2021',
-            ...(this.adultTicketsCount > 0 && this.adultNames.filter(x => x !== '').reduce((acc, curr, i) => ({
-              ...acc,
-              [`adult_name_${i + 1}`]: curr,
-            }), {})),
-            ...(this.childTicketsCount > 0 && this.childNames.filter(x => x !== '').reduce((acc, curr, i) => ({
-              ...acc,
-              [`child_name_${i + 1}`]: curr,
-            }), {})),
-            ...(this.playerTicketsCount > 0 && this.playerNames.filter(x => x !== '').reduce((acc, curr, i) => ({
-              ...acc,
-              [`player_name_${i + 1}`]: curr,
-            }), {})),
-          },
-          success_url: 'https://newcastlecityjuniors.co.uk/payment-success',
-          cancel_url: 'https://newcastlecityjuniors.co.uk/news-and-events/presentation-2020',
-        })
+          if (this.emailAddress == null || this.emailAddress == '') {
+            this.error = 'Invalid email address'
+          }
 
-        this.stripe.redirectToCheckout({ sessionId: checkoutSessionId })
+          this.$nuxt.$loading.start()
+
+          this.checkingOut = true
+
+          const { data: { id: checkoutSessionId } } = await this.$axios.post('/api/stripe/create-checkout', {
+            customer_email: this.emailAddress,
+            line_items: [
+              ...(this.adultTicketsCount > 0 ? [{
+                price: 'price_1IxgxbJgy48auTmoWWoEfpmQ',
+                quantity: this.adultTicketsCount,
+              }] : []),
+              ...(this.childTicketsCount > 0 ? [{
+                price: 'price_1IxgxsJgy48auTmohIvUZjzR',
+                quantity: this.childTicketsCount,
+              }] : []),
+              ...(this.playerTicketsCount > 0 ? [{
+                price: 'price_1Ixgy6Jgy48auTmoM7iox1O3',
+                quantity: this.playerTicketsCount,
+              }] : []),
+            ],
+            metadata: {
+              event: 'presentation-2021',
+              ...(this.adultTicketsCount > 0 && this.adultNames.filter(x => x !== '').reduce((acc, curr, i) => ({
+                ...acc,
+                [`adult_name_${i + 1}`]: curr,
+              }), {})),
+              ...(this.childTicketsCount > 0 && this.childNames.filter(x => x !== '').reduce((acc, curr, i) => ({
+                ...acc,
+                [`child_name_${i + 1}`]: curr,
+              }), {})),
+              ...(this.playerTicketsCount > 0 && this.playerNames.filter(x => x !== '').reduce((acc, curr, i) => ({
+                ...acc,
+                [`player_name_${i + 1}`]: curr,
+              }), {})),
+            },
+            success_url: 'https://newcastlecityjuniors.co.uk/payment-success',
+            cancel_url: 'https://newcastlecityjuniors.co.uk/news-and-events/presentation-2020',
+          })
+
+          this.stripe.redirectToCheckout({ sessionId: checkoutSessionId })
+        }
+      } catch (error) {
+        this.error = error.message
+      } finally {
+        this.$nuxt.$loading.finish()
+        this.checkingOut = false
       }
     },
   },
