@@ -225,8 +225,8 @@ export default {
               [`player_name_${i + 1}`]: curr,
             }), {})),
           },
-          success_url: 'http://localhost:3000/payment-success',
-          cancel_url: 'http://localhost:3000/news-and-events/presentation-2021',
+          success_url: 'https://newcastlecityjuniors.co.uk/payment-success',
+          cancel_url: 'https://newcastlecityjuniors.co.uk/news-and-events/presentation-2021',
         })
 
         this.stripe.redirectToCheckout({ sessionId: checkoutSessionId })
