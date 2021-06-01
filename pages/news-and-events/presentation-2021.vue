@@ -1,86 +1,88 @@
 <template>
   <div>
-    <h1>2021 Presentation</h1>
-    <p class="pb-4">
-      This is the test page for the 2021 Presentation ticket purchasing.
-    </p>
-    <p>Purchase a ticket below for £2.50!</p>
-    <div
-      v-if="showStripeForm"
-      class="mt-8"
-    >
-      <div class="mb-4">
-        <label for="email-address">Email Address</label>
-        <div
-          id="email-address"
-          class="border border-grey-400"
-        >
-          <input
-            v-model="emailAddress"
-            placeholder="Email Address"
-            class="block text-sm w-full focus:outline-none"
-            type="email"
-          >
-        </div>
-      </div>
-      <div class="mb-4">
-        <label for="confirm-email-address">Confirm Email Address</label>
-        <div
-          id="confirm-email-address"
-          class="border border-grey-400"
-        >
-          <input
-            v-model="confirmEmailAddress"
-            placeholder="Confirm Email Address"
-            class="block text-sm w-full focus:outline-none"
-            type="email"
-          >
-        </div>
-      </div>
-      <div class="mb-4">
-        <label for="card-number">Card Number</label>
-        <div
-          id="card-number"
-          ref="stripeCardNumber"
-          class="border border-grey-400 p-2"
+    <h1>NCJ Presentation - 2020-21 Season</h1>
+    <p class="pb-4">Newcastle City Juniors are happy to announce that tickets are now available for our Presentation 2020-21 Season!</p>
+    <p class="pb-4">Each year we want to recognise all of the special talent we have here at Newcastle City Juniors, and present all of the children with a participation trophy for the season.</p>
+    <p class="pb-4">All attending players <strong>MUST</strong> wear their home stripe (Black/White Top, White Shorts/Socks) on the day. All players will be asked to hand in their Black/White Top at the end of the presentation by their team coaches so please bring a change of top for your child. White Shorts/Socks can be kept.</p>
+    <p class="pb-4">Hot/cold food, refreshments and alcoholic beverages will be available on the day.</p>
+    <p class="pb-4">Tickets are £3.00 per adult or £1.00 per additional child (player tickets are free). Tickets can only be purchased here on this page. Simply complete the form below and checkout. An email will be sent to you shortly after checkout confirming your order, and you must bring this email with you on the day as it acts as your ticket to the event.</p>
+    <p>If you have any questions about our Presentation please contact your child's team coach.</p>
+
+    <h2 class="mt-8">Timetable</h2>
+    <p class="font-bold">Football Development</p>
+    <ul class="list-disc list-inside pb-4">
+      <li>Doors Open: 10:30am</li>
+      <li>Presentation: 11:00am - 12:00pm</li>
+    </ul>
+    <p class="font-bold">Mini Soccer (Under 7s - Under 10s)</p>
+    <ul class="list-disc list-inside pb-4">
+      <li>Doors Open: 12:30pm</li>
+      <li>Presentation: 1:00pm - 3:30pm</li>
+    </ul>
+    <p class="font-bold">Juniors (Under 11s - Under 16s)</p>
+    <ul class="list-disc list-inside">
+      <li>Doors Open: 5:00pm</li>
+      <li>Presentation: 5:30pm - 8:00pm</li>
+    </ul>
+
+
+    <div class="mt-8 md:max-w-lg">
+      <FormSection label="Order Tickets">
+        <FormElement
+          label="Email Address"
+          field-type="email"
+          help-text="This is where your ticket(s) will be sent"
+          v-model="emailAddress"
         />
-      </div>
-      <div class="mb-4">
-        <label for="card-cvv">Card CVV</label>
-        <div
-          id="card-cvv"
-          ref="stripeCardCvc"
-          class="border border-grey-400 p-2"
+        <FormSelect
+          label="No. of Adult tickets (£3.00 per ticket)"
+          :options="adultTicketsOptions"
+          v-model="adultTicketsCount"
         />
-      </div>
-      <div class="mb-4">
-        <label for="card-expiration">Expiration Date</label>
-        <div
-          id="card-expiration"
-          ref="stripeCardExpiry"
-          class="border border-grey-400 p-2"
+        <FormElement
+          v-for="adultTicket in adultTickets"
+          :key="`adult-${adultTicket}`"
+          :label="`Adult ${adultTicket} Name`"
+          v-model="adultNames[adultTicket - 1]"
         />
-      </div>
-      <div>
+        <FormSelect
+          label="No. of additional child tickets (£1.00 per ticket)"
+          :options="childTicketsOptions"
+          v-model="childTicketsCount"
+        />
+        <FormElement
+          v-for="childTicket in childTickets"
+          :key="`child-${childTicket}`"
+          :label="`Child ${childTicket} Name`"
+          v-model="childNames[childTicket - 1]"
+        />
+        <FormSelect
+          label="No. of Player tickets (FREE)"
+          :options="playerTicketsOptions"
+          v-model="playerTicketsCount"
+        />
+        <FormElement
+          v-for="playerTicket in playerTickets"
+          :key="`player-${playerTicket}`"
+          :label="`Player ${playerTicket} Name`"
+          v-model="playerNames[playerTicket - 1]"
+        />
+        <FormTotalCost
+          label="Total Cost"
+          :total="totalCost"
+        />
         <button
-          :disabled="stripePaymentProcessing"
-          @click="submitPayment()"
+          :disabled="!canCheckout"
+          class="
+            mt-4 py-2 px-4 bg-gold border border-black text-black uppercase font-bold transition-all
+            hover:bg-black hover:text-white
+            disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gold disabled:text-black
+          "
+          @click="checkout()"
         >
-          {{ stripeSubmitPaymentButtonLabel }}
+          {{ checkoutButtonLabel }}
         </button>
-      </div>
-    </div>
-    <div
-      v-if="stripeErrorMessage"
-      class="mt-8"
-    >
-      <p>{{ stripeErrorMessage }}</p>
-    </div>
-    <div
-      v-if="stripePaymentSucceeded"
-      class="mt-8"
-    >
-      <p>Your payment was successful. An email will be sent to you shortly confirming your payment!</p>
+      </FormSection>
     </div>
   </div>
 </template>
@@ -89,21 +91,23 @@
 export default {
   name: 'PageNewsAndEventsPresentation2021',
 
+  components: {
+    FormSection: () => import('@/components/elements/forms/FormSection.vue'),
+    FormElement: () => import('@/components/elements/forms/FormElement.vue'),
+    FormSelect: () => import('@/components/elements/forms/FormSelect.vue'),
+    FormTotalCost: () => import('@/components/elements/forms/FormTotalCost.vue'),
+  },
+
   data: () => ({
     stripe: null,
-    isStripeLoaded: false,
-    stripePaymentIntentSecret: null,
-    stripeProductsBeingPurchased: [
-      {
-        id: 'presentation-2021-ticket',
-      },
-    ],
-    stripeCardElement: null,
-    stripePaymentProcessing: false,
-    stripePaymentSucceeded: false,
-    stripeErrorMessage: null,
-    emailAddress: null,
-    confirmEmailAddress: null,
+    adultTicketsCount: '1',
+    childTicketsCount: '0',
+    playerTicketsCount: '1',
+    adultNames: ['', '', '', '', ''],
+    childNames: ['', '', '', '', ''],
+    playerNames: ['', '', ''],
+    checkingOut: false,
+    emailAddress: '',
   }),
 
   head () {
@@ -122,103 +126,110 @@ export default {
   computed: {
     /** @returns {boolean} */
     showStripeForm () {
-      return this.isStripeLoaded && !this.stripePaymentSucceeded
+      return this.stripe != null
     },
     /** @returns {string} */
-    stripeSubmitPaymentButtonLabel () {
-      return this.stripePaymentProcessing
+    stripeCheckoutButtonLabel () {
+      return this.checkingOut
         ? 'Please wait...'
         : 'Pay £2.50 now'
     },
-  },
-
-  watch: {
-    isStripeLoaded (val) {
-      if (val) {
-        this.mountStripeElements()
-      }
+    /** @returns {array} */
+    adultTickets () {
+      return [...Array(parseInt(this.adultTicketsCount, 10)).keys()].map(x => x + 1)
     },
-  },
-
-  mounted () {
-    if (this.isStripeLoaded) {
-      this.mountStripeElements()
-    }
+    /** @returns {array} */
+    childTickets () {
+      return [...Array(parseInt(this.childTicketsCount, 10)).keys()].map(x => x + 1)
+    },
+    /** @returns {array} */
+    playerTickets () {
+      return [...Array(parseInt(this.playerTicketsCount, 10)).keys()].map(x => x + 1)
+    },
+    /** @returns {array} */
+    adultTicketsOptions () {
+      return [...Array(5).keys()].map(x => ({
+        key: (x + 1).toString(),
+        value: (x + 1).toString(),
+      }))
+    },
+    /** @returns {array} */
+    childTicketsOptions () {
+      return [...Array(6).keys()].map(x => ({
+        key: x.toString(),
+        value: x.toString(),
+      }))
+    },
+    /** @returns {array} */
+    playerTicketsOptions () {
+      return [...Array(4).keys()].map(x => ({
+        key: x.toString(),
+        value: x.toString(),
+      }))
+    },
+    /** @returns {number} */
+    totalCost () {
+      return (
+        (parseInt(this.adultTicketsCount, 10) * 3)
+        + (parseInt(this.childTicketsCount, 10) * 1)
+      ).toFixed(2)
+    },
+    /** @returns {boolean} */
+    canCheckout() {
+      return this.stripe != null || this.checkingOut
+    },
+    /** @returns {string} */
+    checkoutButtonLabel() {
+      return this.checkingOut
+        ? 'Please wait...'
+        : `Pay Now - £${this.totalCost}`
+    },
   },
 
   methods: {
     stripeLoadedCallback () {
-      this.isStripeLoaded = true
-    },
-    async mountStripeElements () {
       this.stripe = window.Stripe(this.$config.stripeApiKey)
-
-      const { data } = await this.$axios.post('/api/stripe/payment-intents/presentation-2021-event', {
-        items: this.stripeProductsBeingPurchased,
-      })
-
-      this.stripePaymentIntentSecret = data.clientSecret
-
-      const elements = this.stripe.elements()
-
-      const style = {
-        base: {
-          color: '#000',
-          fontFamily: 'Poppins, sans-serif',
-          fontSmoothing: 'antialiased',
-          fontSize: '14px',
-          '::placeholder': {
-            color: '#a1a1aa',
-          },
-          letterSpacing: '0em',
-          lineHeight: '16px',
-        },
-        invalid: {
-          fontFamily: 'Poppins, sans-serif',
-          color: '#ff0000',
-        },
-      }
-
-      const cardNumber = elements.create('cardNumber', { style })
-      cardNumber.mount(this.$refs.stripeCardNumber)
-
-      const cardExpiry = elements.create('cardExpiry', { style })
-      cardExpiry.mount(this.$refs.stripeCardExpiry)
-
-      const cardCvc = elements.create('cardCvc', { style })
-      cardCvc.mount(this.$refs.stripeCardCvc)
-
-      this.stripeCardElement = cardNumber
     },
-    async submitPayment () {
-      try {
-        this.$nuxt.$loading.start()
-        this.stripePaymentProcessing = true
-        this.stripeErrorMessage = null
+    async checkout () {
+      if (this.canCheckout) {
+        this.$nuxt.$loading.start();
 
-        const res = await this.stripe.confirmCardPayment(this.stripePaymentIntentSecret, {
-          payment_method: {
-            card: this.stripeCardElement,
+        const { data: { id: checkoutSessionId } } = await this.$axios.post('/api/stripe/create-checkout', {
+          customer_email: this.emailAddress,
+          line_items: [
+            ...(this.adultTicketsCount > 0 ? [{
+              price: 'price_1IwxxqJgy48auTmoSQ5D3ELG',
+              quantity: this.adultTicketsCount,
+            }] : []),
+            ...(this.childTicketsCount > 0 ? [{
+              price: 'price_1IwxyMJgy48auTmoLWJOfICS',
+              quantity: this.childTicketsCount,
+            }] : []),
+            ...(this.playerTicketsCount > 0 ? [{
+              price: 'price_1IwxyyJgy48auTmoH9D6cYxf',
+              quantity: this.playerTicketsCount,
+            }] : []),
+          ],
+          metadata: {
+            event: 'presentation-2021',
+            ...(this.adultTicketsCount > 0 && this.adultNames.filter(x => x !== '').reduce((acc, curr, i) => ({
+              ...acc,
+              [`adult_name_${i + 1}`]: curr,
+            }), {})),
+            ...(this.childTicketsCount > 0 && this.childNames.filter(x => x !== '').reduce((acc, curr, i) => ({
+              ...acc,
+              [`child_name_${i + 1}`]: curr,
+            }), {})),
+            ...(this.playerTicketsCount > 0 && this.playerNames.filter(x => x !== '').reduce((acc, curr, i) => ({
+              ...acc,
+              [`player_name_${i + 1}`]: curr,
+            }), {})),
           },
+          success_url: 'http://localhost:3000/payment-success',
+          cancel_url: 'http://localhost:3000/news-and-events/presentation-2021',
         })
 
-        console.log({ res })
-
-        if (res?.paymentIntent?.status === 'succeeded') {
-          this.stripePaymentSucceeded = true
-          return
-        }
-
-        if (res.error) {
-          throw res.error
-        }
-      } catch (error) {
-        console.log({ error: error.message })
-
-        this.stripeErrorMessage = error.message
-      } finally {
-        this.stripePaymentProcessing = false
-        this.$nuxt.$loading.finish()
+        this.stripe.redirectToCheckout({ sessionId: checkoutSessionId })
       }
     },
   },

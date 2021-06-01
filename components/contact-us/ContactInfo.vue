@@ -22,10 +22,10 @@
       label="Email"
     >
       <a
-        href="mailto:ncj.adamjones@hotmail.com"
+        href="mailto:info@newcastlecityjuniors.co.uk"
         class="text-white hover:text-gold"
       >
-        ncj.adamjones@hotmail.com
+        info@newcastlecityjuniors.co.uk
       </a>
     </ContactInfoBlock>
   </div>

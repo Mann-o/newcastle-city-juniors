@@ -20,7 +20,8 @@
     "contentful": "8.3.7",
     "core-js": "3.13.0",
     "nuxt": "2.15.6",
-    "vue2-google-maps": "0.10.7"
+    "vue2-google-maps": "0.10.7",
+    "vue-pdf": "4.2.0"
   },
   "devDependencies": {
     "@babel/core": "7.14.3",

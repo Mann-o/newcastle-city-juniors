@@ -20,6 +20,7 @@ export const fontawesome = {
       'faEnvelope',
       'faExternalLinkAlt',
       'faFutbol',
+      'faInfoCircle',
       'faMapMarkerAlt',
       'faPhoneAlt',
       'faTshirt',

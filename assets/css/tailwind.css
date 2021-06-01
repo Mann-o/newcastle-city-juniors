@@ -2,53 +2,51 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  body {
-    @apply font-poppins;
-  }
-  h1 {
-    @apply border-b-2 border-grey-400 relative mb-8 pb-2 text-3xl uppercase;
-  }
+body {
+  @apply font-poppins;
+}
+h1 {
+  @apply border-b-2 border-grey-400 relative mb-8 pb-2 text-3xl uppercase;
+}
 
-  h2 {
-    @apply border-b-2 border-grey-400 relative mb-4 text-xl uppercase inline-block;
+h2 {
+  @apply border-b-2 border-grey-400 relative mb-4 text-xl uppercase inline-block;
 
-    &.central {
-      @apply text-center;
+  &.central {
+    @apply text-center;
 
-      &:after {
-        @apply left-1/2 transform -translate-x-1/2;
-      }
+    &:after {
+      @apply left-1/2 transform -translate-x-1/2;
     }
   }
+}
 
-  h4 {
-    @apply border-b-2 border-grey-400 relative mb-4 pb-2;
-  }
+h4 {
+  @apply border-b-2 border-grey-400 relative mb-4 pb-2;
+}
 
-  h1::after {
-    @apply absolute left-0 bg-gold;
-    height: 2px;
-    width: 50px;
-    bottom: -2px;
-    content: '';
-  }
+h1::after {
+  @apply absolute left-0 bg-gold;
+  height: 2px;
+  width: 50px;
+  bottom: -2px;
+  content: '';
+}
 
-  h2::after {
-    @apply absolute left-0 bg-gold;
-    height: 2px;
-    width: 50px;
-    bottom: -2px;
-    content: '';
-  }
+h2::after {
+  @apply absolute left-0 bg-gold;
+  height: 2px;
+  width: 50px;
+  bottom: -2px;
+  content: '';
+}
 
-  h4::after {
-    @apply absolute left-0 bg-gold;
-    height: 2px;
-    width: 50px;
-    bottom: -2px;
-    content: '';
-  }
+h4::after {
+  @apply absolute left-0 bg-gold;
+  height: 2px;
+  width: 50px;
+  bottom: -2px;
+  content: '';
 }
 
 a {
@@ -73,7 +71,8 @@ p a {
 }
 
 input,
-textarea {
+textarea,
+select {
   @apply p-2 text-sm font-poppins leading-stripe tracking-normal;
 }
 

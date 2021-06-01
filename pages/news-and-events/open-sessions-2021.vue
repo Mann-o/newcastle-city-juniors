@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Holiday Camps - Half Term</h1>
+    <h1>Open Sessions - 2021-22 Season</h1>
     <div v-if="$fetchState.pending">
       <Loader />
     </div>
@@ -8,26 +8,36 @@
       An error occurred fetching this page!
     </div>
     <div v-else>
-      <img :src="leaflet.file.url">
+      <object
+        class="w-full"
+        height="1200"
+        :data="pdf.file.url"
+        type="application/pdf"
+      >
+        <embed
+          :src="pdf.file.url"
+          type="application/pdf"
+        />
+      </object>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'PageHolidayCampsIndex',
+  name: 'PageNewsAndEventsOpenSessions2021',
 
   components: {
     Loader: () => import('@/components/layout/Loader.vue'),
   },
 
   data: () => ({
-    leaflet: null,
+    pdf: null,
   }),
 
   async fetch () {
-    this.leaflet = await this.$contentful
-      .getAsset('4mzk9P56SgDxXHPHZ0CWeq')
+    this.pdf = await this.$contentful
+      .getAsset('16gFUdqrld85f3tZK9oYzs')
       .then(({ fields }) => fields)
   },
 }

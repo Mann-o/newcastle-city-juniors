@@ -74,6 +74,7 @@ module.exports = {
   },
 
   variants: {
+    margin: ({ after }) => after(['first-of-type']),
     extend: {},
   },
 
@@ -90,6 +91,11 @@ module.exports = {
       }))
 
       addUtilities(utilities, variants('borderColor'))
+    },
+    ({ addVariant, e }) => {
+      addVariant('first-of-type', ({ modifySelectors, separator }) => {
+        modifySelectors(({ className }) => `.${e(`first-of-type${separator}${className}`)}:first-of-type`)
+      })
     },
   ],
 }
