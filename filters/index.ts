@@ -1,3 +1,5 @@
+import { format, parseISO } from 'date-fns';
+
 export const telephoneNumberLink = (value: string) => {
   if (value == null) {
     return null
@@ -28,4 +30,10 @@ export const fullName = (firstName: string, lastName: string) => {
   }
 
   return firstName
+}
+
+export const formatDate = (value: string, stringFormat: string = 'dd/MM/yyyy') => {
+  if (!value) return '';
+
+  return format(parseISO(value.toString()), stringFormat);
 }

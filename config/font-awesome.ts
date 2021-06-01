@@ -17,6 +17,7 @@ export const fontawesome = {
       'faTimes',
     ],
     duotone: [
+      'faCalendarAlt',
       'faEnvelope',
       'faExternalLinkAlt',
       'faFutbol',

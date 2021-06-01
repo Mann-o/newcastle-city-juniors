@@ -2,8 +2,9 @@
   <a
     :class="[
       ...(dark ? ['hover:text-white'] : []),
-      ...(light ? ['text-black hover:text-black'] : []),
-      ...(!dark && !light ? ['text-white'] : []),
+      ...(light ? ['text-black', 'hover:text-black'] : []),
+      ...(regular ? ['underline', 'text-black', 'hover:text-gold'] : []),
+      ...(!dark && !light && !regular ? ['text-white'] : []),
     ]"
     :href="to"
     target="_blank"
@@ -54,8 +55,11 @@ export default {
     },
     label: {
       type: String,
-      required: false,
       default: null,
+    },
+    regular: {
+      type: Boolean,
+      default: false,
     },
   },
 

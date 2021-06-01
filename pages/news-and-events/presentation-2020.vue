@@ -226,7 +226,7 @@ export default {
             }), {})),
           },
           success_url: 'https://newcastlecityjuniors.co.uk/payment-success',
-          cancel_url: 'https://newcastlecityjuniors.co.uk/news-and-events/presentation-2021',
+          cancel_url: 'https://newcastlecityjuniors.co.uk/news-and-events/presentation-2020',
         })
 
         this.stripe.redirectToCheckout({ sessionId: checkoutSessionId })
