@@ -198,15 +198,15 @@ export default {
           customer_email: this.emailAddress,
           line_items: [
             ...(this.adultTicketsCount > 0 ? [{
-              price: 'price_1IwxxqJgy48auTmoSQ5D3ELG',
+              price: 'price_1IxgxbJgy48auTmoWWoEfpmQ',
               quantity: this.adultTicketsCount,
             }] : []),
             ...(this.childTicketsCount > 0 ? [{
-              price: 'price_1IwxyMJgy48auTmoLWJOfICS',
+              price: 'price_1IxgxsJgy48auTmohIvUZjzR',
               quantity: this.childTicketsCount,
             }] : []),
             ...(this.playerTicketsCount > 0 ? [{
-              price: 'price_1IwxyyJgy48auTmoH9D6cYxf',
+              price: 'price_1Ixgy6Jgy48auTmoM7iox1O3',
               quantity: this.playerTicketsCount,
             }] : []),
           ],
