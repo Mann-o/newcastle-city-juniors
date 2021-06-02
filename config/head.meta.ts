@@ -14,11 +14,20 @@ export const headMeta = [
     name: 'author',
     content: 'Newcastle City Juniors',
   },
-
   {
     hid: 'description',
     name: 'description',
     content: 'Official website of Newcastle City Juniors F.C. Formed in the summer of 2005 based in the west end of Newcastle upon Tyne, we are committed to coaching players of the future. Registered charity number 1132738.',
+  },
+  {
+    hid: 'og:description',
+    name: 'og:description',
+    content: 'Official website of Newcastle City Juniors F.C. Formed in the summer of 2005 based in the west end of Newcastle upon Tyne, we are committed to coaching players of the future. Registered charity number 1132738.',
+  },
+  {
+    hid: 'og:title',
+    name: 'og:title',
+    content: 'Newcastle City Juniors',
   },
   {
     hid: 'keywords',

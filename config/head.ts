@@ -6,7 +6,7 @@ export const head: NuxtOptionsHead = {
     lang: 'en',
   },
 
-  // title: 'Newcastle City Juniors',
+  title: 'Newcastle City Juniors',
   titleTemplate: '%s :: Newcastle City Juniors',
 
   meta: headMeta,
