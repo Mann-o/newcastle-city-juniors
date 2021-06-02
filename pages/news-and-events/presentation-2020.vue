@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>NCJ Presentation - 2020-21 Season</h1>
-    <p class="pb-4">Newcastle City Juniors are happy to announce that tickets are now available for our Presentation 2020-21 Season!</p>
+    <p class="pb-4">Newcastle City Juniors are happy to announce that tickets are now available for our Presentation 2020-21 Season, being held on 26th June 2021!</p>
     <p class="pb-4">Each year we want to recognise all of the special talent we have here at Newcastle City Juniors, and present all of the children with a participation trophy for the season.</p>
     <p class="pb-4">All attending players <strong>MUST</strong> wear their home stripe (Black/White Top, White Shorts/Socks) on the day. All players will be asked to hand in their Black/White Top at the end of the presentation by their team coaches so please bring a change of top for your child. White Shorts/Socks can be kept.</p>
     <p class="pb-4">Hot/cold food, refreshments and alcoholic beverages will be available on the day.</p>
