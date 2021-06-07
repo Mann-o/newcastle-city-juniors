@@ -18,7 +18,7 @@
     "@nuxtjs/proxy": "2.1.0",
     "@nuxtjs/pwa": "3.3.5",
     "contentful": "8.3.7",
-    "core-js": "3.13.1",
+    "core-js": "3.14.0",
     "date-fns": "2.22.1",
     "nuxt": "2.15.6",
     "vue2-google-maps": "0.10.7"
