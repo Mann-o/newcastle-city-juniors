@@ -11,6 +11,13 @@
       <div class="grid gap-8 lg:grid-cols-5">
         <ArticleCard
           :image="trophyDayImage.file.url"
+          title="Update on Presentation"
+          subtext="An update to our Presentation 2020-21 Season following recent government announcements."
+          date="2021-06-16"
+          link="/news-and-events/presentation-2020-update"
+        />
+        <ArticleCard
+          :image="trophyDayImage.file.url"
           title="Presentation For The 2020-21 Season"
           subtext="Newcastle City Juniors are happy to announce that tickets are now available for our Presentation 2020-21 Season!"
           date="2021-06-01"
