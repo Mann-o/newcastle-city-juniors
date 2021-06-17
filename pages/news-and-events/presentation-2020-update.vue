@@ -4,7 +4,7 @@
 
     <p class="pb-4">Following the latest government announcement on Monday this year's club presentation has had to be altered slightly, unfortunately.</p>
     <p class="pb-4">Originally the football club had planned to hold this year's presentation indoors inside the clubs sports hall but following the latest update, we will move the presentation outdoors ensuring all the children still get their trophies which they all deserve following a tough and very much interrupted season due to COVID-19.</p>
-    <p>The structure has slightly changed with each age group being allocated a time slot and we ask for all players, parents and coaches to be on site at least 10 minutes prior to your age group/teams presentation starting.</p>
+    <p class="pb-4">The structure has slightly changed with each age group being allocated a time slot and we ask for all players, parents and coaches to be on site at least 10 minutes prior to your age group/teams presentation starting.</p>
     <p>The new schedule for Saturday 26th June 2021 is listed below:</p>
 
     <h2 class="mt-8">Timetable</h2>
