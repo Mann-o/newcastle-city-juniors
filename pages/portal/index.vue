@@ -53,7 +53,7 @@
                     <span title="Team" class="inline-block w-6 mr-2">
                       <FontAwesomeIcon :icon="['fad', 'users']" />
                     </span>
-                    {{ player.team.ageGroup.name }} - {{ player.team.name }}
+                    {{ player.ageGroup.name }}
                   </li>
                 </ul>
               </div>

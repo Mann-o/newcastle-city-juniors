@@ -81,16 +81,16 @@
             </div>
 
             <div class="mt-16">
-              <h2>Step 2 - Team Selection &amp; Membership Fees</h2>
+              <h2>Step 2 - Age Group Selection &amp; Membership Fees</h2>
               <ValidationProvider
                 v-slot="{ errors }"
                 rules="required"
                 tag="div"
               >
                 <FormSelect
-                  label="Select which team your player is registering for"
-                  :options="teams"
-                  v-model="form.teamId"
+                  label="Select which age group your player is registering for"
+                  :options="ageGroups"
+                  v-model="form.ageGroupId"
                   :invalid="errors.length > 0"
                 />
                 <span class="text-xs text-danger mt-2">{{ errors[0] }}</span>
@@ -105,7 +105,7 @@
                   label="Select which membership fee option you wish to proceed with"
                   :options="membershipFeeOptions"
                   v-model="form.membershipFeeOption"
-                  help-text="If you choose the 1x payment of £300 option this is a saving of £42 compared to the monthly subscriptions. For the monthly subscriptions, the 1x payment in July covers a £28.50 registration fee and your July monthly subscription. For any monthly subscription payments not received by 15th of each month, your player will need to be de-registered and will not be allowed to train or play as they would not be covered by player insurance."
+                  :help-text="`${form.sex === 'male' ? 'If you choose the 1x payment of £300 option this is a saving of £42 compared to the monthly subscriptions. ' : ''}For the monthly subscriptions, the 1x payment in July covers a £${form.sex === 'male' ? '28.50' : '20'} registration fee and your July monthly subscription. For any monthly subscription payments not received by 15th of each month, your player will need to be de-registered and will not be allowed to train or play as they would not be covered by player insurance.`"
                   :invalid="errors.length > 0"
                 />
                 <span class="text-xs text-danger mt-2">{{ errors[0] }}</span>
@@ -301,14 +301,10 @@ export default {
   scrollToTop: true,
 
   data: () => ({
-    teams: [],
+    ageGroups: [],
     sexes: [
       { key: 'male', value: 'Male' },
       { key: 'female', value: 'Female' },
-    ],
-    membershipFeeOptions: [
-      { key: 'upfront', value: '1x payment of £300' },
-      { key: 'subscription', value: '1x payment of £57.00 in July, then 10x monthly payments of £28.50 from August to May' }
     ],
     form: {
       fullName: '',
@@ -316,7 +312,7 @@ export default {
       sex: 'male',
       medicalConditions: '',
       mediaConsented: true,
-      teamId: '1',
+      ageGroupId: '1',
       membershipFeeOption: 'upfront',
       acceptedPlayerCodeOfConduct: false,
       acceptedParentCodeOfConduct: false,
@@ -328,10 +324,10 @@ export default {
   }),
 
   async fetch() {
-    const { data: { data: teams } } = await this.$axios.get('/api/club/teams')
-    this.teams = teams.map((team) => ({
-      key: team.id,
-      value: `${team.ageGroup.name} - ${team.name}`,
+    const { data: { data: ageGroups } } = await this.$axios.get('/api/club/age-groups')
+    this.ageGroups = ageGroups.map(ageGroup => ({
+      key: ageGroup.id,
+      value: ageGroup.name,
     })) || []
   },
 
@@ -340,6 +336,25 @@ export default {
       return this.registering
         ? 'Registering...'
         : 'Register Player'
+    },
+
+    membershipFeeOptions() {
+      return [
+        {
+          key: 'upfront',
+          value: `1x payment of £${
+            this.form.sex === 'male' ? '300.00' : '200.00'
+          }`,
+        },
+        {
+          key: 'subscription',
+          value: `1x payment of £${
+            this.form.sex === 'male' ? '57.00' : '40.00'
+          } in July, then 10x monthly payments of £${
+            this.form.sex === 'male' ? '28.50' : '20.00'
+          } from August to May`,
+        },
+      ]
     },
   },
 
