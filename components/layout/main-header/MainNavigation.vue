@@ -10,19 +10,36 @@
         ]"
       >
         <ul class="lg:flex">
-          <MainNavigationLink
-            v-for="(route, index) in routes"
-            :key="index"
-            :route="route"
-          >
-            <template v-if="route.children">
-              <MainNavigationSubLink
-                v-for="(childRoute, childIndex) in route.children"
-                :key="childIndex"
-                :child-route="childRoute"
-              />
-            </template>
-          </MainNavigationLink>
+          <template v-for="(route, index) in routes">
+            <MainNavigationLink
+              v-if="
+                route.alwaysDisplay ||
+                (!$auth.loggedIn && route.hideWhenAuthenticated) ||
+                ($auth.loggedIn && route.requiresAuth)
+              "
+              :key="index"
+              :route="route"
+            >
+              <template v-if="route.children">
+                <MainNavigationSubLink
+                  v-for="(childRoute, childIndex) in route.children"
+                  :key="childIndex"
+                  :child-route="childRoute"
+                />
+              </template>
+            </MainNavigationLink>
+          </template>
+          <li
+            v-if="$auth.loggedIn"
+            class="main-navigation-link">
+            <a
+              class="block py-4 pl-4 text-white lg:py-8"
+              href="/logout"
+              @click.prevent="$auth.logout()"
+            >
+              Logout
+            </a>
+          </li>
         </ul>
       </nav>
     </div>

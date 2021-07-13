@@ -4,6 +4,8 @@ const omit = require('lodash/omit')
 const flattenColorPalette = require('tailwindcss/lib/util/flattenColorPalette').default
 
 module.exports = {
+  mode: 'jit',
+
   purge: [
     './components/**/*.{vue,js}',
     './layouts/**/*.vue',
@@ -27,6 +29,11 @@ module.exports = {
       'grey-700': colors.gray['700'],
       'grey-800': colors.gray['800'],
       'grey-900': colors.gray['900'],
+      danger: '#ff0000',
+      success: '#155724',
+      'success-bg': '#d4edda',
+      info: '#004085',
+      warning: '#856404',
     },
     fontFamily: {
       sans: [

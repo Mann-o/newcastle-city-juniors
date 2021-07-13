@@ -9,6 +9,8 @@
 export default {
   name: 'PagePaymentSuccess',
 
+  scrollToTop: true,
+
   head: () => ({
     title: 'Payment Success',
   }),

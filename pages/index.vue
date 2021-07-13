@@ -20,6 +20,8 @@ export default {
     ProvenTrackRecord: () => import('@/components/home/ProvenTrackRecord.vue'),
   },
 
+  scrollToTop: true,
+
   layout: 'full-bleed',
 
   async asyncData ({ $config, $contentful }) {

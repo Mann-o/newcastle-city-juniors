@@ -1,4 +1,4 @@
 export const tailwindcss = {
-  jit: true,
+  // mode: 'jit',
   // exposeConfig: true,
 }

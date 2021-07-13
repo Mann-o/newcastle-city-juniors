@@ -1,4 +1,5 @@
 import { NuxtConfig } from '@nuxt/types'
+import { auth } from './config/auth'
 import { axios } from './config/axios'
 import { build } from './config/build'
 import { buildModules } from './config/build-modules'
@@ -19,6 +20,7 @@ import { tailwindcss } from './config/tailwindcss'
 import { vue } from './config/vue'
 
 const config: NuxtConfig = {
+  auth,
   axios,
   build: Object.assign({
     watch: ['config'],

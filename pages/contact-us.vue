@@ -20,6 +20,8 @@ export default {
     ContactInfo: () => import('@/components/contact-us/ContactInfo.vue'),
   },
 
+  scrollToTop: true,
+
   data: () => ({
     map: {
       height: '400px',

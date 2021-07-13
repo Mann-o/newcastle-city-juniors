@@ -21,6 +21,8 @@ export default {
     Loader: () => import('@/components/layout/Loader.vue'),
   },
 
+  scrollToTop: true,
+
   data: () => ({
     leaflet: null,
   }),

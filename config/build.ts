@@ -21,5 +21,6 @@ export const build: NuxtOptionsBuild = {
 
   transpile: [
     /^vue2-google-maps($|\/)/,
+    'vee-validate/dist/rules',
   ],
 }

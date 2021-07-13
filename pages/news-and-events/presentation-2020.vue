@@ -98,6 +98,8 @@ export default {
   //   FormTotalCost: () => import('@/components/elements/forms/FormTotalCost.vue'),
   // },
 
+  scrollToTop: true,
+
   // data: () => ({
   //   stripe: null,
   //   adultTicketsCount: '1',

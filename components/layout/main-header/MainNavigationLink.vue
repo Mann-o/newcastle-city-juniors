@@ -1,24 +1,16 @@
 <template>
   <li class="main-navigation-link border-b border-grey-800 lg:border-none lg:hover:text-gold transition-all lg:relative">
     <template v-if="!$slots.default">
-      <a
-        v-if="isExternalLink"
-        :href="route.to"
-        class="block py-4 pl-4 text-white lg:py-8"
-      >
-        {{ route.label }}
-        <FontAwesomeIcon
-          class="ml-1"
-          :icon="['fad', 'external-link-alt']"
-        />
-      </a>
       <NuxtLink
-        v-else
         :to="route.to"
         class="block py-4 pl-4 text-white lg:py-8"
         active-class="text-gold"
         :exact="isHomepageRoute"
       >
+        <FontAwesomeIcon
+          v-if="route.icon"
+          :icon="['fad', route.icon]"
+        />
         {{ route.label }}
       </NuxtLink>
     </template>
@@ -72,9 +64,6 @@ export default {
         'fal',
         `angle-${this.route.expanded ? 'up' : 'down'}`,
       ]
-    },
-    isExternalLink () {
-      return this.route.to.startsWith('http://')
     },
     isHomepageRoute () {
       return this.route.to === '/'

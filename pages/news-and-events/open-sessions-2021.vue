@@ -99,5 +99,7 @@
 <script>
 export default {
   name: 'PageNewsAndEventsOpenSessions2021',
+
+  scrollToTop: true,
 }
 </script>

@@ -1,9 +1,15 @@
 <template>
-  <div class="mt-4 first-of-type:mt-0">
+  <div>
     <label class="block text-sm font-bold mb-1">
       {{ label }}
     </label>
-    <div class="border border-grey-400">
+    <div
+      class="border transition-colors"
+      :class="{
+        'border-grey-400': !invalid,
+        'border-danger': invalid,
+      }"
+    >
       <component
         class="block text-sm w-full focus:outline-none"
         :is="fieldElement"
@@ -45,6 +51,11 @@ export default {
       type: String,
       required: true,
     },
+    invalid: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
   },
 
   computed: {
@@ -63,6 +74,12 @@ export default {
           },
           ...this.fieldType === 'email' && {
             type: 'email',
+          },
+          ...this.fieldType === 'password' && {
+            type: 'password',
+          },
+          ...this.fieldType === 'date' && {
+            type: 'date',
           },
         },
       }

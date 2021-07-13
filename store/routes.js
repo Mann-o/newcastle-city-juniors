@@ -1,6 +1,18 @@
-const link = (to, label, children = []) => ({
+const link = ({
   to,
+  icon = null,
   label,
+  alwaysDisplay = true,
+  requiresAuth = false,
+  hideWhenAuthenticated = false,
+  children = [],
+}) => ({
+  to,
+  icon,
+  label,
+  alwaysDisplay,
+  requiresAuth,
+  hideWhenAuthenticated,
   ...(children.length && {
     children,
     expanded: false,
@@ -9,20 +21,75 @@ const link = (to, label, children = []) => ({
 
 export const state = () => ({
   routes: [
-    link('/', 'Home'),
-    link('/about-us', 'About Us', [
-      link('/about-us/club-philosophy', 'Club Philosophy'),
-      link('/about-us/club-committee', 'Club Committee'),
-      link('/about-us/safeguarding', 'Safeguarding'),
-      link('/about-us/anti-bullying', 'Anti-Bullying'),
-      link('/about-us/complaints-procedure', 'Complaints Procedure'),
-    ]),
-    link('/teams', 'Our Teams'),
-    link('/news-and-events', 'News & Events'),
-    link('/newcastle-city-development-centre', 'Development Centre'),
-    link('/holiday-camps', 'Holiday Camps'),
-    // link('http://www.juvelounge.co.uk', 'Juve Lounge'),
-    link('/contact-us', 'Contact Us'),
+    link({
+      to: '/',
+      label: 'Home',
+    }),
+    link({
+      to: '/about-us',
+      label: 'About Us',
+      children: [
+        link({
+          to: '/about-us/club-philosophy',
+          label: 'Club Philosophy',
+        }),
+        link({
+          to: '/about-us/club-committee',
+          label: 'Club Committee',
+        }),
+        link({
+          to: '/about-us/safeguarding',
+          label: 'Safeguarding',
+        }),
+        link({
+          to: '/about-us/anti-bullying',
+          label: 'Anti-Bullying',
+        }),
+        link({
+          to: '/about-us/complaints-procedure',
+          label: 'Complaints Procedure',
+        }),
+      ],
+    }),
+    link({
+      to: '/teams',
+      label: 'Our Teams',
+    }),
+    link({
+      to: '/news-and-events',
+      label: 'News & Events',
+    }),
+    link({
+      to: '/development-centre',
+      label: 'Development Centre',
+    }),
+    link({
+      to: '/holiday-camps',
+      label: 'Holiday Camps',
+    }),
+    link({
+      to: '/contact-us',
+      label: 'Contact Us',
+    }),
+    link({
+      to: '/login',
+      label: 'Login',
+      alwaysDisplay: false,
+      hideWhenAuthenticated: true,
+    }),
+    link({
+      to: '/register',
+      label: 'Register',
+      alwaysDisplay: false,
+      hideWhenAuthenticated: true,
+    }),
+    link({
+      icon: 'futbol',
+      to: '/portal',
+      label: 'Portal',
+      alwaysDisplay: false,
+      requiresAuth: true,
+    }),
   ],
 })
 

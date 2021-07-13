@@ -3,18 +3,24 @@
     <label class="block text-sm font-bold mb-1">
       {{ label }}
     </label>
-    <div class="border border-grey-400">
+    <div
+      class="border transition-colors"
+      :class="{
+        'border-grey-400': !invalid,
+        'border-danger': invalid,
+      }"
+    >
       <select
         class="block w-full text-sm focus:outline-none"
         :value="value"
         @change="changeFieldValue"
       >
         <option
-          v-for="({ key, value }) in options"
-          :key="key"
-          :value="key"
+          v-for="(option, index) in options"
+          :key="index"
+          :value="option[keyField]"
         >
-          {{ value }}
+          {{ option[valueField] }}
         </option>
       </select>
     </div>
@@ -49,6 +55,21 @@ export default {
     value: {
       type: String,
       required: true,
+    },
+    invalid: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+    keyField: {
+      type: String,
+      required: false,
+      default: 'key',
+    },
+    valueField: {
+      type: String,
+      required: false,
+      default: 'value',
     },
   },
 

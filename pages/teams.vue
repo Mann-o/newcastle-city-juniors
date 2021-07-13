@@ -6,6 +6,8 @@
 export default {
   name: 'PageTeams',
 
+  scrollToTop: true,
+
   head: () => ({
     title: 'Teams',
   }),

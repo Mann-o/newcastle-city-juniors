@@ -52,6 +52,8 @@ export default {
     ExternalLink: () => import('@/components/elements/ExternalLink.vue'),
   },
 
+  scrollToTop: true,
+
   data: () => ({
     pdf: null,
   }),

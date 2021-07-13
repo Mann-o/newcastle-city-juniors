@@ -28,6 +28,8 @@ export default {
     // TeamsNavigation: () => import('@/components/teams/navigation/TeamsNavigation.vue'),
   },
 
+  scrollToTop: true,
+
   data: () => ({
     ageGroups: [],
   }),

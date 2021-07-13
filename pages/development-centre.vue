@@ -34,6 +34,8 @@ export default {
     DevelopmentCentreBlock: () => import('@/components/development-centre/DevelopmentCentreBlock.vue'),
   },
 
+  scrollToTop: true,
+
   data: () => ({
     blocks: [
       {

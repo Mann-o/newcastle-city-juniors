@@ -1,6 +1,6 @@
 import { format, parseISO } from 'date-fns';
 
-export const telephoneNumberLink = (value: string) => {
+export const telephoneNumberLink = (value: string): string | null => {
   if (value == null) {
     return null
   }
@@ -12,7 +12,7 @@ export const telephoneNumberLink = (value: string) => {
   }`
 }
 
-export const emailAddressLink = (value: string) => {
+export const emailAddressLink = (value: string): string | null => {
   if (value == null) {
     return null
   }
@@ -20,7 +20,7 @@ export const emailAddressLink = (value: string) => {
   return `mailto:${value}`
 }
 
-export const fullName = (firstName: string, lastName: string) => {
+export const fullName = (firstName: string, lastName: string): string | null => {
   if (firstName == null && lastName == null) {
     return null
   }
@@ -32,8 +32,12 @@ export const fullName = (firstName: string, lastName: string) => {
   return firstName
 }
 
-export const formatDate = (value: string, stringFormat: string = 'dd/MM/yyyy') => {
+export const formatDate = (value: string, stringFormat: string = 'dd/MM/yyyy'): string => {
   if (!value) return '';
 
   return format(parseISO(value.toString()), stringFormat);
 }
+
+export const uppercaseFirst = (value: string): string => value.charAt(0).toUpperCase() + value.slice(1)
+
+export const gbp = (value: number): string => `£${(value / 100).toFixed(2)}`

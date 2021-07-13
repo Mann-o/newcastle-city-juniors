@@ -4,12 +4,14 @@
 
 <script>
 export default {
-  name: 'PageNewsAndEvents',
+  name: 'PagePortal',
 
   scrollToTop: true,
 
   head: () => ({
-    title: 'News & Events',
+    title: 'NCJ Portal',
   }),
+
+  middleware: 'auth',
 }
 </script>
