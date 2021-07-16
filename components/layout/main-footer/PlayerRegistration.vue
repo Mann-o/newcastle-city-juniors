@@ -2,7 +2,7 @@
   <div class="px-8 pb-16 lg:px-0 lg:pb-0">
     <h4>Player Registration</h4>
     <p class="pb-4">
-      Is your child looking for a new challenge? We have teams from U7 to U16 for boys and girls, and we are now accepting online player registrations for the 2021-22 season!
+      Has your child been selected for the 2021-22 season following our open sessions? If so you can now register your player!
     </p>
     <template v-if="$auth.loggedIn">
       <p>Visit the <NuxtLink class="text-gold no-underline hover:underline" to="/portal">NCJ Portal</NuxtLink> to get started.</p>

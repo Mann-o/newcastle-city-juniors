@@ -3,7 +3,8 @@
     <template v-if="!$auth.loggedIn">
       <h1>Login</h1>
       <p class="pb-4">Log in to your Newcastle City Juniors account to manage your players, subscriptions, and more!</p>
-      <p>Don't have an account yet? <NuxtLink to="/register">Create one here</NuxtLink>!</p>
+      <p class="pb-4">Forgot your password? <NuxtLink to="/forgot-password">Reset it here</NuxtLink></p>
+      <p>Don't have an account yet? <NuxtLink to="/register">Create one here</NuxtLink></p>
 
       <form
         class="mt-16 md:max-w-lg"
@@ -32,7 +33,12 @@
           {{ loginButtonLabel }}
         </button>
 
-        <p v-if="loginError">{{ loginError }}</p>
+        <p
+          class="mt-4 text-danger"
+          v-if="loginError"
+        >
+          {{ loginError }}
+        </p>
       </form>
     </template>
     <div v-else>

@@ -3,9 +3,10 @@
     <h1>Register</h1>
     <template v-if="!$auth.loggedIn">
       <template v-if="!registered">
-        <p class="pb-4">Already registered? <NuxtLink to="/login">Login here</NuxtLink>!</p>
-        <p class="pb-4">Thank you for your interest in registering your child with Newcastle City Juniors! To get started please complete the following form to create an NCJ Portal account where you will then be able to register individual players, manage their subscriptions, and more!</p>
-        <p><strong>All fields are required.</strong> This form is to grant you access to the NCJ Portal so please complete this form with your OWN details - not your child! You will be able to register your child once you have verified your email address and logged into the <NuxtLink to="/portal">NCJ Portal</NuxtLink>.</p>
+        <p class="pb-4">Has your child been selected for a team following our Open Sessions? If so it is now time to register your child, pay any upfront costs and/or set up subscription payments. To get started please complete the following form to create an NCJ Portal account where you will then be able to register individual players, manage their subscriptions, and more!</p>
+        <p class="pb-4 text-danger">Please only complete this form and register a player if your child has been selected for a team following our Open Sessions. Our teams are now full and we are not accepting open player registrations. Any registrations received for players who were not selected from our Open Sessions will be removed.</p>
+        <p class="pb-4"><strong>All fields are required.</strong> This form is to grant you access to the NCJ Portal so please complete this form with your OWN details - not your child! You will be able to register your child once you have verified your email address and logged into the <NuxtLink to="/portal">NCJ Portal</NuxtLink>.</p>
+        <p>Already registered? <NuxtLink to="/login">Login here</NuxtLink>!</p>
 
 
         <ValidationObserver v-slot="{ invalid, handleSubmit }">

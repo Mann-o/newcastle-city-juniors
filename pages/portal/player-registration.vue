@@ -6,7 +6,7 @@
       <Loader />
     </div>
     <div v-else-if="$fetchState.error">
-      An error occurred fetching teams!
+      An error occurred fetching age groups!
     </div>
     <div v-else>
       <template v-if="!registered">
@@ -261,13 +261,19 @@
               >
                 {{ registerPlayerButtonLabel }}
               </button>
-              <p v-if="registerError">{{ registerError }}</p>
+              <p
+                class="mt-4 text-danger"
+                v-if="registerError"
+              >
+                {{ registerError }}
+              </p>
             </div>
           </form>
         </ValidationObserver>
       </template>
       <template v-else>
-        <p class="pb-4">Player registration was successful. You may now return to the NCJ Portal to make your first payment or set up your subscriptions.</p>
+        <p class="pb-4">Player registration was successful. Please now return to the NCJ Portal and tap on your player to make your first payment or set up your subscriptions.</p>
+        <p class="strong">IMPORTANT: Payment should be made immediately for any required upfront costs. Do not wait for the club to contact or chase you for payment!</p>
         <NuxtLink
           to="/portal"
           class="
@@ -321,6 +327,7 @@ export default {
     registering: false,
     registerError: null,
     registered: false,
+    player: null,
   }),
 
   async fetch() {
