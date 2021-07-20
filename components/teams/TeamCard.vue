@@ -32,7 +32,7 @@
           <li class="font-bold">
             {{ manager.fields.firstName }} {{ manager.fields.lastName }}
           </li>
-          <li>
+          <li v-if="manager.fields.telephoneNumber">
             <FontAwesomeIcon
               :icon="['fad', 'phone-alt']"
               class="mr-2"
@@ -44,7 +44,7 @@
               {{ manager.fields.telephoneNumber }}
             </a>
           </li>
-          <li>
+          <li v-if="manager.fields.emailAddress">
             <FontAwesomeIcon
               :icon="['fad', 'envelope']"
               class="mr-2"
@@ -74,7 +74,7 @@
             <li class="font-bold">
               {{ coach.fields.firstName }} {{ coach.fields.lastName }}
             </li>
-            <li>
+            <li v-if="coach.fields.telephoneNumber">
               <FontAwesomeIcon
                 :icon="['fad', 'phone-alt']"
                 class="mr-2"
@@ -86,7 +86,7 @@
                 {{ coach.fields.telephoneNumber }}
               </a>
             </li>
-            <li>
+            <li v-if="coach.fields.emailAddress">
               <FontAwesomeIcon
                 :icon="['fad', 'envelope']"
                 class="mr-2"
