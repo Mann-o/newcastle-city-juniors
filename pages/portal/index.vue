@@ -56,6 +56,12 @@
                     {{ player.ageGroup.name }}
                   </li>
                 </ul>
+                <NuxtLink
+                  class="inline-block mt-4 underline hover:text-black"
+                  :to="`/portal/player/${player.id}`"
+                >
+                    View Player
+                </NuxtLink>
               </div>
             </div>
           </NuxtLink>
