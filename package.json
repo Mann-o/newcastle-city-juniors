@@ -52,7 +52,7 @@
     "eslint-plugin-nuxt": "2.0.0",
     "eslint-plugin-vue": "7.13.0",
     "jest": "27.0.6",
-    "postcss": "8.3.5",
+    "postcss": "8.3.6",
     "stylelint": "13.13.1",
     "stylelint-config-standard": "22.0.0",
     "ts-jest": "27.0.3",
