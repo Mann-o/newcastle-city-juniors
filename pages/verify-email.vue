@@ -9,7 +9,7 @@
       <p>If your account is not showing your email address as verified, please reach out to us at <a href="mailto:info@newcastlecityjuniors.co.uk">info@newcastlecityjuniors.co.uk</a> and we will manually verify your account for you.</p>
     </div>
     <div v-else>
-      <p>Your email address has been successfully verified. You may now log in to the <NuxtLink to="/portal">NCJ Portal</NuxtLink> to regster your player, pay the registration fee and manage their subs!</p>
+      <p>Your email address has been successfully verified. You may now log in to the <NuxtLink to="/portal">NCJ Portal</NuxtLink> to register your player, pay the registration fee and manage their subs!</p>
     </div>
   </div>
 </template>
