@@ -3,12 +3,8 @@ const flatMap = require('lodash/flatMap')
 const omit = require('lodash/omit')
 const flattenColorPalette = require('tailwindcss/lib/util/flattenColorPalette').default
 
-const isProduction = process.env.NODE_ENV === 'production'
-
 module.exports = {
   mode: 'jit',
-
-  minify: isProduction,
 
   purge: [
     './components/**/*.{vue,js}',
