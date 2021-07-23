@@ -6,4 +6,5 @@ export const modules: NuxtOptionsModule[] = [
   '@nuxtjs/proxy',
   '@nuxtjs/auth-next',
   '@nuxtjs/sentry',
+  '@nuxtjs/critters',
 ]

@@ -16,12 +16,13 @@
   "dependencies": {
     "@nuxtjs/auth-next": "5.0.0-1624817847.21691f1",
     "@nuxtjs/axios": "5.13.6",
+    "@nuxtjs/critters": "0.2.0",
     "@nuxtjs/proxy": "2.1.0",
     "@nuxtjs/pwa": "3.3.5",
     "@nuxtjs/sentry": "5.1.0",
     "contentful": "8.4.2",
     "core-js": "3.15.2",
-    "date-fns": "2.22.1",
+    "date-fns": "2.23.0",
     "nuxt": "2.15.7",
     "vee-validate": "3.4.11",
     "vue2-google-maps": "0.10.7"
@@ -45,7 +46,7 @@
     "@nuxtjs/tailwindcss": "4.2.1",
     "@tailwindcss/jit": "0.1.18",
     "@tailwindcss/aspect-ratio": "0.2.1",
-    "@vue/test-utils": "1.2.1",
+    "@vue/test-utils": "1.2.2",
     "babel-eslint": "10.1.0",
     "babel-jest": "27.0.6",
     "eslint": "7.31.0",
