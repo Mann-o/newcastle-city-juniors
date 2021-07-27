@@ -16,7 +16,7 @@
         <p v-if="!players.length">You have not registered any players yet!</p>
         <div
           v-else
-          class="grid gap-8 lg:grid-cols-12 lg:gap-16"
+          class="grid gap-x-8 gap-y-4 lg:grid-cols-12 lg:gap-x-16 lg:gap-y-8"
         >
           <NuxtLink
             class="lg:col-span-4 border border-black bg-gold hover:text-black"
