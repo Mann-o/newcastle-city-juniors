@@ -51,7 +51,7 @@
     "babel-jest": "27.0.6",
     "eslint": "7.31.0",
     "eslint-plugin-nuxt": "2.0.0",
-    "eslint-plugin-vue": "7.14.0",
+    "eslint-plugin-vue": "7.15.0",
     "jest": "27.0.6",
     "postcss": "8.3.6",
     "stylelint": "13.13.1",
