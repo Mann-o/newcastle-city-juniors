@@ -319,7 +319,7 @@ export default {
       medicalConditions: '',
       mediaConsented: true,
       ageGroupId: '1',
-      membershipFeeOption: 'upfront',
+      membershipFeeOption: 'subscription',
       acceptedPlayerCodeOfConduct: false,
       acceptedParentCodeOfConduct: false,
       acceptedDeclaration: false,
