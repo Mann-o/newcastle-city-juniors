@@ -347,12 +347,12 @@ export default {
 
     membershipFeeOptions() {
       return [
-        {
-          key: 'upfront',
-          value: `1x payment of £${
-            this.form.sex === 'male' ? '300.00' : '200.00'
-          }`,
-        },
+        // {
+        //   key: 'upfront',
+        //   value: `1x payment of £${
+        //     this.form.sex === 'male' ? '300.00' : '200.00'
+        //   }`,
+        // },
         {
           key: 'subscription',
           value: `1x payment of £${
