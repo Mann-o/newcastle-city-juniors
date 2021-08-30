@@ -24,7 +24,7 @@
     "core-js": "3.16.1",
     "date-fns": "2.23.0",
     "nuxt": "2.15.8",
-    "vee-validate": "3.4.11",
+    "vee-validate": "3.4.12",
     "vue2-google-maps": "0.10.7"
   },
   "devDependencies": {
