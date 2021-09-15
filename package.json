@@ -20,7 +20,7 @@
     "@nuxtjs/proxy": "2.1.0",
     "@nuxtjs/pwa": "3.3.5",
     "@nuxtjs/sentry": "5.1.0",
-    "contentful": "8.4.2",
+    "contentful": "9.0.0",
     "core-js": "3.16.1",
     "date-fns": "2.23.0",
     "nuxt": "2.15.8",
