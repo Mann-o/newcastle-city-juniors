@@ -2,6 +2,14 @@
   <div>
     <h1>Newcastle City Development Centre</h1>
 
+    <div class="mb-16 text-center">
+      <img
+        class="mx-auto max-w-3xl"
+        src="https://images.ctfassets.net/yv1glylq11v9/6becyr4qeuCzDabvghAqS4/1160d4462211519d0e9c22ff99cf6dec/football-development-2021-22.jpeg"
+        alt="Poster for Football Development at Newcastle City Juniors in the 2021-22 season"
+      >
+    </div>
+
     <DevelopmentCentreBlock
       v-for="(block, index) in blocks"
       :key="index"
@@ -23,6 +31,14 @@
       class="mx-auto"
       src="/images/etc/development-camps-3.jpg"
     >
+
+    <div class="mt-16 text-center">
+      <img
+        class="mx-auto max-w-3xl"
+        src="https://images.ctfassets.net/yv1glylq11v9/46R1Aj1uV5kcppHCu6DsiJ/0f3c64d169f2209fa86c6816f3412509/ncj-development-iorder-form.jpeg"
+        alt="Order form for Newcastle City Juniors Football Development sportswear"
+      >
+    </div>
   </div>
 </template>
 

@@ -1,12 +1,18 @@
 <template>
   <div class="grid grid-cols-6 border border-black">
-    <div
-      class="bg-gold flex justify-center items-center col-span-2 text-6xl relative"
-    >
-      <div class="absolute inset-0 flex justify-center items-center text-sm">
-        U{{ ageGroup.fields.ageGroup }}
+    <div class="bg-gold flex justify-center items-center col-span-2 text-6xl relative">
+      <div v-if="hasTeamPhoto">
+        <img
+          :src="team.fields.teamPhoto.fields.file.url"
+          :alt="team.fields.teamPhoto.fields.description"
+        >
       </div>
-      <FontAwesomeIcon :icon="['fad', 'tshirt']" />
+      <div v-else>
+        <div class="absolute inset-0 flex justify-center items-center text-sm">
+          U{{ ageGroup.fields.ageGroup }}
+        </div>
+        <FontAwesomeIcon :icon="['fad', 'tshirt']" />
+      </div>
     </div>
     <div class="p-4 text-xs col-span-4">
       <div class="pb-4 text-lg">
@@ -124,6 +130,10 @@ export default {
     /** @returns {boolean} */
     hasCoaches () {
       return this.team.fields?.coaches?.length
+    },
+    /** @returns {boolean} */
+    hasTeamPhoto () {
+      return this.team.fields?.teamPhoto != null
     },
   },
 }
