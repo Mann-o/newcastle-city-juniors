@@ -61,6 +61,7 @@ export default {
   scrollToTop: true,
 
   data: () => ({
+    playerOfTheMonthImage: null,
     trophyDayImage: null,
     trialsImage: null,
     chelseaAffiliationImage: null,
