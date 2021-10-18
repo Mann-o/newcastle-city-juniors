@@ -10,7 +10,7 @@
     <div v-else>
       <div class="grid gap-8 lg:grid-cols-5">
       <ArticleCard
-          :image="trophyDayImage.file.url"
+          :image="playerOfTheMonthImage.file.url"
           title="Player of the Month - September"
           subtext="A special mention for Newcastle City Juniors' players who were voted Players of the Month in September"
           date="2021-10-10"
