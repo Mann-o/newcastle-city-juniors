@@ -5,7 +5,7 @@
   >
     <div class="overflow-hidden">
       <img
-        class="max-w-full transition-all"
+        class="w-full max-h-250 transition-all"
         :src="image"
       >
     </div>

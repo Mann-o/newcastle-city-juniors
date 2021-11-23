@@ -19,6 +19,6 @@ export default {
 
 <style lang="postcss">
 .home-hero {
-  background-image: url('/images/etc/ncj-team-photo.jpg');
+  background-image: url("/images/etc/ncj-team-photo.jpg");
 }
 </style>
