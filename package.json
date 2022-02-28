@@ -22,7 +22,7 @@
     "@nuxtjs/sentry": "5.1.6",
     "contentful": "9.1.5",
     "core-js": "3.21.1",
-    "date-fns": "2.27.0",
+    "date-fns": "2.28.0",
     "nuxt": "2.15.8",
     "vee-validate": "3.4.14",
     "vue2-google-maps": "0.10.7"
