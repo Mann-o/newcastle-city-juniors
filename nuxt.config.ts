@@ -3,6 +3,7 @@ import { auth } from './config/auth'
 import { axios } from './config/axios'
 import { build } from './config/build'
 import { buildModules } from './config/build-modules'
+import { css } from './config/css'
 import { fontawesome } from './config/font-awesome'
 import { googleFonts } from './config/google-fonts'
 import { head } from './config/head'
@@ -17,7 +18,6 @@ import { router } from './config/router'
 import { sentry } from './config/sentry'
 import { server } from './config/server'
 import { serverMiddleware } from './config/server-middleware'
-import { tailwindcss } from './config/tailwindcss'
 import { vue } from './config/vue'
 
 const config: NuxtConfig = {
@@ -27,6 +27,7 @@ const config: NuxtConfig = {
     watch: ['config'],
   }, build),
   buildModules,
+  css,
   components: false,
   fontawesome,
   googleFonts,
@@ -43,7 +44,6 @@ const config: NuxtConfig = {
   sentry,
   server,
   serverMiddleware,
-  tailwindcss,
   vue,
 }
 

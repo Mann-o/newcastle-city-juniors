@@ -1,6 +1,13 @@
 import { NuxtOptionsBuild } from '@nuxt/types/config/build'
 
 export const build: NuxtOptionsBuild = {
+  postcss: {
+    plugins: {
+      tailwindcss: {},
+      autoprefixer: {},
+    },
+  },
+
   analyze: (process.env.ANALYZE === 'true')
     ? {
         analyzerMode: 'static',

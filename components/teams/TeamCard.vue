@@ -11,7 +11,7 @@
         <div class="absolute inset-0 flex justify-center items-center text-sm">
           U{{ ageGroup.fields.ageGroup }}
         </div>
-        <FontAwesomeIcon :icon="['fad', 'tshirt']" />
+        <FontAwesomeIcon :icon="['fad', 'shirt']" />
       </div>
     </div>
     <div class="p-4 text-xs col-span-4">
@@ -40,7 +40,7 @@
           </li>
           <li v-if="manager.fields.telephoneNumber">
             <FontAwesomeIcon
-              :icon="['fad', 'phone-alt']"
+              :icon="['fad', 'phone']"
               class="mr-2"
             />
             <a
@@ -82,7 +82,7 @@
             </li>
             <li v-if="coach.fields.telephoneNumber">
               <FontAwesomeIcon
-                :icon="['fad', 'phone-alt']"
+                :icon="['fad', 'phone']"
                 class="mr-2"
               />
               <a

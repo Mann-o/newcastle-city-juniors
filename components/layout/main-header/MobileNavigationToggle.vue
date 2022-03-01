@@ -23,7 +23,7 @@ export default {
     mobileNavIcon () {
       return [
         'fal',
-        this.active ? 'times' : 'bars',
+        this.active ? 'xmark' : 'bars',
       ]
     },
   },

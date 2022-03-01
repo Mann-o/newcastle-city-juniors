@@ -28,7 +28,7 @@
       v-if="showHelpText"
       class="text-xs italic text-grey-600 mt-1"
     >
-      <FontAwesomeIcon :icon="['fad', 'info-circle']" />
+      <FontAwesomeIcon :icon="['fad', 'circle-info']" />
       {{ helpText }}
     </div>
   </div>

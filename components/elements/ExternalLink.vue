@@ -15,7 +15,7 @@
     <FontAwesomeIcon
       v-if="showExternalIcon"
       class="ml-1"
-      :icon="['fal', 'external-link']"
+      :icon="['fal', 'arrow-up-right-from-square']"
     />
   </a>
 </template>

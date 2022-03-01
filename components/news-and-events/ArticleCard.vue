@@ -10,7 +10,7 @@
       >
     </div>
     <div class="py-2 text-grey-600">
-      <FontAwesomeIcon :icon="['fad', 'calendar-alt']" />
+      <FontAwesomeIcon :icon="['fad', 'calendar-days']" />
       <span class="ml-1">
         {{ date | formatDate }}
       </span>

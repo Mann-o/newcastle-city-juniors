@@ -4,9 +4,7 @@ const omit = require('lodash/omit')
 const flattenColorPalette = require('tailwindcss/lib/util/flattenColorPalette').default
 
 module.exports = {
-  mode: 'jit',
-
-  purge: [
+  content: [
     './components/**/*.{vue,js}',
     './layouts/**/*.vue',
     './pages/**/*.vue',

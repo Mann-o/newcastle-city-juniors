@@ -1,0 +1,89 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply font-poppins;
+  }
+  h1 {
+    @apply border-b-2 border-grey-400 relative mb-8 pb-2 text-3xl uppercase;
+  }
+
+  h2 {
+    @apply border-b-2 border-grey-400 relative mb-4 text-xl uppercase inline-block;
+
+    &.central {
+      @apply text-center;
+
+      &:after {
+        @apply left-1/2 transform -translate-x-1/2;
+      }
+    }
+  }
+
+  h4 {
+    @apply border-b-2 border-grey-400 relative mb-4 pb-2;
+  }
+
+  h1::after {
+    @apply absolute left-0 bg-gold;
+    height: 2px;
+    width: 50px;
+    bottom: -2px;
+    content: '';
+  }
+
+  h2::after {
+    @apply absolute left-0 bg-gold;
+    height: 2px;
+    width: 50px;
+    bottom: -2px;
+    content: '';
+  }
+
+  h4::after {
+    @apply absolute left-0 bg-gold;
+    height: 2px;
+    width: 50px;
+    bottom: -2px;
+    content: '';
+  }
+
+  a {
+    @apply text-black transition-all;
+
+    &:not(h1):not(h2):not(h3):not(h4):not(h5):not(h6):hover {
+      @apply text-gold;
+    }
+  }
+
+  p a {
+    @apply underline;
+  }
+
+  .page-enter-active,
+  .page-leave-active {
+    @apply transition-opacity;
+  }
+  .page-enter,
+  .page-leave-to {
+    @apply opacity-0;
+  }
+
+  input,
+  textarea,
+  select {
+    @apply p-2 text-sm font-poppins leading-stripe tracking-normal;
+  }
+
+  ::placeholder {
+    @apply text-grey-400;
+  }
+
+  @screen lg {
+    h1 {
+      @apply mb-16;
+    }
+  }
+}
