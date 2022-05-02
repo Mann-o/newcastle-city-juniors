@@ -53,11 +53,15 @@ export const state = () => ({
     }),
     link({
       to: '/teams',
-      label: 'Our Teams',
+      label: 'Teams',
+    }),
+    link({
+      to: '/shop',
+      label: 'Shop',
     }),
     link({
       to: '/news-and-events',
-      label: 'News & Events',
+      label: 'News',
     }),
     link({
       to: '/development-centre',
@@ -68,27 +72,9 @@ export const state = () => ({
       label: 'Holiday Camps',
     }),
     link({
-      to: '/contact-us',
-      label: 'Contact Us',
-    }),
-    link({
-      to: '/login',
-      label: 'Login',
-      alwaysDisplay: false,
-      hideWhenAuthenticated: true,
-    }),
-    link({
-      to: '/register',
-      label: 'Register',
-      alwaysDisplay: false,
-      hideWhenAuthenticated: true,
-    }),
-    link({
       icon: 'futbol',
       to: '/portal',
       label: 'Portal',
-      alwaysDisplay: false,
-      requiresAuth: true,
     }),
   ],
 })

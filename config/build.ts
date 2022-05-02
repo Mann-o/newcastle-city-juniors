@@ -3,6 +3,7 @@ import { NuxtOptionsBuild } from '@nuxt/types/config/build'
 export const build: NuxtOptionsBuild = {
   postcss: {
     plugins: {
+      'tailwindcss/nesting': {},
       tailwindcss: {},
       autoprefixer: {},
     },
@@ -18,9 +19,9 @@ export const build: NuxtOptionsBuild = {
 
   babel: {
     plugins: [
-      ['@babel/plugin-proposal-private-methods', {
-        loose: true,
-      }],
+      // ['@babel/plugin-proposal-private-methods', {
+      //   loose: true,
+      // }],
       '@babel/plugin-proposal-optional-chaining',
       '@babel/plugin-proposal-nullish-coalescing-operator',
     ],

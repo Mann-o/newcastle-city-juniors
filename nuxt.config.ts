@@ -1,4 +1,3 @@
-import { NuxtConfig } from '@nuxt/types'
 import { auth } from './config/auth'
 import { axios } from './config/axios'
 import { build } from './config/build'
@@ -20,7 +19,7 @@ import { server } from './config/server'
 import { serverMiddleware } from './config/server-middleware'
 import { vue } from './config/vue'
 
-const config: NuxtConfig = {
+export default {
   auth,
   axios,
   build: Object.assign({
@@ -46,5 +45,3 @@ const config: NuxtConfig = {
   serverMiddleware,
   vue,
 }
-
-export default config

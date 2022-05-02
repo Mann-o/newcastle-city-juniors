@@ -7,10 +7,4 @@ export const router: NuxtOptionsRouter = {
     'close-mobile-navigation',
     'collapse-all-navigation',
   ],
-
-  // extendRoutes (routes) {
-  //   routes.push({
-
-  //   })
-  // },
 }

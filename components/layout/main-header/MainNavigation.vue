@@ -40,6 +40,21 @@
               Logout
             </a>
           </li>
+          <li>
+            <a
+              class="block py-4 pl-4 text-white lg:py-8"
+              href="/cart"
+              @click.prevent="openMiniCart()"
+            >
+              <FontAwesomeIcon :icon="['fad', 'basket-shopping']" />
+              <span
+                v-if="cartItemCount > 0"
+                class="inline-block text-center text-black bg-gold rounded-full p-px w-4 h-4 text-xs"
+              >
+                {{ cartItemCount }}
+              </span>
+            </a>
+          </li>
         </ul>
       </nav>
     </div>
@@ -47,7 +62,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'MainNavigation',
@@ -65,6 +80,15 @@ export default {
     ]),
     ...mapState('mobile-navigation', [
       'active',
+    ]),
+    ...mapGetters('cart', [
+      'cartItemCount',
+    ]),
+  },
+
+  methods: {
+    ...mapActions('cart', [
+      'openMiniCart',
     ]),
   },
 }

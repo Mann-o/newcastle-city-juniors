@@ -8,8 +8,8 @@
           label="Home"
         />
         <UsefulLink
-          to="/about-us"
-          label="About Us"
+          to="/contact-us"
+          label="Contact Us"
         />
         <UsefulLink
           to="/about-us/anti-bullying"
