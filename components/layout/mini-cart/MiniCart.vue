@@ -27,10 +27,20 @@
           />
         </template>
       </div>
+      <div
+        v-if="!cartIsEmpty"
+        class="flex w-full justify-between text-xs italic pb-4"
+      >
+        <p>Subtotal</p>
+        <p>{{ cartTotalString }}</p>
+      </div>
       <div>
         <button
-          class="bg-black text-white text-center p-4 uppercase w-full"
-          :disabled="cartItemCount === 0"
+          class="text-white text-center p-4 uppercase w-full"
+          :class="[
+            ...(cartIsEmpty ? ['bg-grey-400', 'cursor-not-allowed'] : ['bg-black'])
+          ]"
+          :disabled="cartIsEmpty"
           @click="checkout()"
         >
           Checkout
@@ -60,6 +70,7 @@ export default {
       'cartItemCount',
       'cartItemCountLabel',
       'cartIsEmpty',
+      'cartTotalString',
     ]),
   },
 

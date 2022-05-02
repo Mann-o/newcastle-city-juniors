@@ -4,9 +4,9 @@ export const state = () => ({
 })
 
 export const actions = {
-  addToCart({ commit }, items) {
+  addToCart({ dispatch, commit }, items) {
     commit('ADD_TO_CART', items)
-    commit('OPEN_MINI_CART')
+    dispatch('openMiniCart')
   },
   removeFromCart({ commit }, item) {
     commit('REMOVE_FROM_CART', item)
@@ -98,7 +98,7 @@ export const getters = {
   },
   cartTotal(state) {
     const total = state.cart.reduce((total, item) => {
-      return total + (item.price * item.quantity)
+      return total + (item.unit_amount * item.quantity)
     }, 0)
 
     return total / 100
