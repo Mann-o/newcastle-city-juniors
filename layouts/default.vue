@@ -12,6 +12,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   name: 'LayoutDefault',
 
@@ -21,6 +23,13 @@ export default {
     BackToTop: () => import('@/components/layout/overlay/BackToTop.vue'),
     AppOverlay: () => import('@/components/layout/overlay/AppOverlay.vue'),
     MiniCart: () => import('@/components/layout/mini-cart/MiniCart.vue'),
+  },
+
+  methods: {
+    ...mapActions('app', [
+      'showOverlay',
+      'hideOverlay',
+    ]),
   },
 }
 </script>

@@ -8,4 +8,5 @@ export const plugins: NuxtOptionsPlugin[] = [
     src: '@/plugins/google-maps',
     ssr: true,
   },
+  // '@/plugins/vue-accessible-modal',
 ]

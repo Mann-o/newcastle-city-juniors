@@ -12,6 +12,10 @@ module.exports = {
     './nuxt.config.{js,ts}',
   ],
 
+  safelist: [
+    { pattern: /v-modal./ },
+  ],
+
   theme: {
     colors: {
       // ...colors,
@@ -75,6 +79,9 @@ module.exports = {
       },
       maxHeight: {
         250: '250px',
+      },
+      zIndex: {
+        max: 9999,
       },
     },
   },

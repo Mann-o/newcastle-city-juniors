@@ -6,8 +6,9 @@
   body {
     @apply font-poppins;
   }
+
   h1 {
-    @apply border-b-2 border-grey-400 relative mb-8 pb-2 text-3xl uppercase;
+    @apply border-b-2 border-grey-400 relative mb-8 pb-2 text-3xl uppercase lg:mb-16;
   }
 
   h2 {
@@ -27,11 +28,11 @@
   }
 
   h1::after {
-    @apply absolute left-0 bg-gold;
+    @apply absolute left-0 bg-gold content-[''];
     height: 2px;
     width: 50px;
     bottom: -2px;
-    content: '';
+    /* content: ''; */
   }
 
   h2::after {
@@ -79,11 +80,5 @@
 
   ::placeholder {
     @apply text-grey-400;
-  }
-
-  @screen lg {
-    h1 {
-      @apply mb-16;
-    }
   }
 }

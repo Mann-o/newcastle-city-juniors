@@ -40,7 +40,7 @@
 import { mapActions } from 'vuex'
 
 export default {
-  name: 'MiniCartItem',
+  name: 'CartItem',
 
   props: {
     item: {

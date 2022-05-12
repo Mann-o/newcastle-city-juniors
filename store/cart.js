@@ -1,5 +1,6 @@
 export const state = () => ({
   cart: [],
+  metadata: {},
   miniCartOpen: false,
 })
 
@@ -26,6 +27,9 @@ export const actions = {
   closeMiniCart({ dispatch, commit }) {
     dispatch('app/hideOverlay', null, { root: true })
     commit('CLOSE_MINI_CART')
+  },
+  updateCartMetadata({ commit }, metadata) {
+    commit('UPDATE_CART_METADATA', metadata)
   },
 }
 
@@ -78,6 +82,12 @@ export const mutations = {
   CLOSE_MINI_CART(state) {
     state.miniCartOpen = false;
   },
+  UPDATE_CART_METADATA(state, metadata) {
+    state.metdata = {
+      ...state.metadata,
+      metadata,
+    }
+  },
 }
 
 export const getters = {
@@ -105,5 +115,8 @@ export const getters = {
   },
   cartTotalString(_, getters) {
     return getters.cartTotal.toLocaleString('en-GB', { style: 'currency', currency: 'GBP' })
+  },
+  cartContainsPresentationTickets(state) {
+    return state.cart.some(item => item.product.name.includes('Presentation'))
   },
 }
