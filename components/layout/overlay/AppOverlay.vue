@@ -21,7 +21,7 @@ export default {
   },
 
   methods: {
-    ...mapActions('cart', [
+    ...mapActions('app', [
       'closeMiniCart',
     ]),
   },

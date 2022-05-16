@@ -11,7 +11,7 @@ export default {
   name: 'CartEmpty',
 
   methods: {
-    ...mapActions('cart', [
+    ...mapActions('app', [
       'closeMiniCart',
     ]),
     goToShop() {

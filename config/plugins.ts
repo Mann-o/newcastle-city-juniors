@@ -4,9 +4,7 @@ export const plugins: NuxtOptionsPlugin[] = [
   '@/plugins/vue-configuration',
   '@/plugins/contentful',
   '@/plugins/vee-validate',
-  {
-    src: '@/plugins/google-maps',
-    ssr: true,
-  },
+  '@/plugins/google-maps.server',
+  // '@/plugins/persisted-state',
   // '@/plugins/vue-accessible-modal',
 ]

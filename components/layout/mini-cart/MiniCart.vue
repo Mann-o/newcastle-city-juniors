@@ -56,6 +56,8 @@ export default {
   computed: {
     ...mapState('cart', [
       'cart',
+    ]),
+    ...mapState('app', [
       'miniCartOpen',
     ]),
     ...mapGetters('cart', [
@@ -67,16 +69,9 @@ export default {
   },
 
   methods: {
-    ...mapActions('cart', [
+    ...mapActions('app', [
       'closeMiniCart',
     ]),
-    goToShop() {
-      this.closeMiniCart()
-
-      if (this.$route.name !== 'shop') {
-        this.$router.push('/shop')
-      }
-    },
     checkout() {
       this.closeMiniCart()
 

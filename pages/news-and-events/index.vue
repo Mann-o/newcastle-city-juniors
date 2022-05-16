@@ -9,6 +9,13 @@
     </div>
     <div v-else>
       <div class="grid gap-8 lg:grid-cols-5">
+      <ArticleCard
+          :image="trophyDayImage.file.url"
+          title="Presentation For The 2021-22 Season"
+          subtext="Newcastle City Juniors are happy to announce that tickets are now available for our Presentation 2021-22 Season!"
+          date="2022-05-16"
+          link="/news-and-events/presentation-2021"
+        />
         <ArticleCard
           :image="trophyDayImage.file.url"
           title="Player of the Month - October"

@@ -3,12 +3,12 @@
     <button
       class="text-white text-center p-4 uppercase w-full"
       :class="[
-        ...(disabled ? ['bg-grey-400', 'cursor-not-allowed'] : ['bg-black'])
+        ...((disabled || loading) ? ['bg-grey-400', 'cursor-not-allowed'] : ['bg-black'])
       ]"
-      :disabled="disabled"
+      :disabled="disabled || loading"
       @click="$emit('checkout')"
     >
-      Checkout
+      {{ checkoutButtonLabel }}
     </button>
   </div>
 </template>
@@ -22,6 +22,19 @@ export default {
       type: Boolean,
       required: false,
       default: false,
+    },
+    loading: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+  },
+
+  computed: {
+    checkoutButtonLabel() {
+      return this.loading
+        ? 'Please wait...'
+        : 'Checkout'
     },
   },
 }

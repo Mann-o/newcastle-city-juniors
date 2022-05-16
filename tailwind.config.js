@@ -12,10 +12,6 @@ module.exports = {
     './nuxt.config.{js,ts}',
   ],
 
-  safelist: [
-    { pattern: /v-modal./ },
-  ],
-
   theme: {
     colors: {
       // ...colors,

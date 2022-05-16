@@ -13,7 +13,7 @@ export default {
   name: 'MiniCartClose',
 
   methods: {
-    ...mapActions('cart', [
+    ...mapActions('app', [
       'closeMiniCart',
     ]),
   },

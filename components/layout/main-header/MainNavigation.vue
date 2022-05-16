@@ -47,12 +47,14 @@
               @click.prevent="openMiniCart()"
             >
               <FontAwesomeIcon :icon="['fad', 'basket-shopping']" />
-              <span
-                v-if="cartItemCount > 0"
-                class="inline-block text-center text-black bg-gold rounded-full p-px w-4 h-4 text-xs"
-              >
-                {{ cartItemCount }}
-              </span>
+              <ClientOnly>
+                <span
+                  v-if="cartItemCount > 0"
+                  class="inline-block text-center text-black bg-gold rounded-full p-px w-4 h-4 text-xs"
+                >
+                  {{ cartItemCount }}
+                </span>
+              </ClientOnly>
             </a>
           </li>
         </ul>
@@ -87,7 +89,7 @@ export default {
   },
 
   methods: {
-    ...mapActions('cart', [
+    ...mapActions('app', [
       'openMiniCart',
     ]),
   },

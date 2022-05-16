@@ -1,16 +1,23 @@
 export const state = () => ({
   cart: [],
-  metadata: {},
-  miniCartOpen: false,
+  metadata: null,
+  presentationTicketInfo: {
+    playerName: null,
+    ageGroup: 'u6',
+  },
 })
 
 export const actions = {
   addToCart({ dispatch, commit }, items) {
     commit('ADD_TO_CART', items)
-    dispatch('openMiniCart')
+    dispatch('app/openMiniCart', null, { root: true })
   },
-  removeFromCart({ commit }, item) {
+  removeFromCart({ commit, getters }, item) {
     commit('REMOVE_FROM_CART', item)
+
+    if (!getters.cartContainsPresentationTickets) {
+      commit('RESET_PRESENTATION_TICKET_INFO')
+    }
   },
   decreaseQuantityInCart({ commit, state }, item) {
     const itemInCart = state.cart.find(i => i.id === item.id)
@@ -20,16 +27,20 @@ export const actions = {
   increaseQuantityInCart({ commit }, item) {
     commit('INCREASE_QUANTITY', item)
   },
-  openMiniCart({ dispatch, commit }) {
-    dispatch('app/showOverlay', null, { root: true })
-    commit('OPEN_MINI_CART')
+  addMetadata({ commit }, metadata) {
+    commit('ADD_METADATA', metadata)
   },
-  closeMiniCart({ dispatch, commit }) {
-    dispatch('app/hideOverlay', null, { root: true })
-    commit('CLOSE_MINI_CART')
+  removeMetadata({ commit }, key) {
+    commit('REMOVE_METADATA', key)
   },
-  updateCartMetadata({ commit }, metadata) {
-    commit('UPDATE_CART_METADATA', metadata)
+  updateMetadata({ commit }, { key, value }) {
+    commit('UPDATE_METADATA', { key, value })
+  },
+  updatePresentationTicketInfo({ commit }, $event) {
+    commit('UPDATE_PRESENTATION_TICKET_INFO', {
+      key: $event.target.name,
+      value: $event.target.value,
+    })
   },
 }
 
@@ -65,8 +76,9 @@ export const mutations = {
     if (itemInCart) {
       if (itemInCart.quantity === 1) {
         this.REMOVE_FROM_CART(state, item)
+      } else {
+        itemInCart.quantity -= 1;
       }
-      itemInCart.quantity -= 1;
     }
   },
   INCREASE_QUANTITY(state, item) {
@@ -76,17 +88,29 @@ export const mutations = {
       itemInCart.quantity += 1
     }
   },
-  OPEN_MINI_CART(state) {
-    state.miniCartOpen = true;
-  },
-  CLOSE_MINI_CART(state) {
-    state.miniCartOpen = false;
-  },
-  UPDATE_CART_METADATA(state, metadata) {
-    state.metdata = {
+  ADD_METADATA(state, metadata) {
+    state.metadata = {
       ...state.metadata,
       metadata,
     }
+  },
+  REMOVE_METADATA(state, key) {
+    if (state.metadata[key]) {
+      delete state.metadata[key]
+    }
+  },
+  UPDATE_METADATA(state, { key, value }) {
+    if (state.metadata[key]) {
+      state.metadata[key] = value
+    }
+  },
+  UPDATE_PRESENTATION_TICKET_INFO(state, { key, value }) {
+    const trimmedValue = value === '' ? null : value
+    state.presentationTicketInfo[key] = trimmedValue
+  },
+  RESET_PRESENTATION_TICKET_INFO(state) {
+    state.presentationTicketInfo.playerName = null
+    state.presentationTicketInfo.ageGroup = 'u6'
   },
 }
 
@@ -102,6 +126,9 @@ export const getters = {
     }
 
     return label
+  },
+  cartItemDeepCount(state) {
+    return state.cart.reduce((count, item) => count + item.quantity, 0)
   },
   cartIsEmpty(_, getters) {
     return getters.cartItemCount === 0

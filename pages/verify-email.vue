@@ -18,8 +18,6 @@
 export default {
   name: 'PageVerifyEmail',
 
-  scrollToTop: true,
-
   components: {
     Loader: () => import('@/components/layout/Loader.vue'),
   },
@@ -27,6 +25,8 @@ export default {
   validate({ query }) {
     return query.email != null && query.token != null
   },
+
+  scrollToTop: true,
 
   async fetch () {
     const { data } = await this.$axios.post('/api/auth/verify-email', {
