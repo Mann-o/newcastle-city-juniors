@@ -66,6 +66,7 @@
                   rules="required"
                   vid="ageGroup"
                   tag="div"
+                  immediate
                 >
                   <select
                     class="border border-black w-full"

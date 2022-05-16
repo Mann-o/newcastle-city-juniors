@@ -4,10 +4,17 @@
       <FontAwesomeIcon :icon="['fad', icon]" />
     </div>
     <div class="bg-grey-200 text-sm p-6 text-center">
-      <div>{{ price.product.name }}</div>
-      <div>{{ productPrice }}</div>
-      <button @click="addToCart(price)">
-        Add to Cart
+      <div>
+        <strong>{{ price.product.name }}</strong>
+      </div>
+      <div class="mt-6">
+        {{ price.product.description }}
+      </div>
+      <button
+        class="bg-black text-white mt-6 py-4 px-6 w-full text-center"
+        @click="addToCart(price)"
+      >
+        Add to Cart - {{ productPrice }}
       </button>
     </div>
   </div>
@@ -31,6 +38,10 @@ export default {
       return this.price.product?.metadata?.['fa-icon'] ?? 'image-slash';
     },
     productPrice() {
+      if (this.price.unit_amount === 0) {
+        return 'FREE';
+      }
+
       const price = (this.price.unit_amount / 100)
       return price.toLocaleString('en-GB', { style: 'currency', currency: 'GBP' })
     },

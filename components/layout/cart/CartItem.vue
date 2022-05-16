@@ -54,6 +54,10 @@ export default {
       return this.item?.product?.metadata?.['fa-icon'] ?? 'image-slash'
     },
     productPrice() {
+      if (this.item.unit_amount === 0) {
+        return 'FREE'
+      }
+
       const price = (this.item.unit_amount * this.item.quantity) / 100
       return price.toLocaleString('en-GB', { style: 'currency', currency: 'GBP' })
     },
