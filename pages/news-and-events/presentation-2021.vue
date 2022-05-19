@@ -2,15 +2,15 @@
   <div>
     <h1>NCJ Presentation - 2021-22 Season</h1>
     <p class="pb-8">Newcastle City Juniors Annual Club Presentation 2022 is being held on Saturday 18th June 2022 for all our members at our home ground here at Benwell.</p>
-    <p class="pb-8">The event will be split into two sections with all our mini players (Development, Under 7s - Under 11s) attending in the afternoon session and all our junior players (Under 12s - Under 16s) attending our evening session.</p>
+    <p class="pb-8">The event will be split into two sections with all our mini players (Development, Under 7s - Under 10s) attending in the afternoon session and all our junior players (Under 11s - Under 16s) attending our evening session.</p>
 
     <h2>Timetable</h2>
-    <p class="font-bold">Development &amp; Mini (U7s-U11s)</p>
+    <p class="font-bold">Development &amp; Mini (U7s-U10s)</p>
     <ul class="list-disc list-inside pb-4">
       <li>Doors Open: 12:00</li>
       <li>Presentation: 12:30 - 16:00</li>
     </ul>
-    <p class="font-bold">Juniors (U12s - U16s)</p>
+    <p class="font-bold">Juniors (U11s - U16s)</p>
     <ul class="list-disc list-inside pb-8">
       <li>Doors Open: 17:00</li>
       <li>Presentation: 17:30 - 21:00</li>
