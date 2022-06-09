@@ -5,7 +5,7 @@
     <p class="pb-8">All age groups will attend the same session time below:</p>
 
     <h2>Timetable</h2>
-    <p class="pb-8"><strong>Doors Open:</strong> 18:00</p>
+    <p><strong>Doors Open:</strong> 18:00</p>
     <p class="pb-8"><strong>Presentation Start:</strong> 19:00</p>
 
     <p class="pb-8">Costs for our club presentation is £3.00 per person with ALL Newcastle City Juniors players receiving FREE entry.</p>
