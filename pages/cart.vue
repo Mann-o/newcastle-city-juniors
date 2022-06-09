@@ -167,6 +167,9 @@ export default {
             quantity: lineItem.quantity,
             adjustable_quantity: {
               enabled: true,
+              ...((lineItem.product.metadata?.limit ?? false) && {
+                maximum: lineItem.product.metadata.limit,
+              }),
             },
           })
 

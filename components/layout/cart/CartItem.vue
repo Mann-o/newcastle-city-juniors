@@ -14,7 +14,13 @@
               <FontAwesomeIcon :icon="['fal', 'minus']" />
             </button>
             <div>{{ item.quantity }}</div>
-            <button @click="increaseQuantityInCart(item)">
+            <button
+              :class="[
+                ...(limitReached ? ['opacity-50', 'cursor-not-allowed'] : []),
+              ]"
+              :disabled="limitReached"
+              @click="increaseQuantityInCart(item)"
+            >
               <FontAwesomeIcon :icon="['fal', 'plus']" />
             </button>
           </div>
@@ -37,7 +43,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'CartItem',
@@ -50,6 +56,9 @@ export default {
   },
 
   computed: {
+    ...mapGetters('cart', [
+      'quantityOfProductInCart',
+    ]),
     icon() {
       return this.item?.product?.metadata?.['fa-icon'] ?? 'image-slash'
     },
@@ -60,6 +69,16 @@ export default {
 
       const price = (this.item.unit_amount * this.item.quantity) / 100
       return price.toLocaleString('en-GB', { style: 'currency', currency: 'GBP' })
+    },
+    productLimit() {
+      return this.item.product?.metadata?.limit ?? null;
+    },
+    productInCart() {
+      return this.quantityOfProductInCart(this.item.id);
+    },
+    limitReached() {
+      return (this.productLimit != null)
+        && (this.productInCart >= parseInt(this.productLimit));
     },
   },
 

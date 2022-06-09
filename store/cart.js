@@ -146,4 +146,7 @@ export const getters = {
   cartContainsPresentationTickets(state) {
     return state.cart.some(item => item.product.name.includes('Presentation'))
   },
+  quantityOfProductInCart: state => itemId => {
+    return state.cart.find(item => item.id === itemId)?.quantity ?? 0;
+  },
 }

@@ -12,16 +12,20 @@
       </div>
       <button
         class="bg-black text-white mt-6 py-4 px-6 w-full text-center"
+        :class="[
+          ...(limitReached ? ['opacity-50', 'cursor-not-allowed'] : []),
+        ]"
+        :disabled="limitReached"
         @click="addToCart(price)"
       >
-        Add to Cart - {{ productPrice }}
+        {{ addToCartLabel }}
       </button>
     </div>
   </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   name: 'ShopProduct',
@@ -34,6 +38,9 @@ export default {
   },
 
   computed: {
+    ...mapGetters('cart', [
+      'quantityOfProductInCart',
+    ]),
     icon() {
       return this.price.product?.metadata?.['fa-icon'] ?? 'image-slash';
     },
@@ -44,6 +51,21 @@ export default {
 
       const price = (this.price.unit_amount / 100)
       return price.toLocaleString('en-GB', { style: 'currency', currency: 'GBP' })
+    },
+    productLimit() {
+      return this.price.product?.metadata?.limit ?? null;
+    },
+    productInCart() {
+      return this.quantityOfProductInCart(this.price.id);
+    },
+    limitReached() {
+      return (this.productLimit != null)
+        && (this.productInCart >= parseInt(this.productLimit));
+    },
+    addToCartLabel() {
+      return this.limitReached
+        ? 'Limit Reached'
+        : `Add to Cart - ${this.productPrice}`;
     },
   },
 
