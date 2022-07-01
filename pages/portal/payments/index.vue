@@ -1,9 +1,9 @@
 <template>
-  <NuxtChild />
+  <div>Coming soon!</div>
 </template>
 
 <script>
 export default {
-  name: 'PagePortalPlayer',
+  name: 'PagePortalPayments',
 }
 </script>

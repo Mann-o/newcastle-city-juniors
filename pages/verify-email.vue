@@ -30,7 +30,7 @@ export default {
 
   async fetch () {
     const { data } = await this.$axios.post('/api/auth/verify-email', {
-      email: this.$nuxt.context.route.query.email,
+      email: decodeURIComponent(this.$nuxt.context.route.query.email),
       verificationToken: this.$nuxt.context.route.query.token,
     })
 

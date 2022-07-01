@@ -25,7 +25,7 @@
           </ValidationProvider>
           <ValidationProvider
             v-slot="{ errors }"
-            rules="required|min:8|confirmed:password"
+            rules="required|min:8|confirmed:@password,New Password"
             tag="div"
             class="mt-4"
           >

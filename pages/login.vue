@@ -94,7 +94,7 @@ export default {
           },
         })
       } catch (error) {
-        this.loginError = error?.response?.data?.message || 'Invalid username and/or password, or email address has not yet been verified. Please try again.'
+        this.loginError = 'Invalid username and/or password, or email address has not yet been verified. Please try again.'
       } finally {
         this.loggingIn = false
       }

@@ -2,6 +2,8 @@ import { extend } from 'vee-validate'
 import {
   confirmed,
   email,
+  image,
+  is_not,
   min,
   required,
   required_if,
@@ -11,12 +13,23 @@ const isEmpty = value => ['', null, undefined, false].includes(value)
 
 extend('confirmed', {
   ...confirmed,
-  message: 'This field must match the previous field',
+  params: ['target', 'field'],
+  message: 'This field must match the {field} field',
 })
 
 extend('email', {
   ...email,
   message: 'This field must be a valid email address',
+})
+
+extend('is_not', {
+  ...is_not,
+  message: 'This field is invalid',
+})
+
+extend('image', {
+  ...image,
+  message: 'This field must be a valid image',
 })
 
 extend('min', {
@@ -67,4 +80,12 @@ extend('is_true', {
 extend('is_date', {
   validate: fieldValue => /\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])*/.test(fieldValue),
   message: 'This field must be a valid date in the format YYYY-MM-DD',
+})
+
+extend('nonmatch', {
+  validate: (fieldValue, { target }) => ({
+    valid: fieldValue !== target,
+  }),
+  params: ['target', 'field'],
+  message: 'This field must not match the {field} field',
 })

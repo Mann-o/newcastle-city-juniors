@@ -3,111 +3,15 @@
     <h1>Register</h1>
     <template v-if="!$auth.loggedIn">
       <template v-if="!registered">
-        <p class="pb-4">Has your child been selected for a team following our Open Sessions? If so it is now time to register your child, pay any upfront costs and/or set up subscription payments. To get started please complete the following form to create an NCJ Portal account where you will then be able to register individual players, manage their subscriptions, and more!</p>
-        <p class="pb-4 text-danger">Please only complete this form and register a player if your child has been selected for a team following our Open Sessions. Our teams are now full and we are not accepting open player registrations. Any registrations received for players who were not selected from our Open Sessions will be removed.</p>
-        <p class="pb-4"><strong>All fields are required.</strong> This form is to grant you access to the NCJ Portal so please complete this form with your OWN details - not your child! You will be able to register your child once you have verified your email address and logged into the <NuxtLink to="/portal">NCJ Portal</NuxtLink>.</p>
+        <p class="pb-4">Registering for an NCJ Portal account is quick and easy. Simply enter your email address, choose a password, and then you are ready to start registering your child and managing their subscription!</p>
+        <p class="pb-4 text-danger font-bold">Please only register to the NCJ Portal if an NCJ coach has asked you to do so. Our teams are now full and we do not accept open player registrations. Any registrations received for children who were not told to do so by an NCJ coach will be removed from the system.</p>
         <p>Already registered? <NuxtLink to="/login">Login here</NuxtLink>!</p>
-
 
         <ValidationObserver v-slot="{ invalid, handleSubmit }">
           <form
             @submit.prevent="handleSubmit(register)"
             class="mt-16 md:max-w-lg"
           >
-            <h4>Parent/Guardian 1</h4>
-            <ValidationProvider
-              v-slot="{ errors }"
-              rules="required"
-              vid="selectedTitle"
-              tag="div"
-            >
-              <FormSelect
-                label="Title"
-                :options="titles"
-                v-model="selectedTitle"
-                :invalid="errors.length > 0"
-              />
-              <span class="text-xs text-danger mt-2">{{ errors[0] }}</span>
-            </ValidationProvider>
-            <ValidationProvider
-              v-if="selectedTitle === 'other'"
-              v-slot="{ errors }"
-              rules="required_if:title,other"
-              tag="div"
-              class="mt-4"
-            >
-              <FormElement
-                label="Enter Alternative Title"
-                v-model="otherTitle"
-                :invalid="errors.length > 0"
-              />
-              <span class="text-xs text-danger mt-2">{{ errors[0] }}</span>
-            </ValidationProvider>
-            <ValidationProvider
-              v-slot="{ errors }"
-              rules="required"
-              tag="div"
-              class="mt-4"
-            >
-              <FormElement
-                label="First Name"
-                v-model="form.firstName"
-                :invalid="errors.length > 0"
-              />
-              <span class="text-xs text-danger mt-2">{{ errors[0] }}</span>
-            </ValidationProvider>
-            <ValidationProvider
-              v-slot="{ errors }"
-              rules="required"
-              tag="div"
-              class="mt-4"
-            >
-              <FormElement
-                label="Last Name"
-                v-model="form.lastName"
-                :invalid="errors.length > 0"
-              />
-              <span class="text-xs text-danger mt-2">{{ errors[0] }}</span>
-            </ValidationProvider>
-            <ValidationProvider
-              v-slot="{ errors }"
-              rules="required"
-              tag="div"
-              class="mt-4"
-            >
-              <FormElement
-                label="House Number / Name"
-                v-model="form.houseNameOrNumber"
-                :invalid="errors.length > 0"
-              />
-              <span class="text-xs text-danger mt-2">{{ errors[0] }}</span>
-            </ValidationProvider>
-            <ValidationProvider
-              v-slot="{ errors }"
-              rules="required"
-              tag="div"
-              class="mt-4"
-            >
-              <FormElement
-                label="Postcode"
-                v-model="form.postcode"
-                :invalid="errors.length > 0"
-              />
-              <span class="text-xs text-danger mt-2">{{ errors[0] }}</span>
-            </ValidationProvider>
-            <ValidationProvider
-              v-slot="{ errors }"
-              rules="required"
-              tag="div"
-              class="mt-4"
-            >
-              <FormElement
-                label="Mobile Number"
-                v-model="form.mobileNumber"
-                :invalid="errors.length > 0"
-              />
-              <span class="text-xs text-danger mt-2">{{ errors[0] }}</span>
-            </ValidationProvider>
             <ValidationProvider
               v-slot="{ errors }"
               rules="required|email"
@@ -119,21 +23,7 @@
                 label="Email Address"
                 field-type="email"
                 help-text="This is the email address you will use to login with, and where you will receive an email with a link to verify your email address. Please ensure it is valid!"
-                v-model="form.email"
-                :invalid="errors.length > 0"
-              />
-              <span class="text-xs text-danger mt-2">{{ errors[0] }}</span>
-            </ValidationProvider>
-            <ValidationProvider
-              v-slot="{ errors }"
-              rules="required|email|confirmed:email"
-              tag="div"
-              class="mt-4"
-            >
-              <FormElement
-                label="Confirm Email Address"
-                field-type="email"
-                v-model="form.emailConfirmation"
+                v-model="registerForm.email"
                 :invalid="errors.length > 0"
               />
               <span class="text-xs text-danger mt-2">{{ errors[0] }}</span>
@@ -146,9 +36,9 @@
               class="mt-4"
             >
               <FormElement
-                label="Choose a password"
+                label="Password"
                 field-type="password"
-                v-model="form.password"
+                v-model="registerForm.password"
                 help-text="For security purposes, your password must contain at least 8 characters"
                 :invalid="errors.length > 0"
               />
@@ -156,139 +46,18 @@
             </ValidationProvider>
             <ValidationProvider
               v-slot="{ errors }"
-              rules="required|min:8|confirmed:password"
+              rules="required|confirmed:@password,Password"
               tag="div"
               class="mt-4"
             >
               <FormElement
                 label="Confirm password"
                 field-type="password"
-                v-model="form.passwordConfirmation"
+                v-model="registerForm.passwordConfirmation"
                 :invalid="errors.length > 0"
               />
               <span class="text-xs text-danger mt-2">{{ errors[0] }}</span>
             </ValidationProvider>
-            <ValidationProvider
-              tag="div"
-              class="mt-4"
-              vid="additionalParentOrGuardian"
-            >
-              <FormCheckbox
-                label="Do you wish to add an extra parent/guardian?"
-                v-model="form.additionalParentOrGuardian"
-              />
-            </ValidationProvider>
-            <template v-if="form.additionalParentOrGuardian">
-              <h4 class="mt-8">Parent/Guardian 2</h4>
-              <ValidationProvider
-                v-slot="{ errors }"
-                rules="required"
-                tag="div"
-                class="mt-4"
-                vid="selectedAlternateTitle"
-              >
-                <FormSelect
-                  label="Title"
-                  :options="titles"
-                  v-model="selectedAlternateTitle"
-                  :invalid="errors.length > 0"
-                />
-                <span class="text-xs text-danger mt-2">{{ errors[0] }}</span>
-              </ValidationProvider>
-              <ValidationProvider
-                v-if="selectedAlternateTitle === 'other'"
-                v-slot="{ errors }"
-                rules="required_if:selectedAlternateTitle,other"
-                tag="div"
-                class="mt-4"
-              >
-                <FormElement
-                  label="Enter Alternative Title"
-                  v-model="otherAlternateTitle"
-                  :invalid="errors.length > 0"
-                />
-                <span class="text-xs text-danger mt-2">{{ errors[0] }}</span>
-              </ValidationProvider>
-              <ValidationProvider
-                v-slot="{ errors }"
-                rules="required"
-                tag="div"
-                class="mt-4"
-              >
-                <FormElement
-                  label="First Name"
-                  v-model="form.alternateFirstName"
-                  :invalid="errors.length > 0"
-                />
-                <span class="text-xs text-danger mt-2">{{ errors[0] }}</span>
-              </ValidationProvider>
-              <ValidationProvider
-                v-slot="{ errors }"
-                rules="required"
-                tag="div"
-                class="mt-4"
-              >
-                <FormElement
-                  label="Last Name"
-                  v-model="form.alternateLastName"
-                  :invalid="errors.length > 0"
-                />
-                <span class="text-xs text-danger mt-2">{{ errors[0] }}</span>
-              </ValidationProvider>
-              <ValidationProvider
-                v-slot="{ errors }"
-                rules="required"
-                tag="div"
-                class="mt-4"
-              >
-                <FormElement
-                  label="House Number / Name"
-                  v-model="form.alternateHouseNameOrNumber"
-                  :invalid="errors.length > 0"
-                />
-                <span class="text-xs text-danger mt-2">{{ errors[0] }}</span>
-              </ValidationProvider>
-              <ValidationProvider
-                v-slot="{ errors }"
-                rules="required"
-                tag="div"
-                class="mt-4"
-              >
-                <FormElement
-                  label="Postcode"
-                  v-model="form.alternatePostcode"
-                  :invalid="errors.length > 0"
-                />
-                <span class="text-xs text-danger mt-2">{{ errors[0] }}</span>
-              </ValidationProvider>
-              <ValidationProvider
-                v-slot="{ errors }"
-                rules="required"
-                tag="div"
-                class="mt-4"
-              >
-                <FormElement
-                  label="Mobile Number"
-                  v-model="form.alternateMobileNumber"
-                  :invalid="errors.length > 0"
-                />
-                <span class="text-xs text-danger mt-2">{{ errors[0] }}</span>
-              </ValidationProvider>
-              <ValidationProvider
-                v-slot="{ errors }"
-                rules="required|email"
-                tag="div"
-                class="mt-4"
-              >
-                <FormElement
-                  label="Email Address"
-                  field-type="email"
-                  v-model="form.alternateEmail"
-                  :invalid="errors.length > 0"
-                />
-                <span class="text-xs text-danger mt-2">{{ errors[0] }}</span>
-              </ValidationProvider>
-            </template>
             <button
               type="submit"
               :disabled="invalid || registering"
@@ -301,13 +70,18 @@
               {{ registerButtonLabel }}
             </button>
 
-            <p v-if="registerError">{{ registerError }}</p>
+            <p
+              class="text-danger font-bold mt-8"
+              v-if="registerError"
+            >
+              {{ registerError }}
+            </p>
           </form>
 
         </ValidationObserver>
       </template>
       <template v-else>
-        <p class="pb-4">Registration was successful. You should soon receive an email asking you to verify your email address - you must do so before being able to login to the NCJ portal and register a player.</p>
+        <p class="pb-4">Registration was successful. You should soon receive an email asking you to verify your email address - you must do so before you are able to log in to the NCJ portal and register a child.</p>
         <p>If the email does not arrive, please check your spam/junk folder. If you have still not received the email within a few hours please email us at <a href="mailto:info@newcastlecityjuniors.co.uk">info@newcastlecityjuniors.co.uk</a> using the email address you registered with and we will investigate further.</p>
       </template>
     </template>
@@ -327,43 +101,15 @@ export default {
 
   components: {
     FormElement: () => import('@/components/elements/forms/FormElement.vue'),
-    FormSelect: () => import('@/components/elements/forms/FormSelect.vue'),
-    FormCheckbox: () => import('@/components/elements/forms/FormCheckbox.vue'),
     ValidationObserver,
     ValidationProvider,
   },
 
   data: () => ({
-    titles: [
-      { key: 'mr', value: 'Mr' },
-      { key: 'mrs', value: 'Mrs' },
-      { key: 'mrs', value: 'Ms' },
-      { key: 'miss', value: 'Miss' },
-      { key: 'other', value: 'Other (enter manually)' },
-    ],
-    selectedTitle: '',
-    otherTitle: '',
-    selectedAlternateTitle: '',
-    otherAlternateTitle: '',
-    form: {
-      title: '',
-      firstName: '',
-      lastName: '',
-      houseNameOrNumber: '',
-      postcode: '',
-      mobileNumber: '',
-      email: '',
-      emailConfirmation: '',
-      password: '',
-      passwordConfirmation: '',
-      additionalParentOrGuardian: false,
-      alternateTitle: '',
-      alternateFirstName: '',
-      alternateLastName: '',
-      alternateHouseNameOrNumber: '',
-      alternatePostcode: '',
-      alternateMobileNumber: '',
-      alternateEmail: '',
+    registerForm: {
+      email: null,
+      password: null,
+      passwordConfirmation: null,
     },
     registering: false,
     registerError: null,
@@ -373,36 +119,19 @@ export default {
   computed: {
     registerButtonLabel() {
       return this.registering
-        ? 'Registering...'
+        ? 'Please wait...'
         : 'Register'
     },
   },
 
   methods: {
-    resetTitleFields() {
-      this.form.title = ''
-
-      if (this.form.additionalParentOrGuardian) {
-        this.form.alternateTitle = '';
-      }
-    },
     async register() {
       this.registerError = null;
       this.registering = true;
 
       try {
-        this.form.title = this.selectedTitle === 'other'
-          ? this.otherTitle
-          : this.titles.find(({ key }) => key === this.selectedTitle).value
-
-        if (this.form.additionalParentOrGuardian) {
-          this.form.alternateTitle = this.selectedAlternateTitle === 'other'
-            ? this.otherAlternateTitle
-            : this.titles.find(({ key }) => key === this.selectedAlternateTitle).value
-        }
-
         const formToSubmit = Object
-          .entries(this.form)
+          .entries(this.registerForm)
           .reduce((acc, [key, value]) => {
             if (value != null && value !== '') {
               acc[key] = value
@@ -419,19 +148,13 @@ export default {
         this.registered = true
 
         window.scrollTo(0, 0)
-      } catch {
-        this.resetTitleFields()
-
+      } catch(error) {
+        console.log(error);
         this.registerError = 'Unable to register'
       } finally {
         this.registering = false
       }
     },
-  },
-
-  mounted() {
-    this.selectedTitle = this.titles[0].key
-    this.selectedAlternateTitle = this.titles[0].key
   },
 }
 </script>

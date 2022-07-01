@@ -2,6 +2,7 @@
   <div>
     <label class="block text-sm font-bold mb-1">
       {{ label }}
+      <span v-if="required" class="text-danger ml-0.5">*</span>
     </label>
     <div
       class="border transition-colors"
@@ -49,9 +50,15 @@ export default {
     },
     value: {
       type: String,
-      required: true,
+      required: false,
+      default: null,
     },
     invalid: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+    required: {
       type: Boolean,
       required: false,
       default: false,
@@ -81,6 +88,9 @@ export default {
           ...this.fieldType === 'date' && {
             type: 'date',
           },
+          ...this.required && {
+            required: true,
+          },
         },
       }
     },
@@ -92,7 +102,7 @@ export default {
 
   methods: {
     changeFieldValue (e) {
-      this.$emit('input', e.target.value)
+      this.$emit('input', e.target.value === '' ? null : e.target.value)
     },
   },
 }

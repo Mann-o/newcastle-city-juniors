@@ -8,17 +8,22 @@
       An error occurred fetching shop data!
     </div>
     <div v-else>
-      <ShopFilters
-        :categories="categories"
-        :selected-category="selectedCategory"
-        @set-category="setCategory"
-      />
-      <div class="grid md:grid-cols-4 gap-6 md:gap-12">
-        <ShopProduct
-          v-for="price in shop"
-          :key="price.id"
-          :price="price"
+      <div v-if="shop.length === 0">
+        <p>No products are currently for sale, check back later!</p>
+      </div>
+      <div v-else>
+        <ShopFilters
+          :categories="categories"
+          :selected-category="selectedCategory"
+          @set-category="setCategory"
         />
+        <div class="grid md:grid-cols-4 gap-6 md:gap-12">
+          <ShopProduct
+            v-for="price in shop"
+            :key="price.id"
+            :price="price"
+          />
+        </div>
       </div>
     </div>
   </div>

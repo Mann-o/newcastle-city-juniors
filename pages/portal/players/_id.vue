@@ -308,7 +308,7 @@ export default {
           payment_method: {
             card: this.card,
           },
-          receipt_email: this.$auth.user.email,
+          receipt_email: this.$auth.user[0].email,
         })
 
         if (result.error) {

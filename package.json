@@ -25,6 +25,7 @@
     "date-fns": "2.28.0",
     "nuxt": "2.15.8",
     "vee-validate": "3.4.14",
+    "vue-accessible-modal": "0.4.0",
     "vue2-google-maps": "0.10.7"
   },
   "devDependencies": {

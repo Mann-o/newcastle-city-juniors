@@ -2,6 +2,7 @@
   <div class="mt-4 first-of-type:mt-0">
     <label class="block text-sm font-bold mb-1">
       {{ label }}
+      <span v-if="required" class="text-danger ml-0.5">*</span>
     </label>
     <div
       class="border transition-colors"
@@ -53,7 +54,7 @@ export default {
       default: null,
     },
     value: {
-      type: String,
+      type: [String, Number],
       required: true,
     },
     invalid: {
@@ -70,6 +71,11 @@ export default {
       type: String,
       required: false,
       default: 'value',
+    },
+    required: {
+      type: Boolean,
+      required: false,
+      default: false,
     },
   },
 

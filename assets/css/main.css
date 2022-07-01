@@ -82,3 +82,23 @@
     @apply text-grey-400;
   }
 }
+
+.v-modal {
+  z-index: 999;
+}
+
+.v-modal--wide .v-modal__content {
+  @apply md:max-w-6xl;
+}
+
+.v-modal__backdrop {
+  @apply cursor-pointer !fixed;
+}
+
+.v-modal__holder {
+  @apply !p-2 md:!p-0;
+}
+
+.v-modal__content {
+  @apply md:max-w-screen-md;
+}

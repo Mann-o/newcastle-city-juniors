@@ -25,6 +25,6 @@ export const auth = {
     },
   },
   redirect: {
-    home: '/portal',
+    home: '/portal/players',
   },
 }
