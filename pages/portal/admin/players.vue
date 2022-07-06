@@ -35,10 +35,10 @@
             <td class="p-2 border border-grey-200 text-sm">{{ player.age_group }}</td>
             <td class="p-2 border border-grey-200 text-sm">{{ player.team }}</td>
             <td class="p-2 border border-grey-200 text-sm">
-              <button @click="downloadFile('identity', player.identity_verification_photo)">Download</button>
+              <button @click="downloadFile(player.identity_verification_photo)">Download</button>
             </td>
             <td class="p-2 border border-grey-200 text-sm">
-              <button @click="downloadFile('age', player.age_verification_photo)">Download</button>
+              <button @click="downloadFile(player.age_verification_photo)">Download</button>
             </td>
             <td class="p-2 border border-grey-200 text-sm">
               <button @click.prevent="viewParent(player)">View</button>
@@ -69,27 +69,24 @@ export default {
   },
 
   methods: {
-    async downloadFile(type, path) {
-      const { data: image } = await this.$axios.get(`/api/admin/verification-photos/${type}/${path}`, { responseType: 'blob' });
+    async downloadFile(path) {
+      const { data: image } = await this.$axios.get(`/api/admin/verification-photos/${path}`, { responseType: 'blob' });
 
       const url = window.URL.createObjectURL(image);
       const link = document.createElement('a');
       link.href = url;
-      link.setAttribute('download', `${type}_verification_photo`);
+      link.setAttribute('download', path);
       document.body.appendChild(link);
       link.click();
       link.remove();
     },
     async viewParent(player) {
-      const { data: { data: parent } } = await this.$axios.get(`/api/admin/player/${player.id}/parent`);
-
       this.$modal.show(() => import('@/components/modals/ParentInfoModal.vue'), {
         attributes: {
           'aria-labelledby': 'modal-heading',
         },
         props: {
           player,
-          parent,
         },
       });
     },

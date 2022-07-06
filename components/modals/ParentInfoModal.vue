@@ -10,7 +10,15 @@
     </template>
 
     <template #body>
-      <table class="w-full border-collapse">
+      <div v-if="$fetchState.pending">
+        <Loader />
+      </div>
+
+      <div v-else-if="$fetchState.error">
+        An error occurred fetching registered players!
+      </div>
+
+      <table v-else class="w-full border-collapse">
         <tbody>
           <tr>
             <th class="text-left p-2">Title</th>
@@ -72,6 +80,7 @@ export default {
 
   components: {
     ModalWrapper: () => import('./ModalWrapper.vue'),
+    Loader: () => import('@/components/layout/Loader.vue'),
   },
 
   props: {
@@ -79,10 +88,16 @@ export default {
       type: Object,
       required: true,
     },
-    parent: {
-      type: Object,
-      required: true,
-    },
+  },
+
+  data: () => ({
+    parent: null,
+  }),
+
+  async fetch() {
+    const { data: { data: parent } } = await this.$axios.get(`/api/admin/player/${this.player.id}/parent`);
+
+    this.parent = parent;
   },
 };
 </script>
