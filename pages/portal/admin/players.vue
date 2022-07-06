@@ -35,13 +35,32 @@
             <td class="p-2 border border-grey-200 text-sm">{{ player.age_group }}</td>
             <td class="p-2 border border-grey-200 text-sm">{{ player.team }}</td>
             <td class="p-2 border border-grey-200 text-sm">
-              <button @click="downloadFile(player.identity_verification_photo)">Download</button>
+              <button
+                v-if="player.identity_verification_photo"
+                class="underline"
+                @click="downloadFile(player.identity_verification_photo)"
+              >
+                Download
+              </button>
+              <span v-else>Not available</span>
             </td>
             <td class="p-2 border border-grey-200 text-sm">
-              <button @click="downloadFile(player.age_verification_photo)">Download</button>
+              <button
+                v-if="player.age_verification_photo"
+                class="underline"
+                @click="downloadFile(player.age_verification_photo)"
+              >
+                Download
+              </button>
+              <span v-else>Not available</span>
             </td>
             <td class="p-2 border border-grey-200 text-sm">
-              <button @click.prevent="viewParent(player)">View</button>
+              <button
+                class="underline"
+                @click.prevent="viewParent(player)"
+              >
+                View
+              </button>
             </td>
           </tr>
         </tbody>
