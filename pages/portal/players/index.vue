@@ -16,7 +16,7 @@
             <th class="bg-black text-gold text-left font-normal text-sm p-2">Player Name</th>
             <th class="bg-black text-gold text-left font-normal text-sm p-2">Date of Birth</th>
             <th class="bg-black text-gold text-left font-normal text-sm p-2">Sex</th>
-            <!-- <th class="bg-black text-gold text-left font-normal text-sm p-2">Actions</th> -->
+            <th class="bg-black text-gold text-left font-normal text-sm p-2">Actions</th>
           </tr>
         </thead>
         <tbody v-if="!players.length">
@@ -32,14 +32,14 @@
             <td class="p-2 border border-grey-200 text-sm">{{ player.full_name }}</td>
             <td class="p-2 border border-grey-200 text-sm">{{ player.date_of_birth | formatDate }}</td>
             <td class="p-2 border border-grey-200 text-sm">{{ player.sex | uppercaseFirst }}</td>
-            <!-- <td class="p-2 border border-grey-200 text-sm">
+            <td class="p-2 border border-grey-200 text-sm">
               <NuxtLink
                 class="underline"
                 :to="`/portal/players/${player.id}`"
               >
                 Manage Player
               </NuxtLink>
-            </td> -->
+            </td>
           </tr>
         </tbody>
       </table>
@@ -86,7 +86,7 @@ export default {
   },
 
   mounted() {
-    if (this.$route.query?.status === 'success' && this.$route.query?.id) {
+    if (this.$route.query?.status === 'success') {
       this.$store.dispatch('notifications/add', {
         type: 'success',
         title: 'Player Registered',

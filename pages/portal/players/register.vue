@@ -161,7 +161,7 @@
           </div>
 
           <div class="mt-16">
-            <h2>Step 3 - Team Selection &amp; Membership Fees</h2>
+            <h2>Step 3 - Team Selection{{ freeChild ? '' : ' &amp; Membership Fees' }}</h2>
 
             <ValidationProvider
               v-slot="{ errors }"
@@ -193,100 +193,102 @@
               />
               <span class="text-xs text-danger mt-2">{{ errors[0] }}</span>
             </ValidationProvider>
-            <ValidationProvider
-              class="mt-4"
-              v-slot="{ errors }"
-              rules="required"
-              tag="div"
-              vid="membershipOption"
-            >
-              <label class="block text-sm font-bold mb-1">
-                Select your membership fee option
-                <span class="text-danger ml-0.5">*</span>
-              </label>
-              <table class="w-full border-collapse">
-                <thead>
-                  <tr>
-                    <th class="text-left border-r border-b border-grey-400 p-2">&nbsp;</th>
-                    <th class="text-left border border-grey-400 p-2">Option</th>
-                    <th class="text-left border border-grey-400 p-2">Details</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td class="border border-grey-400 p-2 text-center">
-                      <input
-                        type="radio"
-                        value="upfront"
-                        name="membership-fee"
-                        v-model="form.membershipFeeOption"
-                        :disabled="upfrontDisabled"
-                        required
+            <template v-if="!freeChild">
+              <ValidationProvider
+                class="mt-4"
+                v-slot="{ errors }"
+                rules="required"
+                tag="div"
+                vid="membershipOption"
+              >
+                <label class="block text-sm font-bold mb-1">
+                  Select your membership fee option
+                  <span class="text-danger ml-0.5">*</span>
+                </label>
+                <table class="w-full border-collapse">
+                  <thead>
+                    <tr>
+                      <th class="text-left border-r border-b border-grey-400 p-2">&nbsp;</th>
+                      <th class="text-left border border-grey-400 p-2">Option</th>
+                      <th class="text-left border border-grey-400 p-2">Details</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="border border-grey-400 p-2 text-center">
+                        <input
+                          type="radio"
+                          value="upfront"
+                          name="membership-fee"
+                          v-model="form.membershipFeeOption"
+                          :disabled="upfrontDisabled"
+                          required
+                        >
+                      </td>
+                      <td
+                        class="border border-grey-400 p-2"
+                        :class="[
+                          upfrontDisabled ? ['line-through', 'text-grey-400'] : [],
+                        ]"
                       >
-                    </td>
-                    <td
-                      class="border border-grey-400 p-2"
-                      :class="[
-                        upfrontDisabled ? ['line-through', 'text-grey-400'] : [],
-                      ]"
-                    >
-                      Upfront ({{ form.sex === 'male' ? 'Boys' : 'Girls' }})
-                    </td>
-                    <td
-                      class="border border-grey-400 p-2"
-                      :class="[
-                        upfrontDisabled ? ['line-through', 'text-grey-400'] : [],
-                      ]"
-                    >
-                      <ul class="list-disc pl-4">
-                        <li>{{ subscriptionOptions.upfront }}</li>
-                        <li><strong>£40 cheaper than the monthly subscription option</strong></li>
-                        <li><strong>Only available during July 2023</strong></li>
-                      </ul>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="border border-grey-400 p-2 text-center">
-                      <input
-                        type="radio"
-                        value="subscription"
-                        name="membership-fee"
-                        v-model="form.membershipFeeOption"
-                        required
+                        Upfront ({{ form.sex === 'male' ? 'Boys' : 'Girls' }})
+                      </td>
+                      <td
+                        class="border border-grey-400 p-2"
+                        :class="[
+                          upfrontDisabled ? ['line-through', 'text-grey-400'] : [],
+                        ]"
                       >
-                    </td>
-                    <td class="border border-grey-400 p-2">
-                      Monthly Subscription ({{ form.sex === 'male' ? 'Boys' : 'Girls' }})
-                    </td>
-                    <td class="border border-grey-400 p-2">
-                      <ul class="list-disc pl-4">
-                        <li>{{ subscriptionOptions.monthly.upfront }}</li>
-                        <li>{{ subscriptionOptions.monthly.subscription }}</li>
-                        <li><strong>{{ subscriptionOptions.monthly.total }}</strong></li>
-                      </ul>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-              <span class="text-xs text-danger mt-2">{{ errors[0] }}</span>
-            </ValidationProvider>
-            <ValidationProvider
-              v-if="form.membershipFeeOption === 'subscription'"
-              class="mt-4"
-              v-slot="{ errors }"
-              rules="required_if:membershipOption,subscription"
-              tag="div"
-            >
-              <FormSelect
-                label="Select preferred payment date"
-                :options="paymentDateOptions"
-                v-model="form.paymentDate"
-                help-text="This will be the date your subscription payment is taken each month"
-                :invalid="errors.length > 0"
-                required
-              />
-              <span class="text-xs text-danger mt-2">{{ errors[0] }}</span>
-            </ValidationProvider>
+                        <ul class="list-disc pl-4">
+                          <li>{{ subscriptionOptions.upfront }}</li>
+                          <li><strong>£40 cheaper than the monthly subscription option</strong></li>
+                          <li><strong>Only available during July 2023</strong></li>
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="border border-grey-400 p-2 text-center">
+                        <input
+                          type="radio"
+                          value="subscription"
+                          name="membership-fee"
+                          v-model="form.membershipFeeOption"
+                          required
+                        >
+                      </td>
+                      <td class="border border-grey-400 p-2">
+                        Monthly Subscription ({{ form.sex === 'male' ? 'Boys' : 'Girls' }})
+                      </td>
+                      <td class="border border-grey-400 p-2">
+                        <ul class="list-disc pl-4">
+                          <li>{{ subscriptionOptions.monthly.upfront }}</li>
+                          <li>{{ subscriptionOptions.monthly.subscription }}</li>
+                          <li><strong>{{ subscriptionOptions.monthly.total }}</strong></li>
+                        </ul>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <span class="text-xs text-danger mt-2">{{ errors[0] }}</span>
+              </ValidationProvider>
+              <ValidationProvider
+                v-if="form.membershipFeeOption === 'subscription'"
+                class="mt-4"
+                v-slot="{ errors }"
+                rules="required_if:membershipOption,subscription"
+                tag="div"
+              >
+                <FormSelect
+                  label="Select preferred payment date"
+                  :options="paymentDateOptions"
+                  v-model="form.paymentDate"
+                  help-text="This will be the date your subscription payment is taken each month"
+                  :invalid="errors.length > 0"
+                  required
+                />
+                <span class="text-xs text-danger mt-2">{{ errors[0] }}</span>
+              </ValidationProvider>
+            </template>
           </div>
 
           <div class="mt-16">
@@ -528,6 +530,9 @@ export default {
         },
       }
     },
+    freeChild() {
+      return this.$auth.user[0].permissions.map(({ name }) => name).includes('free-child');
+    },
   },
 
   watch: {
@@ -553,6 +558,10 @@ export default {
         text: 'An error occured whilst processing, or you have cancelled, your one-off payment - please try again.',
         sticky: true,
       });
+    }
+
+    if (this.freeChild) {
+      this.form.membershipFeeOption = 'upfront';
     }
   },
 
@@ -582,17 +591,21 @@ export default {
       }
 
       try {
-        const { data: { checkoutUrl } } = await this.$axios.post('/api/club/players', playerForm);
+        const { data: { checkoutUrl }, status } = await this.$axios.post('/api/club/players', playerForm);
 
         if (checkoutUrl) {
           window.location.href = checkoutUrl;
         } else {
-          this.$store.dispatch('notifications/add', {
-            type: 'error',
-            title: 'Error',
-            text: 'We were unable to register your player - please ensure all fields are completed and try again',
-            sticky: true,
-          });
+          if (status === 200) {
+            this.$router.push('/portal/players?status=success');
+          } else {
+            this.$store.dispatch('notifications/add', {
+              type: 'error',
+              title: 'Error',
+              text: 'We were unable to register your player - please ensure all fields are completed and try again',
+              sticky: true,
+            });
+          }
         }
       } catch (error) {
         console.log(error)

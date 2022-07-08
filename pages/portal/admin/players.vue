@@ -19,6 +19,7 @@
             <th class="bg-black text-gold text-left font-normal text-sm p-2">Identity Verification</th>
             <th class="bg-black text-gold text-left font-normal text-sm p-2">Age Verification</th>
             <th class="bg-black text-gold text-left font-normal text-sm p-2">Parent</th>
+            <th class="bg-black text-gold text-left font-normal text-sm p-2">Actions</th>
           </tr>
         </thead>
         <tbody v-if="!players.length">
@@ -38,9 +39,9 @@
               <button
                 v-if="player.identity_verification_photo"
                 class="underline"
-                @click="downloadFile(player.identity_verification_photo)"
+                @click="viewImage(player.identity_verification_photo)"
               >
-                Download
+                View
               </button>
               <span v-else>Not available</span>
             </td>
@@ -48,9 +49,9 @@
               <button
                 v-if="player.age_verification_photo"
                 class="underline"
-                @click="downloadFile(player.age_verification_photo)"
+                @click="viewImage(player.age_verification_photo)"
               >
-                Download
+                View
               </button>
               <span v-else>Not available</span>
             </td>
@@ -88,13 +89,12 @@ export default {
   },
 
   methods: {
-    async downloadFile(path) {
-      const { data: image } = await this.$axios.get(`/api/admin/verification-photos/${path}`, { responseType: 'blob' });
+    async viewImage(path) {
+      const { data: { data: image} } = await this.$axios.get(`/api/admin/verification-photos/${path}`);
 
-      const url = window.URL.createObjectURL(image);
       const link = document.createElement('a');
-      link.href = url;
-      link.setAttribute('download', path);
+      link.href = image;
+      link.setAttribute('target', '_blank');
       document.body.appendChild(link);
       link.click();
       link.remove();

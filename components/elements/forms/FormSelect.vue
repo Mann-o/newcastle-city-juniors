@@ -1,6 +1,6 @@
 <template>
   <div class="mt-4 first-of-type:mt-0">
-    <label class="block text-sm font-bold mb-1">
+    <label v-if="label" class="block text-sm font-bold mb-1">
       {{ label }}
       <span v-if="required" class="text-danger ml-0.5">*</span>
     </label>
@@ -42,7 +42,8 @@ export default {
   props: {
     label: {
       type: String,
-      required: true,
+      required: false,
+      default: null,
     },
     options: {
       type: Array,
