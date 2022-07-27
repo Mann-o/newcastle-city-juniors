@@ -39,14 +39,16 @@
               >
                 Manage Player
               </NuxtLink>
-              <span class="mx-2">|</span>
-              <a
-                class="underline"
-                :href="`/portal/players/${player.id}/subscription`"
-                @click.prevent="redirectToStripeCustomerPortal()"
-              >
-                Subscription Portal
-              </a>
+              <template v-if="player.membership_fee_option === 'subscription'">
+                <span class="mx-2">|</span>
+                <a
+                  class="underline"
+                  :href="`/portal/players/${player.id}/subscription`"
+                  @click.prevent="redirectToStripeCustomerPortal()"
+                >
+                  Subscription Portal
+                </a>
+              </template>
             </td>
           </tr>
         </tbody>
