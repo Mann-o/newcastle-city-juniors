@@ -1,11 +1,22 @@
 <template>
-  <ul>
+  <ul class="grid gap-8 md:grid-cols-4">
     <li
+      class="bg-grey-200 text-center"
       v-for="link in links"
       :key="link.path"
     >
-      <NuxtLink :to="link.path">
-        {{ link.label }}
+      <NuxtLink
+        class="block p-4 hover:text-black"
+        :to="link.path"
+      >
+        <div class="flex flex-col gap-2">
+          <div class="text-[3.6rem]">
+            <FontAwesomeIcon :icon="['fad', link.icon]" />
+          </div>
+          <span class="font-bold uppercase">
+            {{ link.label }}
+          </span>
+        </div>
       </NuxtLink>
     </li>
   </ul>
@@ -21,6 +32,14 @@ export default {
         ...(
           this.$auth?.user?.[0]?.permissions.some(({ name }) => name === 'view-players')
             ? [{ label: 'Players', path: '/portal/admin/players', icon: 'users-between-lines' }]
+            : []
+        ),
+        ...(
+          this.$auth?.user?.[0]?.permissions.some(({ name }) => name === 'view-payments')
+            ? [
+              { label: 'Payments', path: '/portal/admin/payments', icon: 'credit-card-front' },
+              { label: 'Subscriptions', path: '/portal/admin/subscriptions', icon: 'arrows-repeat' },
+            ]
             : []
         ),
       ];

@@ -92,12 +92,14 @@ export default {
 
   data: () => ({
     parent: null,
+    charges: null,
   }),
 
   async fetch() {
-    const { data: { data: parent } } = await this.$axios.get(`/api/admin/player/${this.player.id}/parent`);
+    const { data: { data: { parent, charges } } } = await this.$axios.get(`/api/admin/player/${this.player.id}/parent`);
 
     this.parent = parent;
+    this.charges = charges;
   },
 };
 </script>

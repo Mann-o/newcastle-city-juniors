@@ -39,6 +39,14 @@
               >
                 Manage Player
               </NuxtLink>
+              <span class="mx-2">|</span>
+              <a
+                class="underline"
+                :href="`/portal/players/${player.id}/subscription`"
+                @click.prevent="redirectToStripeCustomerPortal()"
+              >
+                Subscription Portal
+              </a>
             </td>
           </tr>
         </tbody>
@@ -101,6 +109,13 @@ export default {
       if (this.parentCount > 0) {
         this.$router.push('/portal/players/register');
       }
+    },
+    async redirectToStripeCustomerPortal() {
+      const { data: { data: { url } } } = await this.$axios.post('/api/stripe/create-customer-portal-session', {
+        returnUrl: window.location.href,
+      });
+
+      window.location.replace(url);
     },
   },
 }
