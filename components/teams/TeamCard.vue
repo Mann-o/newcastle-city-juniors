@@ -9,16 +9,28 @@
       </div>
       <div v-else>
         <div class="absolute inset-0 flex justify-center items-center text-sm">
-          U{{ ageGroup.fields.ageGroup }}
+          <template v-if="ageGroup.fields.slug !== 'seniors'">
+            U{{ ageGroup.fields.ageGroup }}
+          </template>
+          <template v-else>
+            S
+          </template>
         </div>
         <FontAwesomeIcon :icon="['fad', 'shirt']" />
       </div>
     </div>
     <div class="p-4 text-xs col-span-4">
       <div class="pb-4 text-lg">
-        <span class="font-bold">
-          U{{ ageGroup.fields.ageGroup }} {{ team.fields.name }}
-        </span>
+        <template v-if="ageGroup.fields.slug !== 'seniors'">
+          <span class="font-bold">
+            U{{ ageGroup.fields.ageGroup }} {{ team.fields.name }}
+          </span>
+        </template>
+        <template v-else>
+          <span class="font-bold">
+            Seniors
+          </span>
+        </template>
         <!-- <NuxtLink
           class="font-bold"
           :to="`/teams/${ageGroup.fields.slug}/${team.fields.slug}`"
