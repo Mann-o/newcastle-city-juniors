@@ -20,7 +20,7 @@
               tag="div"
             >
               <FormSelect
-                label="Please select which Parent or Guardian is registering this child"
+                label="Please select which Parent or Guardian is registering this player"
                 :options="parents"
                 v-model="form.parentId"
                 :invalid="errors.length > 0"
@@ -105,7 +105,7 @@
                 label="Details of any medical conditions"
                 v-model="form.medicalConditions"
                 field-type="textarea"
-                help-text="Even if your child does not have any medical conditions that we need to be aware of, you should confirm this here"
+                help-text="Even if the player does not have any medical conditions that we need to be aware of, you should confirm this here"
                 :invalid="errors.length > 0"
                 required
               />
@@ -118,7 +118,7 @@
               tag="div"
             >
               <label class="block text-sm font-bold mb-1">
-                Identification Verification: Please provide a passport style photo of your child
+                Identification Verification: Please provide a passport style photo of the player
                 <span class="text-danger ml-0.5">*</span>
               </label>
               <input
@@ -137,7 +137,7 @@
               tag="div"
             >
               <label class="block text-sm font-bold mb-1">
-                Age Verification: Please provide a picture of your child's passport or birth certificate
+                Age Verification: Please provide a picture of the player's passport or birth certificate
                 <span class="text-danger ml-0.5">*</span>
               </label>
               <input
@@ -154,7 +154,7 @@
               tag="div"
             >
               <FormCheckbox
-                label="Please untick this box if you do not consent to your child having video/photography of them taken by the club"
+                label="Please untick this box if you do not consent to your player having video/photography of them taken by the club"
                 v-model="form.mediaConsented"
               />
             </ValidationProvider>
@@ -214,7 +214,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
+                    <!-- <tr v-if="form.ageGroup !== 'seniors'">
                       <td class="border border-grey-400 p-2 text-center">
                         <input
                           type="radio"
@@ -245,7 +245,7 @@
                           <li><strong>Only available during July 2023</strong></li>
                         </ul>
                       </td>
-                    </tr>
+                    </tr> -->
                     <tr>
                       <td class="border border-grey-400 p-2 text-center">
                         <input
@@ -257,7 +257,11 @@
                         >
                       </td>
                       <td class="border border-grey-400 p-2">
-                        Monthly Subscription ({{ form.sex === 'male' ? 'Boys' : 'Girls' }})
+                        Monthly Subscription ({{
+                          form.ageGroup === 'seniors'
+                            ? 'Seniors'
+                            : (form.sex === 'male' ? 'Boys' : 'Girls')
+                        }})
                       </td>
                       <td class="border border-grey-400 p-2">
                         <ul class="list-disc pl-4">
@@ -292,7 +296,7 @@
           </div>
 
           <div class="mt-16">
-            <h2>Step 4 - Respect Code of Conduct - Young Players</h2>
+            <h2>Step 4 - Respect Code of Conduct</h2>
             <p class="mb-4">When playing football, I will:</p>
             <ul
               class="list-disc pl-10 mb-4"
@@ -342,7 +346,7 @@
                 @click="toggleCodeOfConductAcceptance()"
               >
                 <input type="checkbox" v-model="form.acceptedCodeOfConduct">
-                <p class="ml-4">By ticking this box, I am confirming that the player I am registering has read and agrees to adhere to the Respect Code of Conduct for Young Players</p>
+                <p class="ml-4">By ticking this box, I am confirming that the player I am registering has read and agrees to adhere to the Respect Code of Conduct</p>
               </div>
               <span class="text-xs text-danger mt-2">{{ errors[0] }}</span>
             </ValidationProvider>
@@ -469,7 +473,10 @@ export default {
         }));
       });
 
-    this.ageGroupOptions = this.ageGroups.map(({ key, value }) => ({ key, value }));
+    this.ageGroupOptions = [
+      ...this.ageGroups.map(({ key, value }) => ({ key, value })),
+      { key: 'seniors', value: 'Seniors' },
+    ];
 
     const { data: { data: parents } } = await this.$axios.get('/api/club/parents');
     this.parents = parents.map(({ id, full_name }) => ({
@@ -503,7 +510,9 @@ export default {
 
   computed: {
     teams() {
-      return this.ageGroups.find(({ key }) => key === this.form.ageGroup).teams;
+      return this.form.ageGroup === 'seniors'
+        ? [{ key: 'seniors', value: 'Seniors' }]
+        : this.ageGroups.find(({ key }) => key === this.form.ageGroup).teams;
     },
     registerPlayerButtonLabel() {
       return this.registering
@@ -514,7 +523,10 @@ export default {
       return new Date() > new Date('2022-07-31');
     },
     subscriptionOptions() {
-      const monthlyCost = this.form.sex === 'male' ? 30 : 25;
+      const monthlyCost = (this.form.ageGroup === 'seniors')
+        ? 20
+        : (this.form.sex === 'male' ? 30 : 25);
+
       const currentDate = new Date();
 
       const monthDiff = (dateFrom, dateTo) => {
@@ -524,9 +536,9 @@ export default {
       return {
         upfront: `£${(monthlyCost * 12) - 40} one-off payment, inclusive of membership fee`,
         monthly: {
-          upfront: `1x £${monthlyCost * 2} one-off payment (£${monthlyCost} membership fee and £${monthlyCost} ${currentDate.toLocaleDateString('en-gb', { month: 'long', year: 'numeric' })} subscription)`,
+          upfront: `1x £${this.form.ageGroup === 'seniors' ? 60 : (monthlyCost * 2)} one-off payment${this.form.ageGroup === 'seniors' ? '' : ` (£${monthlyCost} membership fee and £${monthlyCost} ${currentDate.toLocaleDateString('en-gb', { month: 'long', year: 'numeric' })} subscription)`}`,
           subscription: `${monthDiff(currentDate, new Date('2023-05-01'))}x £${monthlyCost} monthly payments from ${new Date(currentDate.setMonth(currentDate.getMonth() + 1)).toLocaleDateString('en-gb', { month: 'long', year: 'numeric' })} up to, and including, May 2023`,
-          total: `Total: £${((monthDiff(currentDate, new Date('2023-05-01')) + 1) * monthlyCost) + (monthlyCost * 2)}`,
+          total: `Total: £${((monthDiff(currentDate, new Date('2023-05-01')) + 1) * monthlyCost) + (this.form.ageGroup === 'seniors' ? 60 : (monthlyCost * 2))}`,
         },
       }
     },
