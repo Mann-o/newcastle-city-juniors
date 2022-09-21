@@ -9,7 +9,14 @@
     </div>
     <div v-else>
       <div class="grid gap-8 lg:grid-cols-5">
-      <ArticleCard
+        <ArticleCard
+          image="https://images.ctfassets.net/yv1glylq11v9/5kbgg2tAgrb8a07cIGKcmC/9db30aa7d70b1dde3ca1eee7037422f2/halloween-2022-poster.jpeg?h=250"
+          title="NCJ Halloween Party"
+          subtext="Newcastle City Juniors are happy to announce that tickets are now available for our 2022 Halloween Party!"
+          date="2022-09-21"
+          link="/news-and-events/halloween-2022"
+        />
+        <ArticleCard
           :image="trophyDayImage.file.url"
           title="Presentation For The 2021-22 Season"
           subtext="Newcastle City Juniors are happy to announce that tickets are now available for our Presentation 2021-22 Season!"

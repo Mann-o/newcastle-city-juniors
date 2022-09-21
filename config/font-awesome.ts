@@ -29,6 +29,7 @@ export const fontawesome = {
       'faCreditCardFront',
       'faEnvelope',
       'faFutbol',
+      'faJackOLantern',
       'faImageSlash',
       'faLocationDot',
       'faPhone',
