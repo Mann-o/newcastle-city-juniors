@@ -1,13 +1,5 @@
 <template>
   <div>
-    <GmapMap
-      :style="{ height: map.height }"
-      :center="map.center"
-      :zoom="map.zoom"
-    >
-      <GmapMarker :position="map.center" />
-    </GmapMap>
-
     <ContactInfo />
   </div>
 </template>
@@ -21,17 +13,6 @@ export default {
   },
 
   scrollToTop: true,
-
-  data: () => ({
-    map: {
-      height: '400px',
-      center: {
-        lng: -1.679560,
-        lat: 54.976517,
-      },
-      zoom: 16,
-    },
-  }),
 
   head: () => ({
     title: 'Contact Us',

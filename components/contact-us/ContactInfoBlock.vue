@@ -1,5 +1,5 @@
 <template>
-  <div class="border border-gold col-span-4 py-8 px-4 mb-8 last:mb-0 lg:mb-0">
+  <div class="border border-gold col-span-6 py-8 px-4 mb-8 last:mb-0 lg:mb-0">
     <div class="text-center text-4xl text-gold pb-8">
       <FontAwesomeIcon :icon="['fad', icon]" />
     </div>

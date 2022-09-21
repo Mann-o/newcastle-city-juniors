@@ -7,17 +7,6 @@
       <p>Newcastle City Juniors, Gibside Gardens<br>Benwell, NE15 7PP</p>
     </ContactInfoBlock>
     <ContactInfoBlock
-      icon="phone"
-      label="Telephone"
-    >
-      <a
-        href="tel:+447518389898"
-        class="text-white hover:text-gold"
-      >
-        07518389898
-      </a>
-    </ContactInfoBlock>
-    <ContactInfoBlock
       icon="envelope"
       label="Email"
     >
