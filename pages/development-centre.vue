@@ -5,8 +5,8 @@
     <div class="mb-16 text-center">
       <img
         class="mx-auto max-w-3xl"
-        src="https://images.ctfassets.net/yv1glylq11v9/6becyr4qeuCzDabvghAqS4/1160d4462211519d0e9c22ff99cf6dec/football-development-2021-22.jpeg"
-        alt="Poster for Football Development at Newcastle City Juniors in the 2021-22 season"
+        src="https://images.ctfassets.net/yv1glylq11v9/1L4ZOciRQ23jVSVO8JBlQY/369dfee5c301bb526f1af05788b08478/NCJ_Football_Development_Advert_2022-23.jpg"
+        alt="Poster for Football Development at Newcastle City Juniors in the 2022-23 season"
       >
     </div>
 
