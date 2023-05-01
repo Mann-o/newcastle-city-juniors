@@ -33,6 +33,7 @@ export const fontawesome = {
       'faImageSlash',
       'faLocationDot',
       'faPhone',
+      'faRotateRight',
       'faShirt',
       'faSignature',
       'faTicket',

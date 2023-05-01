@@ -34,7 +34,7 @@
 
 <script>
 export default {
-  name: 'PageNewsAndEventsPresentation2021Update',
+  name: 'PageNewsAndEventsPresentation2020Update',
 
   scrollToTop: true,
 }

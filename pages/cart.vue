@@ -31,7 +31,6 @@
               It appears you are purchasing {{ cartItemDeepCount > 1 ? 'tickets' : 'a ticket' }} to an NCJ presentation event. Please provide the following information:
             </p>
 
-
               <div class="flex flex-col w-full items-left gap-2 mb-4 md:flex-row md:justify-between">
                 <label class="font-bold">
                   Player Name
@@ -55,7 +54,7 @@
                 </ValidationProvider>
               </div>
 
-              <div class="flex flex-col w-full items-left gap-2 md:flex-row md:justify-between">
+              <!-- <div class="flex flex-col w-full items-left gap-2 md:flex-row md:justify-between">
                 <label class="font-bold">
                   Age Group
                 </label>
@@ -77,6 +76,37 @@
                     <option
                       v-for="{ key, value } in ageGroups"
                       :key="`age-group-${key}`"
+                      :value="key"
+                    >
+                      {{ value }}
+                    </option>
+                  </select>
+                  <span class="text-xs text-danger mt-2">{{ errors[0] }}</span>
+                </ValidationProvider>
+              </div> -->
+
+              <div class="flex flex-col w-full items-left gap-2 md:flex-row md:justify-between">
+                <label class="font-bold">
+                  Team
+                </label>
+
+                <ValidationProvider
+                  v-slot="{ errors }"
+                  class="w-full md:w-auto md:flex-[0_0_75%]"
+                  rules="required"
+                  vid="team"
+                  tag="div"
+                  immediate
+                >
+                  <select
+                    class="border border-black w-full"
+                    name="team"
+                    :value="presentationTicketInfo.team"
+                    @input="updatePresentationTicketInfo"
+                  >
+                    <option
+                      v-for="{ key, value } in teams"
+                      :key="`team-${key}`"
                       :value="key"
                     >
                       {{ value }}
@@ -118,18 +148,56 @@ export default {
   },
 
   data: () => ({
-    ageGroups: [
-      { key: 'u6', value: 'Under 6s' },
-      { key: 'u7', value: 'Under 7s' },
-      { key: 'u8', value: 'Under 8s' },
-      { key: 'u9', value: 'Under 9s' },
-      { key: 'u10', value: 'Under 10s' },
-      { key: 'u11', value: 'Under 11s' },
-      { key: 'u12', value: 'Under 12s' },
-      { key: 'u13', value: 'Under 13s' },
-      { key: 'u14', value: 'Under 14s' },
-      { key: 'u15', value: 'Under 15s' },
-      { key: 'u16', value: 'Under 16s' },
+    // ageGroups: [
+    //   { key: 'u6', value: 'Under 6s' },
+    //   { key: 'u7', value: 'Under 7s' },
+    //   { key: 'u8', value: 'Under 8s' },
+    //   { key: 'u9', value: 'Under 9s' },
+    //   { key: 'u10', value: 'Under 10s' },
+    //   { key: 'u11', value: 'Under 11s' },
+    //   { key: 'u12', value: 'Under 12s' },
+    //   { key: 'u13', value: 'Under 13s' },
+    //   { key: 'u14', value: 'Under 14s' },
+    //   { key: 'u15', value: 'Under 15s' },
+    //   { key: 'u16', value: 'Under 16s' },
+    // ],
+    teams: [
+      { key: 'u7-inter', value: 'U7 Inter' },
+      { key: 'u7-juve', value: 'U7 Juve' },
+      { key: 'u7-milan', value: 'U7 Milan' },
+      { key: 'u8-saturday', value: 'U8 (Saturday)' },
+      { key: 'u8-atlanta', value: 'U8 Atlanta' },
+      { key: 'u8-fiorentina-saturday', value: 'U8 Fiorentina (Saturday)' },
+      { key: 'u8-girls-saturday', value: 'U8 Girls (Saturday)' },
+      { key: 'u8-inter', value: 'U8 Inter' },
+      { key: 'u8-juve', value: 'U8 Juve' },
+      { key: 'u8-lazio', value: 'U8 Lazio' },
+      { key: 'u8-napoli-saturday', value: 'U8 Napoli (Saturday)' },
+      { key: 'u8-roma', value: 'U8 Roma' },
+      { key: 'u8-torino', value: 'U8 Torino' },
+      { key: 'u9-girls-saturday', value: 'U9 Girls (Saturday)' },
+      { key: 'u9-inter', value: 'U9 Inter' },
+      { key: 'u9-juve', value: 'U9 Juve' },
+      { key: 'u9-milan', value: 'U9 Milan' },
+      { key: 'u10-inter', value: 'U10 Inter' },
+      { key: 'u10-juve', value: 'U10 Juve' },
+      { key: 'u10-juve-saturday', value: 'U10 Juve (Saturday)' },
+      { key: 'u10-milan', value: 'U10 Milan' },
+      { key: 'u10-milan-saturday', value: 'U10 Milan (Saturday)' },
+      { key: 'u10-napoli-saturday', value: 'U10 Napoli (Saturday)' },
+      { key: 'u10-sparta', value: 'U10 Sparta' },
+      { key: 'u10-sparta-saturday', value: 'U10 Sparta (Saturday)' },
+      { key: 'u12-juve', value: 'U12 Juve' },
+      { key: 'u12-milan', value: 'U12 Milan' },
+      { key: 'u12-roma', value: 'U12 Roma' },
+      { key: 'u13-saturday', value: 'U13 (Saturday)' },
+      { key: 'u13-juve', value: 'U13 Juve' },
+      { key: 'u13-milan', value: 'U13 Milan' },
+      { key: 'u14-saturday', value: 'U14 (Saturday)' },
+      { key: 'u14-juve', value: 'U14 Juve' },
+      { key: 'u14-milan', value: 'U14 Milan' },
+      { key: 'u15', value: 'U15' },
+      { key: 'u16', value: 'U16' },
     ],
     checkingOut: false,
   }),
@@ -178,7 +246,8 @@ export default {
         ...(this.cartContainsPresentationTickets && {
           metadata: {
             presentationTicketPlayerName: this.presentationTicketInfo.playerName,
-            presentationTicketAgeGroup: this.presentationTicketInfo.ageGroup,
+            // presentationTicketAgeGroup: this.presentationTicketInfo.ageGroup,
+            presentationTicketTeam: this.presentationTicketInfo.team,
           },
         }),
         success_url: `http${

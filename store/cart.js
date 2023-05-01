@@ -3,7 +3,8 @@ export const state = () => ({
   metadata: null,
   presentationTicketInfo: {
     playerName: null,
-    ageGroup: 'u6',
+    // ageGroup: 'u7',
+    team: 'u7-inter',
   },
 })
 

@@ -10,6 +10,13 @@
     <div v-else>
       <div class="grid gap-8 lg:grid-cols-5">
         <ArticleCard
+          :image="trophyDayImage.file.url"
+          title="Presentation For The 2022-23 Season"
+          subtext="Newcastle City Juniors are happy to announce that tickets are now available for our Presentation 2022-23 Season!"
+          date="2023-04-24"
+          link="/news-and-events/presentation-2022"
+        />
+        <ArticleCard
           image="https://images.ctfassets.net/yv1glylq11v9/YiiotqMbOGMxktEMRA83V/d720dcf4c23eb8c866d933f03a582551/WhatsApp_Image_2022-09-22_at_12.55.06.jpeg?h=250"
           title="NCJ Halloween Party"
           subtext="Newcastle City Juniors are happy to announce that tickets are now available for our 2022 Halloween Party!"

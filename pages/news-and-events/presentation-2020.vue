@@ -89,7 +89,7 @@
 
 <script>
 export default {
-  name: 'PageNewsAndEventsPresentation2021',
+  name: 'PageNewsAndEventsPresentation2020',
 
   // components: {
   //   FormSection: () => import('@/components/elements/forms/FormSection.vue'),
