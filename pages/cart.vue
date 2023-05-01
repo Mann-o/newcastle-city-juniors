@@ -225,8 +225,6 @@ export default {
     async checkout() {
       this.checkingOut = true
 
-      debugger
-
       const { data: { checkoutUrl } } = await this.$axios.post('/api/stripe/create-checkout', {
         ...(this.$auth.loggedIn && {
           customer: this.$auth.user[0].stripe_customer_id,
