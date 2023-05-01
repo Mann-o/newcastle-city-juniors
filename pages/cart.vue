@@ -225,6 +225,8 @@ export default {
     async checkout() {
       this.checkingOut = true
 
+      debugger
+
       const { data: { checkoutUrl } } = await this.$axios.post('/api/stripe/create-checkout', {
         ...(this.$auth.loggedIn && {
           customer: this.$auth.user[0].stripe_customer_id,
@@ -248,6 +250,13 @@ export default {
             presentationTicketPlayerName: this.presentationTicketInfo.playerName,
             // presentationTicketAgeGroup: this.presentationTicketInfo.ageGroup,
             presentationTicketTeam: this.presentationTicketInfo.team,
+          },
+          payment_intent_data: {
+            metadata: {
+              presentationTicketPlayerName: this.presentationTicketInfo.playerName,
+              // presentationTicketAgeGroup: this.presentationTicketInfo.ageGroup,
+              presentationTicketTeam: this.presentationTicketInfo.team,
+            },
           },
         }),
         success_url: `http${
