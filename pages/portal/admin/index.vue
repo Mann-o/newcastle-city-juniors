@@ -39,7 +39,8 @@ export default {
             ? [
               { label: 'Payments', path: '/portal/admin/payments', icon: 'credit-card-front' },
               { label: 'Subscriptions', path: '/portal/admin/subscriptions', icon: 'arrows-repeat' },
-              { label: 'Actions', path: '/portal/admin/actions', icon: 'rotate-right' },
+              { label: 'Presentation Tickets', path: '/portal/admin/presentation-tickets', icon: 'ticket' },
+              // { label: 'Actions', path: '/portal/admin/actions', icon: 'rotate-right' },
             ]
             : []
         ),
