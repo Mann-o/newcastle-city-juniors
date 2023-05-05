@@ -4,7 +4,7 @@ export const state = () => ({
   presentationTicketInfo: {
     playerName: null,
     // ageGroup: 'u7',
-    team: 'u7-inter',
+    team: 'development',
   },
 })
 
