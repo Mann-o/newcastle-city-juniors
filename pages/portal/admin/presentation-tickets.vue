@@ -10,7 +10,7 @@
 
     <div v-else>
       <h2>Totals</h2>
-      <p><strong>Player:</strong> {{ totals.player }}<br /><strong>Visitor:</strong> {{ totals.visitor }}</p>
+      <p><strong>Player:</strong> {{ totals.player }}<br /><strong>Visitor:</strong> {{ totals.visitor }}<br /><strong>Grand Total:</strong> {{ totalTickets }}</p>
       <table class="mt-12">
         <thead>
           <tr>
@@ -53,6 +53,12 @@ export default {
       visitor: 0,
     },
   }),
+
+  computed: {
+    totalTickets() {
+      return this.totals.player + this.totals.visitor;
+    },
+  },
 
   async fetch() {
     const { data: { data } } = await this.$axios.get('/api/admin/presentation-tickets-schedule');
