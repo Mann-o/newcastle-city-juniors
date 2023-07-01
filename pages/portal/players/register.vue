@@ -113,42 +113,53 @@
             </ValidationProvider>
             <ValidationProvider
               class="mt-4"
-              v-slot="{ errors, validate }"
-              rules="required|image"
               tag="div"
             >
-              <label class="block text-sm font-bold mb-1">
-                Identification Verification: Please provide a passport style photo of the player
-                <span class="text-danger ml-0.5">*</span>
-              </label>
-              <input
-                type="file"
-                accept="image/*"
-                ref="identityVerificationPhoto"
-                required
-                @change="validate"
-              >
-              <span class="text-xs text-danger mt-2">{{ errors[0] }}</span>
+              <FormCheckbox
+                label="Please tick this box if your player was registered last season and has already provided Identity/Age verification documents."
+                v-model="form.alreadyProvidedVerification"
+              />
             </ValidationProvider>
-            <ValidationProvider
-              class="mt-4"
-              v-slot="{ errors, validate }"
-              rules="required|image"
-              tag="div"
-            >
-              <label class="block text-sm font-bold mb-1">
-                Age Verification: Please provide a picture of the player's passport or birth certificate
-                <span class="text-danger ml-0.5">*</span>
-              </label>
-              <input
-                type="file"
-                accept="image/*"
-                ref="ageVerificationPhoto"
-                required
-                @change="validate"
+            <template v-if="form.alreadyProvidedVerification === false">
+              <ValidationProvider
+                class="mt-4"
+                v-slot="{ errors, validate }"
+                rules="required_if:alreadyProvidedVerification,false|image"
+                tag="div"
               >
-              <span class="text-xs text-danger mt-2">{{ errors[0] }}</span>
-            </ValidationProvider>
+                <label class="block text-sm font-bold mb-1">
+                  Identification Verification: Please provide a passport style photo of the player
+                  <span class="text-danger ml-0.5">*</span>
+                </label>
+                <input
+                  type="file"
+                  accept="image/*"
+                  ref="identityVerificationPhoto"
+                  required
+                  @change="validate"
+                >
+                <span class="text-xs text-danger mt-2">{{ errors[0] }}</span>
+              </ValidationProvider>
+              <ValidationProvider
+                class="mt-4"
+                v-slot="{ errors, validate }"
+                rules="required_if:alreadyProvidedVerification,false|image"
+                tag="div"
+              >
+                <label class="block text-sm font-bold mb-1">
+                  Age Verification: Please provide a picture of the player's passport or birth certificate
+                  <span class="text-danger ml-0.5">*</span>
+                </label>
+                <input
+                  type="file"
+                  accept="image/*"
+                  ref="ageVerificationPhoto"
+                  required
+                  @change="validate"
+                >
+                <span class="text-xs text-danger mt-2">{{ errors[0] }}</span>
+              </ValidationProvider>
+            </template>
             <ValidationProvider
               class="mt-4"
               tag="div"
@@ -185,11 +196,26 @@
               tag="div"
             >
               <FormSelect
-                label="Select team"
+                label="Select primary team"
                 :options="teams"
                 v-model="form.team"
                 :invalid="errors.length > 0"
                 required
+              />
+              <span class="text-xs text-danger mt-2">{{ errors[0] }}</span>
+            </ValidationProvider>
+            <ValidationProvider
+              class="mt-4"
+              v-slot="{ errors }"
+              rules="is_not:Invalid"
+              tag="div"
+            >
+              <FormSelect
+                label="Select secondary team"
+                :options="secondaryTeams"
+                v-model="form.secondTeam"
+                help-text="OPTIONAL - Choose a second team, e.g. if your player plays both on a Saturday and Sunday. Please note that there is an additional monthly cost of £15 to be registered to two teams."
+                :invalid="errors.length > 0"
               />
               <span class="text-xs text-danger mt-2">{{ errors[0] }}</span>
             </ValidationProvider>
@@ -214,7 +240,8 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <!-- <tr v-if="form.ageGroup !== 'seniors'">
+                    <tr>
+                    <!-- <tr v-if="upfrontDisabled === false"> -->
                       <td class="border border-grey-400 p-2 text-center">
                         <input
                           type="radio"
@@ -231,7 +258,7 @@
                           upfrontDisabled ? ['line-through', 'text-grey-400'] : [],
                         ]"
                       >
-                        Upfront ({{ form.sex === 'male' ? 'Boys' : 'Girls' }})
+                        Upfront ({{ form.sex === 'male' ? 'Male' : 'Female' }})
                       </td>
                       <td
                         class="border border-grey-400 p-2"
@@ -242,10 +269,10 @@
                         <ul class="list-disc pl-4">
                           <li>{{ subscriptionOptions.upfront }}</li>
                           <li><strong>£40 cheaper than the monthly subscription option</strong></li>
-                          <li><strong>Only available during July 2023</strong></li>
+                          <li><strong>Only available during July 2024!</strong></li>
                         </ul>
                       </td>
-                    </tr> -->
+                    </tr>
                     <tr>
                       <td class="border border-grey-400 p-2 text-center">
                         <input
@@ -257,11 +284,7 @@
                         >
                       </td>
                       <td class="border border-grey-400 p-2">
-                        Monthly Subscription ({{
-                          form.ageGroup === 'seniors'
-                            ? 'Seniors'
-                            : (form.sex === 'male' ? 'Boys' : 'Girls')
-                        }})
+                        Monthly Subscription ({{ form.sex === 'male' ? 'Male' : 'Female' }})
                       </td>
                       <td class="border border-grey-400 p-2">
                         <ul class="list-disc pl-4">
@@ -443,40 +466,115 @@ export default {
       mediaConsented: true,
       ageGroup: '6',
       team: null,
+      secondTeam: null,
       paymentDate: 1,
       membershipFeeOption: 'subscription',
       acceptedCodeOfConduct: false,
       acceptedDeclaration: false,
       parentId: null,
+      alreadyProvidedVerification: false,
     },
     registering: false,
     player: null,
   }),
 
   async fetch() {
-    this.ageGroups = await this.$contentful
-      .getEntries({
-        content_type: this.$config.contentfulAgeGroupContentType,
-        order: 'fields.ageGroup',
-        include: 2,
-      })
-      .then(({ items: ageGroups }) => {
-        return ageGroups.map(({ fields: { slug, title, teams } }) => ({
-          key: slug,
-          value: title,
-          teams: teams
-            ? teams.map(({ fields: { slug, title } }) => ({
-              key: slug,
-              value: title,
-            }))
-            : [{ key: 'invalid', value: 'No teams exist at this age group' }],
-        }));
-      });
-
-    this.ageGroupOptions = [
-      ...this.ageGroups.map(({ key, value }) => ({ key, value })),
-      { key: 'seniors', value: 'Seniors' },
+    this.ageGroups = [
+      {
+        key: 'u7',
+        value: 'Under 7s',
+        teams: [
+          { key: 'u7-boys-saturday', value: 'U7 Boys (Sat) - John Sullivan' },
+          { key: 'u7-girls-saturday', value: 'U7 Girls (Sat) - Mark Hedley' },
+          { key: 'u7-milan', value: 'U7 Milan (Sun) - Jordan Holmes' },
+          { key: 'u7-juve', value: 'U7 Juve (Sun) - John Sullivan' },
+          { key: 'u7-inter', value: 'U7 Inter (Sun) - Jamie Chandler' },
+        ],
+      },
+      {
+        key: 'u8',
+        value: 'Under 8s',
+        teams: [
+          { key: 'u8-girls-saturday', value: 'U8 Girls (Sat) - Mark Hedley' },
+          { key: 'u8-milan', value: 'U8 Milan (Sun) - Joe Foalle' },
+          { key: 'u8-juve', value: 'U8 Juve (Sun) - Joe Foalle' },
+          { key: 'u8-inter', value: 'U8 Inter (Sun) - Joe Foalle' },
+        ],
+      },
+      {
+        key: 'u9',
+        value: 'Under 9s',
+        teams: [
+          { key: 'u9-girls-saturday', value: 'U9 Girls (Sat) - Mark Hedley' },
+          { key: 'u9-girls-lionesses-saturday', value: 'U9 Girls Lionesses (Sat) - Leanne Marshall' },
+          { key: 'u9-napoli-saturday', value: 'U9 Napoli (Sat) - Chris Hunn' },
+          { key: 'u9-fiorentina-saturday', value: 'U9 Fiorentina (Sat) - Paul Leadbitter' },
+          { key: 'u9-inter', value: 'U9 Inter (Sun) - Paul Leadbitter' },
+          { key: 'u9-atalanta', value: 'U9 Atalanta (Sun) - Mattie Thompson' },
+          { key: 'u9-juve', value: 'U9 Juve (Sun) - James Tolchard' },
+          { key: 'u9-roma', value: 'U9 Roma (Sun) - Chris Hunn' },
+        ],
+      },
+      {
+        key: 'u10',
+        value: 'Under 10s',
+        teams: [
+          { key: 'u10-girls-lionesses-saturday', value: 'U10 Girls Lionesses (Sat)' },
+          { key: 'u10-milan', value: 'U10 Milan (Sun) - Adam Jones' },
+          { key: 'u10-juve', value: 'U10 Juve (Sun) - Adam Jones' },
+          { key: 'u10-inter', value: 'U10 Inter (Sun) - Paul Thornton' },
+        ],
+      },
+      {
+        key: 'u11',
+        value: 'Under 11s',
+        teams: [
+          { key: 'u11-sparta', value: 'U11 Sparta (Sun) - David Moore' },
+          { key: 'u11-milan', value: 'U11 Milan (Sun) - David Moore' },
+        ],
+      },
+      {
+        key: 'u12',
+        value: 'Under 12s',
+        teams: [
+          { key: 'u12', value: 'U12s (Sun) - Simon Philpott' },
+        ],
+      },
+      {
+        key: 'u13',
+        value: 'Under 13s',
+        teams: [
+          { key: 'u13-juve', value: 'U13 Juve (Sun) - Stuart Smith' },
+        ],
+      },
+      {
+        key: 'u14',
+        value: 'Under 14s',
+        teams: [
+          { key: 'u14-saturday', value: 'U14s (Sat) - John Sullivan' },
+          { key: 'u14-milan', value: 'U14 Milan (Sun) - Ryan Donaldson' },
+          { key: 'u14-juve', value: 'U14 Juve (Sun) - John Sullivan' },
+        ],
+      },
+      {
+        key: 'u15',
+        value: 'Under 15s',
+        teams: [
+          { key: 'u15-saturday', value: 'U15s (Sat) - Steve Surtees' },
+          { key: 'u15-milan', value: 'U15 Milan (Sun) - Matty Henry' },
+          { key: 'u15-juve', value: 'U15 Juve (Sun) - Mark Foreman' },
+        ],
+      },
+      {
+        key: 'u16',
+        value: 'Under 16s',
+        teams: [
+          { key: 'u16', value: 'U16s (Sun) - Andrew Ferguson' },
+        ],
+      },
     ];
+
+    this.ageGroupOptions = this.ageGroups.map(({ key, value }) => ({ key, value }));
 
     const { data: { data: parents } } = await this.$axios.get('/api/club/parents');
     this.parents = parents.map(({ id, full_name }) => ({
@@ -501,6 +599,7 @@ export default {
       this.form.mediaConsented = this.player.media_consented;
       this.form.ageGroup = this.player.age_group;
       this.form.team = this.player.team;
+      this.form.secondTeam = this.player.second_team;
       this.form.membershipFeeOption = this.player.membership_fee_option;
       this.form.paymentDate = this.player.payment_date;
       this.form.acceptedCodeOfConduct = true;
@@ -510,9 +609,16 @@ export default {
 
   computed: {
     teams() {
-      return this.form.ageGroup === 'seniors'
-        ? [{ key: 'seniors', value: 'Seniors' }]
-        : this.ageGroups.find(({ key }) => key === this.form.ageGroup).teams;
+      return this.ageGroups.find(({ key }) => key === this.form.ageGroup).teams;
+    },
+    secondaryTeams() {
+      return [
+        { key: 'none', value: 'None' },
+        ...this.teams.filter(({ key }) => key !== this.form.team),
+      ];
+    },
+    hasSelectedMultipleTeams() {
+      return this.form.secondTeam !== 'none';
     },
     registerPlayerButtonLabel() {
       return this.registering
@@ -520,12 +626,17 @@ export default {
         : 'Register Player'
     },
     upfrontDisabled() {
-      return new Date() > new Date('2022-07-31');
+      return new Date() > new Date('2024-07-31');
     },
     subscriptionOptions() {
-      const monthlyCost = (this.form.ageGroup === 'seniors')
-        ? 20
-        : (this.form.sex === 'male' ? 30 : 25);
+      const costs = {
+        maleRegistrationFee: 60,
+        femaleRegistrationFee: 50,
+        maleSingleTeamMonthly: 30,
+        maleMultiTeamMonthly: 45,
+        femaleSingleTeamMonthly: 25,
+        femaleMultiTeamMonthly: 40,
+      };
 
       const currentDate = new Date();
 
@@ -533,12 +644,15 @@ export default {
         return (dateTo.getMonth() - dateFrom.getMonth()) + (12 * (dateTo.getFullYear() - dateFrom.getFullYear()))
       }
 
+      const monthlyCost = costs[`${this.form.sex}${this.hasSelectedMultipleTeams ? 'Multi' : 'Single'}TeamMonthly`];
+      const registrationFee = costs[`${this.form.sex}RegistrationFee`];
+
       return {
         upfront: `£${(monthlyCost * 12) - 40} one-off payment, inclusive of membership fee`,
         monthly: {
-          upfront: `1x £${this.form.ageGroup === 'seniors' ? 60 : (monthlyCost * 2)} one-off payment${this.form.ageGroup === 'seniors' ? '' : ` (£${monthlyCost} membership fee and £${monthlyCost} ${currentDate.toLocaleDateString('en-gb', { month: 'long', year: 'numeric' })} subscription)`}`,
-          subscription: `${monthDiff(currentDate, new Date('2023-05-01'))}x £${monthlyCost} monthly payments from ${new Date(currentDate.setMonth(currentDate.getMonth() + 1)).toLocaleDateString('en-gb', { month: 'long', year: 'numeric' })} up to, and including, May 2023`,
-          total: `Total: £${((monthDiff(currentDate, new Date('2023-05-01')) + 1) * monthlyCost) + (this.form.ageGroup === 'seniors' ? 60 : (monthlyCost * 2))}`,
+          upfront: `1x £${registrationFee} one-off payment (membership fee and ${currentDate.toLocaleDateString('en-gb', { month: 'long', year: 'numeric' })} subscription)`,
+          subscription: `${monthDiff(currentDate, new Date('2024-05-01'))}x £${monthlyCost} monthly payments from ${new Date(currentDate.setMonth(currentDate.getMonth() + 1)).toLocaleDateString('en-gb', { month: 'long', year: 'numeric' })} up to, and including, May 2024`,
+          total: `Total: £${((monthDiff(currentDate, new Date('2024-05-01')) + 1) * monthlyCost) + (monthlyCost * 2)}`,
         },
       }
     },
@@ -558,6 +672,7 @@ export default {
     'form.ageGroup': function watchAgeGroup() {
       this.$nextTick(() => {
         this.form.team = this.teams[0].key;
+        this.form.secondTeam = 'none';
       });
     },
   },
@@ -590,13 +705,19 @@ export default {
       const playerForm = new window.FormData();
 
       Object.entries(this.form).forEach(([ key, value ]) => {
-        if (value != null) {
+        if ((key === 'paymentDate')) {
+          if (this.form.membershipFeeOption === 'subscription') {
+            playerForm.append(key, value);
+          }
+        } else {
           playerForm.append(key, value)
         }
       });
 
-      playerForm.append('identityVerificationPhoto', this.$refs.identityVerificationPhoto.files[0]);
-      playerForm.append('ageVerificationPhoto', this.$refs.ageVerificationPhoto.files[0]);
+      if (this.form.alreadyProvidedVerification === false) {
+        playerForm.append('identityVerificationPhoto', this.$refs.identityVerificationPhoto.files[0]);
+        playerForm.append('ageVerificationPhoto', this.$refs.ageVerificationPhoto.files[0]);
+      }
 
       if (this.$route.query?.player) {
         playerForm.append('existingPlayerId', this.$route.query.player);

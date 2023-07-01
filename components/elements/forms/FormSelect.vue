@@ -55,7 +55,7 @@ export default {
       default: null,
     },
     value: {
-      type: [String, Number],
+      type: [String, Number, undefined],
       required: true,
     },
     invalid: {
