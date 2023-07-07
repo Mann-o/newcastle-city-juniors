@@ -711,8 +711,10 @@ export default {
           if (this.form.membershipFeeOption === 'subscription') {
             playerForm.append(key, value);
           }
-        } else if ((key === 'middleNames') && (value !== '')) {
-          playerForm.append(key, value);
+        } else if (key === 'middleNames') {
+          if (value != null && value !== '') {
+            playerForm.append(key, value);
+          }
         } else {
           playerForm.append(key, value)
         }
