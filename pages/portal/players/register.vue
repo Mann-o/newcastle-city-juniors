@@ -111,7 +111,7 @@
               />
               <span class="text-xs text-danger mt-2">{{ errors[0] }}</span>
             </ValidationProvider>
-            <ValidationProvider
+            <!-- <ValidationProvider
               class="mt-4"
               tag="div"
             >
@@ -119,12 +119,12 @@
                 label="Please tick this box if your player was registered last season and has already provided Identity/Age verification documents."
                 v-model="form.alreadyProvidedVerification"
               />
-            </ValidationProvider>
-            <template v-if="form.alreadyProvidedVerification === false">
+            </ValidationProvider> -->
+            <!-- <template v-if="form.alreadyProvidedVerification === false"> -->
               <ValidationProvider
                 class="mt-4"
                 v-slot="{ errors, validate }"
-                rules="required_if:alreadyProvidedVerification,false|image"
+                rules="required|image"
                 tag="div"
               >
                 <label class="block text-sm font-bold mb-1">
@@ -143,7 +143,7 @@
               <ValidationProvider
                 class="mt-4"
                 v-slot="{ errors, validate }"
-                rules="required_if:alreadyProvidedVerification,false|image"
+                rules="required|image"
                 tag="div"
               >
                 <label class="block text-sm font-bold mb-1">
@@ -159,7 +159,7 @@
                 >
                 <span class="text-xs text-danger mt-2">{{ errors[0] }}</span>
               </ValidationProvider>
-            </template>
+            <!-- </template> -->
             <ValidationProvider
               class="mt-4"
               tag="div"
@@ -496,6 +496,7 @@ export default {
         value: 'Under 8s',
         teams: [
           { key: 'u8-girls-saturday', value: 'U8 Girls (Sat) - Mark Hedley' },
+          { key: 'u8-milan-saturday', value: 'U8 Milan (Sat) - Jordan Holmes' },
           { key: 'u8-milan', value: 'U8 Milan (Sun) - Joe Foalle' },
           { key: 'u8-juve', value: 'U8 Juve (Sun) - Joe Foalle' },
           { key: 'u8-inter', value: 'U8 Inter (Sun) - Joe Foalle' },
@@ -509,6 +510,7 @@ export default {
           { key: 'u9-girls-lionesses-saturday', value: 'U9 Girls Lionesses (Sat) - Leanne Marshall' },
           { key: 'u9-napoli-saturday', value: 'U9 Napoli (Sat) - Chris Hunn' },
           { key: 'u9-fiorentina-saturday', value: 'U9 Fiorentina (Sat) - Paul Leadbitter' },
+          { key: 'u9-juve-saturday', value: 'U9 Juve (Sat) - James Tolchard' },
           { key: 'u9-inter', value: 'U9 Inter (Sun) - Paul Leadbitter' },
           { key: 'u9-atalanta', value: 'U9 Atalanta (Sun) - Mattie Thompson' },
           { key: 'u9-juve', value: 'U9 Juve (Sun) - James Tolchard' },
@@ -614,7 +616,7 @@ export default {
     secondaryTeams() {
       return [
         { key: 'none', value: 'None' },
-        ...this.teams.filter(({ key }) => key !== this.form.team),
+        ...this.ageGroups.flatMap(({ teams }) => teams).filter(({ key }) => key !== this.form.team),
       ];
     },
     hasSelectedMultipleTeams() {
@@ -712,12 +714,16 @@ export default {
         } else {
           playerForm.append(key, value)
         }
+
+        if ((key === 'middleNames') && (value !== '')) {
+          playerForm.append(key, value);
+        }
       });
 
-      if (this.form.alreadyProvidedVerification === false) {
+      // if (this.form.alreadyProvidedVerification === false) {
         playerForm.append('identityVerificationPhoto', this.$refs.identityVerificationPhoto.files[0]);
         playerForm.append('ageVerificationPhoto', this.$refs.ageVerificationPhoto.files[0]);
-      }
+      // }
 
       if (this.$route.query?.player) {
         playerForm.append('existingPlayerId', this.$route.query.player);
