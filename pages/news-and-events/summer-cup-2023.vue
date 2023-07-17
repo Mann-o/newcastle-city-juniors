@@ -34,24 +34,24 @@
         <form class="mt-8 md:max-w-lg" @submit.prevent="handleSubmit(completePayment)">
           <FormSection label="Summer Cup 2023 - Registration">
             <p class="mb-8"><em><strong>IMPORTANT:</strong> All fields are required!</em></p>
-            <ValidationProvider class="mb-4" v-slot="{ errors }" rules="required|email" tag="div">
+            <ValidationProvider class="mb-4" v-slot="{ errors }" rules="required|email" tag="div" mode="eager">
               <FormElement label="Email Address" field-type="email" help-text="This is where your payment receipt will be sent" v-model="form.emailAddress" required />
               <span class="text-xs text-danger mt-2">{{ errors[0] }}</span>
             </ValidationProvider>
-            <ValidationProvider class="mb-4" v-slot="{ errors }" rules="required" tag="div">
+            <ValidationProvider class="mb-4" v-slot="{ errors }" rules="required" tag="div" mode="eager">
               <FormElement label="Club Name" v-model="form.clubName" required />
               <span class="text-xs text-danger mt-2">{{ errors[0] }}</span>
             </ValidationProvider>
-            <ValidationProvider class="mb-4" v-slot="{ errors }" rules="required" tag="div">
+            <ValidationProvider class="mb-4" v-slot="{ errors }" rules="required" tag="div" mode="eager">
               <FormElement label="Team Name" v-model="form.teamName" required />
               <span class="text-xs text-danger mt-2">{{ errors[0] }}</span>
             </ValidationProvider>
             <FormSelect class="mb-4" label="Age group (2023/24 season)" :options="ageGroupOptions" :help-text="ageGroupPricingInfo" v-model="form.ageGroup" required />
-            <ValidationProvider class="mb-4" v-slot="{ errors }" rules="required" tag="div">
+            <ValidationProvider class="mb-4" v-slot="{ errors }" rules="required" tag="div" mode="eager">
               <FormElement label="Name of coach/manager" v-model="form.coachName" required />
               <span class="text-xs text-danger mt-2">{{ errors[0] }}</span>
             </ValidationProvider>
-            <ValidationProvider class="mb-4" v-slot="{ errors }" rules="required" tag="div">
+            <ValidationProvider class="mb-4" v-slot="{ errors }" rules="required" tag="div" mode="eager">
               <FormElement label="Contact number" v-model="form.contactNumber" required />
               <span class="text-xs text-danger mt-2">{{ errors[0] }}</span>
             </ValidationProvider>
@@ -86,6 +86,9 @@
               <span class="text-xs text-danger mt-2">{{ errors[0] }}</span>
             </ValidationProvider>
           </FormSection>
+          <div v-if="stripe.elements.showBlockError" class="mb-4">
+            <p class="text-danger">Your browser appears to be blocking our payment provider, Stripe, from loading on this page. Please disable any tracking/ad blockers such as uBlock Origin or AdBlock and reload the page.</p>
+          </div>
           <div id="payment-element" class="mb-4" />
           <button
             type="submit"
@@ -143,25 +146,30 @@ export default {
       emailAddress: null,
       clubName: null,
       teamName: null,
-      ageGroup: 'under-7',
+      ageGroup: 'under-7-boys',
       coachName: null,
       contactNumber: null,
       acceptedCoachQualificationAgreement: false,
       acceptedOrganiserDecisionAgreement: false,
     },
     ageGroupOptions: [
-      { key: 'under-7', value: 'Under 7', age: 6 },
-      { key: 'under-8', value: 'Under 8', age: 7 },
-      { key: 'under-9', value: 'Under 9', age: 8 },
-      { key: 'under-10', value: 'Under 10', age: 9 },
-      { key: 'under-11', value: 'Under 11', age: 10 },
-      { key: 'under-12', value: 'Under 12', age: 11 },
+      { key: 'under-7-boys', value: 'Under 7 Boys - Sat 26th Aug', age: 6 },
+      { key: 'under-7-girls', value: 'Under 7 Girls - Sat 12th Aug', age: 6 },
+      { key: 'under-8-boys', value: 'Under 8 Boys - Sun 27th Aug', age: 7 },
+      { key: 'under-8-girls', value: 'Under 8 Girls - Sat 12th Aug', age: 7 },
+      { key: 'under-9-boys', value: 'Under 9 Boys - Sat 26th Aug', age: 8 },
+      { key: 'under-9-girls', value: 'Under 9 Girls - Sat 12th Aug', age: 8 },
+      { key: 'under-10-boys', value: 'Under 10 Boys - Sun 27th Aug', age: 9 },
+      { key: 'under-10-girls', value: 'Under 10 Girls - Sat 12th Aug', age: 9 },
+      { key: 'under-11', value: 'Under 11 - Sun 13th Aug', age: 10 },
+      { key: 'under-12', value: 'Under 12 - Sun 13th Aug', age: 11 },
     ],
     stripe: {
       client: null,
       elements: {
         root: null,
         payment: null,
+        showBlockError: false,
       },
       payment: {
         intent: null,
@@ -204,22 +212,26 @@ export default {
       if (!this.formActive) {
         this.formActive = true;
 
-        this.stripe.client = window.Stripe(this.$config.stripeApiKey);
+        try {
+          this.stripe.client = window.Stripe(this.$config.stripeApiKey);
 
-        const { data: { paymentIntent } } = await this.$axios.post('/api/stripe/payment-intents/summer-camp-2023', {
-          amount: this.activePrice * 100,
-          form: this.form,
-          paymentIntentId: this.stripe.payment.intent,
-        });
+          const { data: { paymentIntent } } = await this.$axios.post('/api/stripe/payment-intents/summer-camp-2023', {
+            amount: this.activePrice * 100,
+            form: this.form,
+            paymentIntentId: this.stripe.payment.intent,
+          });
 
-        this.stripe.payment.intent = paymentIntent.id;
+          this.stripe.payment.intent = paymentIntent.id;
 
-        this.stripe.elements.root = this.stripe.client.elements({
-          clientSecret: paymentIntent.client_secret,
-        });
+          this.stripe.elements.root = this.stripe.client.elements({
+            clientSecret: paymentIntent.client_secret,
+          });
 
-        this.stripe.elements.payment = this.stripe.elements.root.create('payment', { layout: 'tabs' });
-        this.stripe.elements.payment.mount("#payment-element");
+          this.stripe.elements.payment = this.stripe.elements.root.create('payment', { layout: 'tabs' });
+          this.stripe.elements.payment.mount('#payment-element');
+        } catch {
+          this.stripe.elements.showBlockError = true;
+        }
       }
     },
     async completePayment() {
@@ -227,6 +239,15 @@ export default {
       this.stripe.payment.loading = true;
 
       try {
+        const { data: { paymentIntent } } = await this.$axios.post('/api/stripe/payment-intents/summer-camp-2023', {
+          amount: this.activePrice * 100,
+          form: this.form,
+          paymentIntentId: this.stripe.payment.intent,
+          finalise: true,
+        });
+
+        this.stripe.elements.root.fetchUpdates();
+
         const { error } = await this.stripe.client.confirmPayment({
           elements: this.stripe.elements.root,
           confirmParams: {
