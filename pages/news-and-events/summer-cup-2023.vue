@@ -239,18 +239,18 @@ export default {
       this.stripe.payment.loading = true;
 
       try {
-        const { data: { paymentIntent } } = await this.$axios.post('/api/stripe/payment-intents/summer-camp-2023', {
+        await this.$axios.post('/api/stripe/payment-intents/summer-camp-2023', {
           amount: this.activePrice * 100,
           form: this.form,
           paymentIntentId: this.stripe.payment.intent,
-          finalise: true,
         });
 
-        this.stripe.elements.root.fetchUpdates();
+        await this.stripe.elements.root.fetchUpdates();
 
         const { error } = await this.stripe.client.confirmPayment({
           elements: this.stripe.elements.root,
           confirmParams: {
+            receipt_email: this.form.emailAddress,
             return_url: `${window.location.origin}/payment-success`,
           },
         });
