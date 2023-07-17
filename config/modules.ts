@@ -5,6 +5,5 @@ export const modules: NuxtOptionsModule[] = [
   '@nuxtjs/pwa',
   '@nuxtjs/proxy',
   '@nuxtjs/auth-next',
-  '@nuxtjs/sentry',
   '@nuxtjs/critters',
 ]

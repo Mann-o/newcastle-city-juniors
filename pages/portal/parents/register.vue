@@ -269,7 +269,6 @@ export default {
       this.parentForm.acceptedCodeOfConduct = !this.parentForm.acceptedCodeOfConduct
     },
     showCodeOfConductModal() {
-      console.log('showing...')
       this.$modal.show(() => import('@/components/modals/ParentCodeOfConductModal.vue'))
     },
     async register() {

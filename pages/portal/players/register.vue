@@ -111,55 +111,44 @@
               />
               <span class="text-xs text-danger mt-2">{{ errors[0] }}</span>
             </ValidationProvider>
-            <!-- <ValidationProvider
+            <ValidationProvider
               class="mt-4"
+              v-slot="{ errors, validate }"
+              rules="required|image"
               tag="div"
             >
-              <FormCheckbox
-                label="Please tick this box if your player was registered last season and has already provided Identity/Age verification documents."
-                v-model="form.alreadyProvidedVerification"
-              />
-            </ValidationProvider> -->
-            <!-- <template v-if="form.alreadyProvidedVerification === false"> -->
-              <ValidationProvider
-                class="mt-4"
-                v-slot="{ errors, validate }"
-                rules="required|image"
-                tag="div"
+              <label class="block text-sm font-bold mb-1">
+                Identification Verification: Please provide a passport style photo of the player
+                <span class="text-danger ml-0.5">*</span>
+              </label>
+              <input
+                type="file"
+                accept="image/*"
+                ref="identityVerificationPhoto"
+                required
+                @change="validate"
               >
-                <label class="block text-sm font-bold mb-1">
-                  Identification Verification: Please provide a passport style photo of the player
-                  <span class="text-danger ml-0.5">*</span>
-                </label>
-                <input
-                  type="file"
-                  accept="image/*"
-                  ref="identityVerificationPhoto"
-                  required
-                  @change="validate"
-                >
-                <span class="text-xs text-danger mt-2">{{ errors[0] }}</span>
-              </ValidationProvider>
-              <ValidationProvider
-                class="mt-4"
-                v-slot="{ errors, validate }"
-                rules="required|image"
-                tag="div"
+              <span class="text-xs text-danger mt-2">{{ errors[0] }}</span>
+            </ValidationProvider>
+            <ValidationProvider
+              class="mt-4"
+              v-slot="{ errors, validate }"
+              rules="required|image"
+              tag="div"
+            >
+              <label class="block text-sm font-bold mb-1">
+                Age Verification: Please provide a picture of the player's passport or birth certificate
+                <span class="text-danger ml-0.5">*</span>
+              </label>
+              <input
+                type="file"
+                accept="image/*"
+                ref="ageVerificationPhoto"
+                required
+                @change="validate"
               >
-                <label class="block text-sm font-bold mb-1">
-                  Age Verification: Please provide a picture of the player's passport or birth certificate
-                  <span class="text-danger ml-0.5">*</span>
-                </label>
-                <input
-                  type="file"
-                  accept="image/*"
-                  ref="ageVerificationPhoto"
-                  required
-                  @change="validate"
-                >
-                <span class="text-xs text-danger mt-2">{{ errors[0] }}</span>
-              </ValidationProvider>
-            <!-- </template> -->
+              <span class="text-xs text-danger mt-2">{{ errors[0] }}</span>
+            </ValidationProvider>
             <ValidationProvider
               class="mt-4"
               tag="div"
@@ -472,7 +461,6 @@ export default {
       acceptedCodeOfConduct: false,
       acceptedDeclaration: false,
       parentId: null,
-      alreadyProvidedVerification: false,
     },
     registering: false,
     player: null,
@@ -720,10 +708,8 @@ export default {
         }
       });
 
-      // if (this.form.alreadyProvidedVerification === false) {
-        playerForm.append('identityVerificationPhoto', this.$refs.identityVerificationPhoto.files[0]);
-        playerForm.append('ageVerificationPhoto', this.$refs.ageVerificationPhoto.files[0]);
-      // }
+      playerForm.append('identityVerificationPhoto', this.$refs.identityVerificationPhoto.files[0]);
+      playerForm.append('ageVerificationPhoto', this.$refs.ageVerificationPhoto.files[0]);
 
       if (this.$route.query?.player) {
         playerForm.append('existingPlayerId', this.$route.query.player);

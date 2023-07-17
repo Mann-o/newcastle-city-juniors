@@ -14,7 +14,6 @@ import { publicRuntimeConfig } from './config/public-runtime-config'
 import { pwa } from './config/pwa'
 import { render } from './config/render'
 import { router } from './config/router'
-import { sentry } from './config/sentry'
 import { server } from './config/server'
 import { serverMiddleware } from './config/server-middleware'
 import { vue } from './config/vue'
@@ -40,7 +39,6 @@ export default {
   pwa,
   render,
   router,
-  sentry,
   server,
   serverMiddleware,
   vue,
