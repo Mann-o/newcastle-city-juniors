@@ -521,6 +521,7 @@ export default {
         teams: [
           { key: 'u11-sparta', value: 'U11 Sparta (Sun) - David Moore' },
           { key: 'u11-milan', value: 'U11 Milan (Sun) - David Moore' },
+          { key: 'u11-saturday', value: 'U11 Boys (Sat)'},
         ],
       },
       {

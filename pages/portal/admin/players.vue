@@ -36,6 +36,7 @@
                 <th class="bg-black text-gold text-left font-normal text-sm p-2">Player</th>
                 <th class="bg-black text-gold text-left font-normal text-sm p-2">Age Group</th>
                 <th class="bg-black text-gold text-left font-normal text-sm p-2">Team</th>
+                <th class="bg-black text-gold text-left font-normal text-sm p-2">Second Team</th>
                 <th class="bg-black text-gold text-left font-normal text-sm p-2">Identity Verification</th>
                 <th class="bg-black text-gold text-left font-normal text-sm p-2">Age Verification</th>
                 <th class="bg-black text-gold text-left font-normal text-sm p-2">Parent</th>
@@ -55,6 +56,7 @@
                 <td class="p-2 border border-grey-200 text-sm">{{ player.full_name }}</td>
                 <td class="p-2 border border-grey-200 text-sm">{{ player.age_group }}</td>
                 <td class="p-2 border border-grey-200 text-sm">{{ player.team }}</td>
+                <td class="p-2 border border-grey-200 text-sm">{{ player.second_team }}</td>
                 <td class="p-2 border border-grey-200 text-sm">
                   <button
                     v-if="player.identity_verification_photo"
