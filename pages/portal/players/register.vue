@@ -513,6 +513,7 @@ export default {
           { key: 'u10-milan', value: 'U10 Milan (Sun) - Adam Jones' },
           { key: 'u10-juve', value: 'U10 Juve (Sun) - Adam Jones' },
           { key: 'u10-inter', value: 'U10 Inter (Sun) - Paul Thornton' },
+          { key: 'u10-pumas', value: 'U10 Pumas (Sun)' },
         ],
       },
       {
@@ -529,6 +530,7 @@ export default {
         value: 'Under 12s',
         teams: [
           { key: 'u12', value: 'U12s (Sun) - Simon Philpott' },
+          { key: 'u12-saturday', value: 'U12s (Sat)' },
         ],
       },
       {
