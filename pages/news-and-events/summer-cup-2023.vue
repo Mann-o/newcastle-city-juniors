@@ -6,7 +6,11 @@
       <img src="https://images.ctfassets.net/yv1glylq11v9/6n31tCBhUfUgPEdkrSnGEN/6d8d5a888eedc3a543c5a57e7355f344/image__1_.png">
     </div>
 
-    <div class="py-8">
+    <p class="py-8">
+      <strong>Unfortunately, due to lack of interest we have made the decision to cancel the first weekend of the NCJ Summer Cup 2023. Registration remains open for the second weekend!</strong>
+    </p>
+
+    <div class="pb-8">
       <ul class="list-disc list-inside">
         <li>Mini Soccer Teams - £50</li>
         <li>Junior 9-a-side Teams - £60</li>
@@ -154,15 +158,15 @@ export default {
     },
     ageGroupOptions: [
       { key: 'under-7-boys', value: 'Under 7 Boys - Sat 26th Aug', age: 6 },
-      { key: 'under-7-girls', value: 'Under 7 Girls - Sat 12th Aug', age: 6 },
+      // { key: 'under-7-girls', value: 'Under 7 Girls - Sat 12th Aug', age: 6 },
       { key: 'under-8-boys', value: 'Under 8 Boys - Sun 27th Aug', age: 7 },
-      { key: 'under-8-girls', value: 'Under 8 Girls - Sat 12th Aug', age: 7 },
+      // { key: 'under-8-girls', value: 'Under 8 Girls - Sat 12th Aug', age: 7 },
       { key: 'under-9-boys', value: 'Under 9 Boys - Sat 26th Aug', age: 8 },
-      { key: 'under-9-girls', value: 'Under 9 Girls - Sat 12th Aug', age: 8 },
+      // { key: 'under-9-girls', value: 'Under 9 Girls - Sat 12th Aug', age: 8 },
       { key: 'under-10-boys', value: 'Under 10 Boys - Sun 27th Aug', age: 9 },
-      { key: 'under-10-girls', value: 'Under 10 Girls - Sat 12th Aug', age: 9 },
-      { key: 'under-11', value: 'Under 11 - Sun 13th Aug', age: 10 },
-      { key: 'under-12', value: 'Under 12 - Sun 13th Aug', age: 11 },
+      // { key: 'under-10-girls', value: 'Under 10 Girls - Sat 12th Aug', age: 9 },
+      // { key: 'under-11', value: 'Under 11 - Sun 13th Aug', age: 10 },
+      // { key: 'under-12', value: 'Under 12 - Sun 13th Aug', age: 11 },
     ],
     stripe: {
       client: null,
