@@ -2,15 +2,17 @@
   <div>
     <h1>Newcastle City Juniors Summer Cup 2023</h1>
 
-    <div class="mx-auto max-w-5xl">
+    <!-- <div class="mx-auto max-w-5xl">
       <img src="https://images.ctfassets.net/yv1glylq11v9/6n31tCBhUfUgPEdkrSnGEN/6d8d5a888eedc3a543c5a57e7355f344/image__1_.png">
-    </div>
+    </div> -->
 
     <p class="py-8">
-      <strong>Unfortunately, due to lack of interest we have made the decision to cancel the first weekend of the NCJ Summer Cup 2023. Registration remains open for the second weekend!</strong>
+      <strong>Unfortunately, due to lack of interest we have made the decision to cancel the NCJ Summer Cup 2023.</strong>
     </p>
 
-    <div class="pb-8">
+    <p>We apologise for any inconvenience. Refunds are in the process of being issued where appropriate and should be with registered teams shortly.</p>
+
+    <!-- <div class="pb-8">
       <ul class="list-disc list-inside">
         <li>Mini Soccer Teams - £50</li>
         <li>Junior 9-a-side Teams - £60</li>
@@ -110,167 +112,167 @@
           </div>
         </form>
       </ValidationObserver>
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script>
-import { ValidationObserver, ValidationProvider } from 'vee-validate';
+// import { ValidationObserver, ValidationProvider } from 'vee-validate';
 
 export default {
   name: 'PageNewsAndEventsSummerCup2023',
 
   scrollToTop: true,
 
-  components: {
-    Loader: () => import('@/components/layout/Loader.vue'),
-    FormSection: () => import('@/components/elements/forms/FormSection.vue'),
-    FormElement: () => import('@/components/elements/forms/FormElement.vue'),
-    FormSelect: () => import('@/components/elements/forms/FormSelect.vue'),
-    FormTotalCost: () => import('@/components/elements/forms/FormTotalCost.vue'),
-    ValidationObserver,
-    ValidationProvider,
-  },
+  // components: {
+  //   Loader: () => import('@/components/layout/Loader.vue'),
+  //   FormSection: () => import('@/components/elements/forms/FormSection.vue'),
+  //   FormElement: () => import('@/components/elements/forms/FormElement.vue'),
+  //   FormSelect: () => import('@/components/elements/forms/FormSelect.vue'),
+  //   FormTotalCost: () => import('@/components/elements/forms/FormTotalCost.vue'),
+  //   ValidationObserver,
+  //   ValidationProvider,
+  // },
 
-  head () {
-    return {
-      script: [
-        {
-          hid: 'stripe',
-          src: 'https://js.stripe.com/v3/',
-          defer: true,
-        },
-      ],
-    }
-  },
+  // head () {
+  //   return {
+  //     script: [
+  //       {
+  //         hid: 'stripe',
+  //         src: 'https://js.stripe.com/v3/',
+  //         defer: true,
+  //       },
+  //     ],
+  //   }
+  // },
 
-  data: () => ({
-    formActive: false,
-    form: {
-      emailAddress: null,
-      clubName: null,
-      teamName: null,
-      ageGroup: 'under-7-boys',
-      coachName: null,
-      contactNumber: null,
-      acceptedCoachQualificationAgreement: false,
-      acceptedOrganiserDecisionAgreement: false,
-    },
-    ageGroupOptions: [
-      { key: 'under-7-boys', value: 'Under 7 Boys - Sat 26th Aug', age: 6 },
-      // { key: 'under-7-girls', value: 'Under 7 Girls - Sat 12th Aug', age: 6 },
-      { key: 'under-8-boys', value: 'Under 8 Boys - Sun 27th Aug', age: 7 },
-      // { key: 'under-8-girls', value: 'Under 8 Girls - Sat 12th Aug', age: 7 },
-      { key: 'under-9-boys', value: 'Under 9 Boys - Sat 26th Aug', age: 8 },
-      // { key: 'under-9-girls', value: 'Under 9 Girls - Sat 12th Aug', age: 8 },
-      { key: 'under-10-boys', value: 'Under 10 Boys - Sun 27th Aug', age: 9 },
-      // { key: 'under-10-girls', value: 'Under 10 Girls - Sat 12th Aug', age: 9 },
-      // { key: 'under-11', value: 'Under 11 - Sun 13th Aug', age: 10 },
-      // { key: 'under-12', value: 'Under 12 - Sun 13th Aug', age: 11 },
-    ],
-    stripe: {
-      client: null,
-      elements: {
-        root: null,
-        payment: null,
-        showBlockError: false,
-      },
-      payment: {
-        intent: null,
-        error: null,
-        loading: false,
-      },
-    },
-  }),
+  // data: () => ({
+  //   formActive: false,
+  //   form: {
+  //     emailAddress: null,
+  //     clubName: null,
+  //     teamName: null,
+  //     ageGroup: 'under-7-boys',
+  //     coachName: null,
+  //     contactNumber: null,
+  //     acceptedCoachQualificationAgreement: false,
+  //     acceptedOrganiserDecisionAgreement: false,
+  //   },
+  //   ageGroupOptions: [
+  //     { key: 'under-7-boys', value: 'Under 7 Boys - Sat 26th Aug', age: 6 },
+  //     // { key: 'under-7-girls', value: 'Under 7 Girls - Sat 12th Aug', age: 6 },
+  //     { key: 'under-8-boys', value: 'Under 8 Boys - Sun 27th Aug', age: 7 },
+  //     // { key: 'under-8-girls', value: 'Under 8 Girls - Sat 12th Aug', age: 7 },
+  //     { key: 'under-9-boys', value: 'Under 9 Boys - Sat 26th Aug', age: 8 },
+  //     // { key: 'under-9-girls', value: 'Under 9 Girls - Sat 12th Aug', age: 8 },
+  //     { key: 'under-10-boys', value: 'Under 10 Boys - Sun 27th Aug', age: 9 },
+  //     // { key: 'under-10-girls', value: 'Under 10 Girls - Sat 12th Aug', age: 9 },
+  //     // { key: 'under-11', value: 'Under 11 - Sun 13th Aug', age: 10 },
+  //     // { key: 'under-12', value: 'Under 12 - Sun 13th Aug', age: 11 },
+  //   ],
+  //   stripe: {
+  //     client: null,
+  //     elements: {
+  //       root: null,
+  //       payment: null,
+  //       showBlockError: false,
+  //     },
+  //     payment: {
+  //       intent: null,
+  //       error: null,
+  //       loading: false,
+  //     },
+  //   },
+  // }),
 
-  computed: {
-    activePrice() {
-      return this.ageGroupOptions.find(({ key }) => key === this.form.ageGroup).age <= 9 ? 50 : 60;
-    },
-    ageGroupPricingInfo() {
-      return `This age group requires an upfront payment of £${this.activePrice}`;
-    },
-  },
+  // computed: {
+  //   activePrice() {
+  //     return this.ageGroupOptions.find(({ key }) => key === this.form.ageGroup).age <= 9 ? 50 : 60;
+  //   },
+  //   ageGroupPricingInfo() {
+  //     return `This age group requires an upfront payment of £${this.activePrice}`;
+  //   },
+  // },
 
-  watch: {
-    'form.ageGroup': function updatePaymentIntent() {
-      this.$nextTick(async () => {
-        await this.$axios.post('/api/stripe/payment-intents/summer-camp-2023', {
-          amount: this.activePrice * 100,
-          paymentIntentId: this.stripe.payment.intent,
-        });
+  // watch: {
+  //   'form.ageGroup': function updatePaymentIntent() {
+  //     this.$nextTick(async () => {
+  //       await this.$axios.post('/api/stripe/payment-intents/summer-camp-2023', {
+  //         amount: this.activePrice * 100,
+  //         paymentIntentId: this.stripe.payment.intent,
+  //       });
 
-        this.stripe.elements.root.fetchUpdates();
-      });
-    },
-  },
+  //       this.stripe.elements.root.fetchUpdates();
+  //     });
+  //   },
+  // },
 
-  methods: {
-    toggleCoachQualificationAgreement() {
-      this.form.acceptedCoachQualificationAgreement = !this.form.acceptedCoachQualificationAgreement;
-    },
-    toggleOrganiserDecisionAgreement() {
-      this.form.acceptedOrganiserDecisionAgreement = !this.form.acceptedOrganiserDecisionAgreement;
-    },
-    async showSignupForm() {
-      if (!this.formActive) {
-        this.formActive = true;
+  // methods: {
+  //   toggleCoachQualificationAgreement() {
+  //     this.form.acceptedCoachQualificationAgreement = !this.form.acceptedCoachQualificationAgreement;
+  //   },
+  //   toggleOrganiserDecisionAgreement() {
+  //     this.form.acceptedOrganiserDecisionAgreement = !this.form.acceptedOrganiserDecisionAgreement;
+  //   },
+  //   async showSignupForm() {
+  //     if (!this.formActive) {
+  //       this.formActive = true;
 
-        try {
-          this.stripe.client = window.Stripe(this.$config.stripeApiKey);
+  //       try {
+  //         this.stripe.client = window.Stripe(this.$config.stripeApiKey);
 
-          const { data: { paymentIntent } } = await this.$axios.post('/api/stripe/payment-intents/summer-camp-2023', {
-            amount: this.activePrice * 100,
-            form: this.form,
-            paymentIntentId: this.stripe.payment.intent,
-          });
+  //         const { data: { paymentIntent } } = await this.$axios.post('/api/stripe/payment-intents/summer-camp-2023', {
+  //           amount: this.activePrice * 100,
+  //           form: this.form,
+  //           paymentIntentId: this.stripe.payment.intent,
+  //         });
 
-          this.stripe.payment.intent = paymentIntent.id;
+  //         this.stripe.payment.intent = paymentIntent.id;
 
-          this.stripe.elements.root = this.stripe.client.elements({
-            clientSecret: paymentIntent.client_secret,
-          });
+  //         this.stripe.elements.root = this.stripe.client.elements({
+  //           clientSecret: paymentIntent.client_secret,
+  //         });
 
-          this.stripe.elements.payment = this.stripe.elements.root.create('payment', { layout: 'tabs' });
-          this.stripe.elements.payment.mount('#payment-element');
-        } catch {
-          this.stripe.elements.showBlockError = true;
-        }
-      }
-    },
-    async completePayment() {
-      this.stripe.payment.error = null;
-      this.stripe.payment.loading = true;
+  //         this.stripe.elements.payment = this.stripe.elements.root.create('payment', { layout: 'tabs' });
+  //         this.stripe.elements.payment.mount('#payment-element');
+  //       } catch {
+  //         this.stripe.elements.showBlockError = true;
+  //       }
+  //     }
+  //   },
+  //   async completePayment() {
+  //     this.stripe.payment.error = null;
+  //     this.stripe.payment.loading = true;
 
-      try {
-        await this.$axios.post('/api/stripe/payment-intents/summer-camp-2023', {
-          amount: this.activePrice * 100,
-          form: this.form,
-          paymentIntentId: this.stripe.payment.intent,
-        });
+  //     try {
+  //       await this.$axios.post('/api/stripe/payment-intents/summer-camp-2023', {
+  //         amount: this.activePrice * 100,
+  //         form: this.form,
+  //         paymentIntentId: this.stripe.payment.intent,
+  //       });
 
-        await this.stripe.elements.root.fetchUpdates();
+  //       await this.stripe.elements.root.fetchUpdates();
 
-        const { error } = await this.stripe.client.confirmPayment({
-          elements: this.stripe.elements.root,
-          confirmParams: {
-            receipt_email: this.form.emailAddress,
-            return_url: `${window.location.origin}/payment-success`,
-          },
-        });
+  //       const { error } = await this.stripe.client.confirmPayment({
+  //         elements: this.stripe.elements.root,
+  //         confirmParams: {
+  //           receipt_email: this.form.emailAddress,
+  //           return_url: `${window.location.origin}/payment-success`,
+  //         },
+  //       });
 
-        if (error.type === 'card_error' || error.type === 'validation_error') {
-          this.stripe.payment.error = error.message;
-        } else {
-          this.stripe.payment.error = 'An unexpected error occurred, please try again';
-        }
+  //       if (error.type === 'card_error' || error.type === 'validation_error') {
+  //         this.stripe.payment.error = error.message;
+  //       } else {
+  //         this.stripe.payment.error = 'An unexpected error occurred, please try again';
+  //       }
 
-        this.stripe.payment.loading = false;
-      } catch (error) {
-        this.stripe.payment.loading = false;
-        console.log(error);
-      }
-    },
-  },
+  //       this.stripe.payment.loading = false;
+  //     } catch (error) {
+  //       this.stripe.payment.loading = false;
+  //       console.log(error);
+  //     }
+  //   },
+  // },
 };
 </script>
