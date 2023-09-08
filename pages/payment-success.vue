@@ -9,7 +9,7 @@
         <li><strong>Amount:</strong> £{{ (stripe.payment.intent.amount / 100).toFixed(2) }}</li>
         <li><strong>Status:</strong> {{ stripe.payment.intent.status | uppercaseFirst }}</li>
         <li><strong>Email address for receipt:</strong> {{ stripe.payment.intent.receipt_email }}</li>
-        <li><strong>Date/time:</strong> {{ new Date(stripe.payment.intent.created).toLocaleString() }}</li>
+        <li><strong>Date/time:</strong> {{ new Date(stripe.payment.intent.created * 1000).toLocaleString() }}</li>
       </ul>
     </p>
     <p>You should receive an email receipt shortly. For any questions or concerns, please <NuxtLink to="/contact-us">contact us</NuxtLink>.</p>
