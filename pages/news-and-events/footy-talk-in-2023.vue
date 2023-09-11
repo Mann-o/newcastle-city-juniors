@@ -3,7 +3,7 @@
     <h1>Newcastle City Juniors - Football Talk-In 2023</h1>
 
     <div class="mx-auto max-w-5xl">
-      <img src="https://images.ctfassets.net/yv1glylq11v9/7sqcUSc4qHmFWPqUj3RYsV/3fa958bf6c2a1ab3c46b82d912c5064d/image__1_.png">
+      <img src="https://images.ctfassets.net/yv1glylq11v9/7sqcUSc4qHmFWPqUj3RYsV/cd9304f96d8194108019449db547b6d6/image__2___1_.png">
     </div>
 
     <p class="py-8">Newcastle City Juniors are happy to announce our upcoming Football Talk-In 2023!</p>
