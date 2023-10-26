@@ -19,7 +19,9 @@
       </ul>
     </div>
 
-    <p class="pb-8"><strong>Table bookings are a fixed price of £200 for a table of 10. No partial tables/payments accepted. Full payment is required up-front to secure your booking.</strong></p>
+    <p><strong>This event is in the past and can no longer be booked.</strong></p>
+
+    <!-- <p class="pb-8"><strong>Table bookings are a fixed price of £200 for a table of 10. No partial tables/payments accepted. Full payment is required up-front to secure your booking.</strong></p>
 
     <p class="pb-8">To book a table, simply tap the button below, complete all fields and make payment!</p>
 
@@ -84,125 +86,125 @@
           </div>
         </form>
       </ValidationObserver>
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script>
-import { ValidationObserver, ValidationProvider } from 'vee-validate';
+// import { ValidationObserver, ValidationProvider } from 'vee-validate';
 
 export default {
   name: 'PageNewsAndEventsFootyTalkIn2023',
 
   scrollToTop: true,
 
-  components: {
-    Loader: () => import('@/components/layout/Loader.vue'),
-    FormSection: () => import('@/components/elements/forms/FormSection.vue'),
-    FormElement: () => import('@/components/elements/forms/FormElement.vue'),
-    FormSelect: () => import('@/components/elements/forms/FormSelect.vue'),
-    FormTotalCost: () => import('@/components/elements/forms/FormTotalCost.vue'),
-    ValidationObserver,
-    ValidationProvider,
-  },
+  // components: {
+  //   Loader: () => import('@/components/layout/Loader.vue'),
+  //   FormSection: () => import('@/components/elements/forms/FormSection.vue'),
+  //   FormElement: () => import('@/components/elements/forms/FormElement.vue'),
+  //   FormSelect: () => import('@/components/elements/forms/FormSelect.vue'),
+  //   FormTotalCost: () => import('@/components/elements/forms/FormTotalCost.vue'),
+  //   ValidationObserver,
+  //   ValidationProvider,
+  // },
 
-  head () {
-    return {
-      script: [
-        {
-          hid: 'stripe',
-          src: 'https://js.stripe.com/v3/',
-          defer: true,
-        },
-      ],
-    }
-  },
+  // head () {
+  //   return {
+  //     script: [
+  //       {
+  //         hid: 'stripe',
+  //         src: 'https://js.stripe.com/v3/',
+  //         defer: true,
+  //       },
+  //     ],
+  //   }
+  // },
 
-  data: () => ({
-    formActive: false,
-    form: {
-      fullName: null,
-      houseNameAndNumber: null,
-      city: null,
-      contactNumber: null,
-      emailAddress: null,
-      bookingName: null,
-    },
-    stripe: {
-      client: null,
-      elements: {
-        root: null,
-        payment: null,
-        showBlockError: false,
-      },
-      payment: {
-        intent: null,
-        error: null,
-        loading: false,
-      },
-    },
-  }),
+  // data: () => ({
+  //   formActive: false,
+  //   form: {
+  //     fullName: null,
+  //     houseNameAndNumber: null,
+  //     city: null,
+  //     contactNumber: null,
+  //     emailAddress: null,
+  //     bookingName: null,
+  //   },
+  //   stripe: {
+  //     client: null,
+  //     elements: {
+  //       root: null,
+  //       payment: null,
+  //       showBlockError: false,
+  //     },
+  //     payment: {
+  //       intent: null,
+  //       error: null,
+  //       loading: false,
+  //     },
+  //   },
+  // }),
 
-  methods: {
-    async showSignupForm() {
-      if (!this.formActive) {
-        this.formActive = true;
+  // methods: {
+  //   async showSignupForm() {
+  //     if (!this.formActive) {
+  //       this.formActive = true;
 
-        try {
-          this.stripe.client = window.Stripe(this.$config.stripeApiKey);
+  //       try {
+  //         this.stripe.client = window.Stripe(this.$config.stripeApiKey);
 
-          const { data: { paymentIntent } } = await this.$axios.post('/api/stripe/payment-intents/footy-talk-in-2023', {
-            amount: 20000,
-            form: this.form,
-            paymentIntentId: this.stripe.payment.intent,
-          });
+  //         const { data: { paymentIntent } } = await this.$axios.post('/api/stripe/payment-intents/footy-talk-in-2023', {
+  //           amount: 20000,
+  //           form: this.form,
+  //           paymentIntentId: this.stripe.payment.intent,
+  //         });
 
-          this.stripe.payment.intent = paymentIntent.id;
+  //         this.stripe.payment.intent = paymentIntent.id;
 
-          this.stripe.elements.root = this.stripe.client.elements({
-            clientSecret: paymentIntent.client_secret,
-          });
+  //         this.stripe.elements.root = this.stripe.client.elements({
+  //           clientSecret: paymentIntent.client_secret,
+  //         });
 
-          this.stripe.elements.payment = this.stripe.elements.root.create('payment', { layout: 'tabs' });
-          this.stripe.elements.payment.mount('#payment-element');
-        } catch {
-          this.stripe.elements.showBlockError = true;
-        }
-      }
-    },
-    async completePayment() {
-      this.stripe.payment.error = null;
-      this.stripe.payment.loading = true;
+  //         this.stripe.elements.payment = this.stripe.elements.root.create('payment', { layout: 'tabs' });
+  //         this.stripe.elements.payment.mount('#payment-element');
+  //       } catch {
+  //         this.stripe.elements.showBlockError = true;
+  //       }
+  //     }
+  //   },
+  //   async completePayment() {
+  //     this.stripe.payment.error = null;
+  //     this.stripe.payment.loading = true;
 
-      try {
-        await this.$axios.post('/api/stripe/payment-intents/footy-talk-in-2023', {
-          amount: 20000,
-          form: this.form,
-          paymentIntentId: this.stripe.payment.intent,
-        });
+  //     try {
+  //       await this.$axios.post('/api/stripe/payment-intents/footy-talk-in-2023', {
+  //         amount: 20000,
+  //         form: this.form,
+  //         paymentIntentId: this.stripe.payment.intent,
+  //       });
 
-        await this.stripe.elements.root.fetchUpdates();
+  //       await this.stripe.elements.root.fetchUpdates();
 
-        const { error } = await this.stripe.client.confirmPayment({
-          elements: this.stripe.elements.root,
-          confirmParams: {
-            receipt_email: this.form.emailAddress,
-            return_url: `${window.location.origin}/payment-success`,
-          },
-        });
+  //       const { error } = await this.stripe.client.confirmPayment({
+  //         elements: this.stripe.elements.root,
+  //         confirmParams: {
+  //           receipt_email: this.form.emailAddress,
+  //           return_url: `${window.location.origin}/payment-success`,
+  //         },
+  //       });
 
-        if (error.type === 'card_error' || error.type === 'validation_error') {
-          this.stripe.payment.error = error.message;
-        } else {
-          this.stripe.payment.error = 'An unexpected error occurred, please try again';
-        }
+  //       if (error.type === 'card_error' || error.type === 'validation_error') {
+  //         this.stripe.payment.error = error.message;
+  //       } else {
+  //         this.stripe.payment.error = 'An unexpected error occurred, please try again';
+  //       }
 
-        this.stripe.payment.loading = false;
-      } catch (error) {
-        this.stripe.payment.loading = false;
-        console.log(error);
-      }
-    },
-  },
+  //       this.stripe.payment.loading = false;
+  //     } catch (error) {
+  //       this.stripe.payment.loading = false;
+  //       console.log(error);
+  //     }
+  //   },
+  // },
 };
 </script>
