@@ -1,7 +1,20 @@
 <template>
   <li class="main-navigation-link border-b border-grey-800 lg:border-none lg:hover:text-gold transition-all lg:relative">
     <template v-if="!$slots.default">
+      <a
+        v-if="isExternalLink(route.to)"
+        :href="route.to"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <FontAwesomeIcon
+          v-if="route.icon"
+          :icon="['fad', route.icon]"
+        />
+        {{ route.label }}
+      </a>
       <NuxtLink
+        v-else
         :to="route.to"
         class="block py-4 pl-4 text-white lg:py-8"
         active-class="text-gold"
@@ -77,6 +90,9 @@ export default {
     ...mapActions('routes', [
       'toggleExpand',
     ]),
+    isExternalLink(link) {
+      return link.startsWith('http')
+    },
   },
 }
 </script>
