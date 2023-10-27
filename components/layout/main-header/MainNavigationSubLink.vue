@@ -5,6 +5,7 @@
       :href="childRoute.to"
       target="_blank"
       rel="noopener noreferrer"
+      class="block text-white"
     >
       {{ childRoute.label }}
     </a>
