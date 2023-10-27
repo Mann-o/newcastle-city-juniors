@@ -2,7 +2,7 @@
   <li class="main-navigation-link border-b border-grey-800 lg:border-none lg:hover:text-gold transition-all lg:relative">
     <template v-if="!$slots.default">
       <a
-        v-if="isExternalLink(route.to)"
+        v-if="route.external"
         :href="route.to"
         target="_blank"
         rel="noopener noreferrer"
@@ -90,9 +90,6 @@ export default {
     ...mapActions('routes', [
       'toggleExpand',
     ]),
-    isExternalLink(link) {
-      return link.startsWith('http')
-    },
   },
 }
 </script>

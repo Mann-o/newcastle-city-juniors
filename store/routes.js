@@ -6,6 +6,7 @@ const link = ({
   requiresAuth = false,
   hideWhenAuthenticated = false,
   children = [],
+  external = false,
 }) => ({
   to,
   icon,
@@ -17,6 +18,7 @@ const link = ({
     children,
     expanded: false,
   }),
+  external,
 })
 
 export const state = () => ({
@@ -52,6 +54,7 @@ export const state = () => ({
         link({
           to: 'https://www.thefa.com/get.involved/respect',
           label: 'FA Respect Programme',
+          external: true,
         })
       ],
     }),
