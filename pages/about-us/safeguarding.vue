@@ -149,9 +149,6 @@
           <strong>Newcastle City Juniors Welfare Officer:</strong><br>Name: Adam Jones<br>Telephone: <a href="tel:+447518389898">07518 389898</a><br>Email: <a href="mailto:ncj.adamjones@hotmail.com">ncj.adamjones@hotmail.com</a>
         </p>
         <p class="mb-4">
-          <strong>Newcastle City Juniors Assistant Welfare Officer:</strong><br>Name: Jack Foalle<br>Telephone: <a href="tel:+447432079000">07432 079000</a><br>Email: <a href="mailto:jackfoalle1994@yahoo.co.uk">jackfoalle1994@yahoo.co.uk</a>
-        </p>
-        <p class="mb-4">
           If at any time you are not able to contact your Club Welfare Officer or the matter is clearly serious then you can either:
         </p>
         <p class="mb-4">
