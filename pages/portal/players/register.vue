@@ -477,6 +477,7 @@ export default {
           { key: 'u7-milan', value: 'U7 Milan (Sun) - Jordan Holmes' },
           { key: 'u7-juve', value: 'U7 Juve (Sun) - John Sullivan' },
           { key: 'u7-inter', value: 'U7 Inter (Sun) - Jamie Chandler' },
+          { key: 'u7-girls', value: 'U7 Girls (Sat) - Leanne Marshall' },
         ],
       },
       {
