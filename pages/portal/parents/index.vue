@@ -16,7 +16,7 @@
             <th class="bg-black text-gold text-left font-normal text-sm p-2">Name</th>
             <th class="bg-black text-gold text-left font-normal text-sm p-2">Date of Birth</th>
             <th class="bg-black text-gold text-left font-normal text-sm p-2">Email Address</th>
-            <!-- <th class="bg-black text-gold text-left font-normal text-sm p-2">Actions</th> -->
+            <th class="bg-black text-gold text-left font-normal text-sm p-2">Actions</th>
           </tr>
         </thead>
         <tbody v-if="!parents.length">
@@ -32,14 +32,14 @@
             <td class="p-2 border border-grey-200 text-sm">{{ parent.full_name }}</td>
             <td class="p-2 border border-grey-200 text-sm">{{ parent.date_of_birth | formatDate }}</td>
             <td class="p-2 border border-grey-200 text-sm">{{ parent.email }}</td>
-            <!-- <td class="p-2 border border-grey-200 text-sm">
+            <td class="p-2 border border-grey-200 text-sm">
               <NuxtLink
                 class="underline"
                 :to="`/portal/parents/${parent.id}`"
               >
-                Manage
+                Manage Parent/Guardian
               </NuxtLink>
-            </td> -->
+            </td>
           </tr>
         </tbody>
       </table>

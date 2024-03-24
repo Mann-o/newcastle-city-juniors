@@ -11,6 +11,13 @@
       <div class="grid gap-8 lg:grid-cols-5">
         <ArticleCard
           :image="trialsImage.file.url"
+          title="NCJ Summer Cup 2024"
+          subtext="Newcastle City Juniors are happy to announce our upcoming Newcastle City Juniors Summer Cup 2024!"
+          date="2024-03-18"
+          link="/news-and-events/summer-cup-2024"
+        />
+        <ArticleCard
+          :image="trialsImage.file.url"
           title="NCJ Footy Talk-In 2023"
           subtext="Newcastle City Juniors are happy to announce our upcoming Football Talk-In!"
           date="2023-09-08"
