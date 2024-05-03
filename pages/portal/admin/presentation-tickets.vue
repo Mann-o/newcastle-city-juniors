@@ -70,7 +70,7 @@
             <tr v-for="order in filteredOrders">
               <td class="p-2 border border-grey-200 text-sm">{{ order.child_name }}</td>
               <td class="p-2 border border-grey-200 text-sm">{{ order.age_group.charAt(0).toUpperCase() + order.age_group.slice(1).replace('-', ' ') }}</td>
-              <td class="p-2 border border-grey-200 text-sm">{{ order.team_name.charAt(0).toUpperCase() + order.age_group.slice(1).replace(/-/g, ' ') }}</td>
+              <td class="p-2 border border-grey-200 text-sm">{{ order.team_name.charAt(0).toUpperCase() + order.team_name.slice(1).replace(/-/g, ' ') }}</td>
               <td class="p-2 border border-grey-200 text-sm">{{ order.coach_name }}</td>
               <td class="p-2 border border-grey-200 text-sm">{{ order.tickets_ordered }}</td>
               <td class="p-2 border border-grey-200 text-sm">{{ order.guest_names }}</td>
