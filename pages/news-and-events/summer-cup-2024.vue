@@ -2,132 +2,147 @@
   <div>
     <h1>Newcastle City Juniors Summer Cup 2024</h1>
 
-    <div class="mx-auto max-w-5xl">
-      <img src="https://images.ctfassets.net/yv1glylq11v9/SFVRugQs2A3rBuMJMxNIH/3fc474a2432f17fa12683e23e0043f04/image__2___1_.png">
+    <div v-if="$fetchState.pending">
+      <Loader />
     </div>
 
-    <p class="my-8">Thanks for your enquiry about the Newcastle City Juniors Summer Cup 2024, set to be hosted at Bullocksteads Sports Hub state-of-the-art facilities in July 2024.</p>
-
-    <h2>Key Event Information</h2>
-    <div class="pb-8">
-      <ul class="list-disc list-inside">
-        <li>Dates: Saturday 13th & Sunday 14th July 2024 - Saturday 20th & Sunday 21st July 2024</li>
-        <li>Age groups: U7 - U12 Girls & Mixed (2024/25 season)</li>
-        <li>Tournament Type: Cup and Trophy</li>
-        <li>Venue: Bullocksteads Sports Hub</li>
-        <li>A reminder that the Newcastle City Juniors Summer Cup 2024 is a pre-season event for the 2024/25 season, so all age groups fall in line with next seasons dates.</li>
-      </ul>
+    <div v-else-if="$fetchState.error">
+      An error occurred fetching page configuration!
     </div>
 
-    <h2>Next Steps</h2>
-    <p class="mb-4">Places at the tournament can be secured on a first come, first served basis, with interest expected to be high.</p>
-    <p class="mb-8">If you would like to secure your place at the relevant age group(s), registration can be completed below. <strong>Please complete all fields.</strong></p>
+    <div v-else-if="noPlacesAvailable">
+      <p class="my-4"><strong>Unfortunately, all places for the Newcastle City Juniors Summer Cup 2024 have now been filled.</strong></p>
+      <p>If you would like to be added to the waiting list, please email <a href="mailto:info@newcastlecityjuniors.co.uk">info@newcastlecityjuniors.co.uk</a>.</p>
+    </div>
 
+    <div v-else>
+      <div class="mx-auto max-w-5xl">
+        <img src="https://images.ctfassets.net/yv1glylq11v9/SFVRugQs2A3rBuMJMxNIH/3fc474a2432f17fa12683e23e0043f04/image__2___1_.png">
+      </div>
 
-    <button
-      v-if="!formActive"
-      class="
-        py-2 px-4 bg-gold border border-black text-black uppercase font-bold transition-all
-        hover:bg-black hover:text-white
-      "
-      @click="showSignupForm()"
-    >
-      Register
-    </button>
+      <p class="my-8">Thanks for your enquiry about the Newcastle City Juniors Summer Cup 2024, set to be hosted at Bullocksteads Sports Hub state-of-the-art facilities in July 2024.</p>
 
-    <div v-if="formActive">
-      <ValidationObserver v-slot="{ invalid, handleSubmit }">
-        <form class="mt-8 md:max-w-lg" @submit.prevent="handleSubmit(completePayment)">
-          <FormSection label="Summer Cup 2023 - Registration">
-            <p class="mb-8"><em><strong>IMPORTANT:</strong> All fields are required!</em></p>
-            <ValidationProvider class="mb-4" v-slot="{ errors }" rules="required" tag="div" mode="eager">
-              <FormElement label="Club Name" v-model="form.clubName" required />
-              <span class="text-xs text-danger mt-2">{{ errors[0] }}</span>
-            </ValidationProvider>
-            <ValidationProvider class="mb-4" v-slot="{ errors }" rules="required" tag="div" mode="eager">
-              <FormElement label="Team Name" v-model="form.teamName" required />
-              <span class="text-xs text-danger mt-2">{{ errors[0] }}</span>
-            </ValidationProvider>
-            <FormSelect class="mb-4" label="Ability Level" :options="abilityLevelOptions" v-model="form.abilityLevel" required />
-            <FormSelect class="mb-4" label="Tournament Entry" :options="ageGroupOptions" :help-text="ageGroupPricingInfo" v-model="form.tournamentEntry" required />
-            <ValidationProvider class="mb-4" v-slot="{ errors }" rules="required" tag="div" mode="eager">
-              <FormElement label="Name of coach/manager" v-model="form.coachName" required />
-              <span class="text-xs text-danger mt-2">{{ errors[0] }}</span>
-            </ValidationProvider>
-            <ValidationProvider class="mb-4" v-slot="{ errors }" rules="required" tag="div" mode="eager">
-              <FormElement label="Contact number" v-model="form.contactNumber" required />
-              <span class="text-xs text-danger mt-2">{{ errors[0] }}</span>
-            </ValidationProvider>
-            <ValidationProvider class="mb-4" v-slot="{ errors }" rules="required|email" tag="div" mode="eager">
-              <FormElement label="Email Address" field-type="email" help-text="This is where your payment receipt will be sent" v-model="form.emailAddress" required />
-              <span class="text-xs text-danger mt-2">{{ errors[0] }}</span>
-            </ValidationProvider>
-            <ValidationProvider class="mb-4" rules="is_true" v-slot="{ errors }" tag="div">
-              <div
-                class="flex items-center cursor-pointer border p-4 transition-colors"
-                :class="{
-                  'border-danger': !form.acceptedNextYearsAgeGroupAgreement,
-                  'border-success': form.acceptedNextYearsAgeGroupAgreement,
-                  'bg-success-bg': form.acceptedNextYearsAgeGroupAgreement,
-                }"
-                @click="toggleNextYearsAgeGroupAgreement()"
-              >
-                <input type="checkbox" v-model="form.acceptedNextYearsAgeGroupAgreement">
-                <p class="ml-4">Please tick to confirm you are entering the tournament based on NEXT SEASONS AGE GROUPS (2024/2025 season)</p>
-              </div>
-              <span class="text-xs text-danger mt-2">{{ errors[0] }}</span>
-            </ValidationProvider>
-            <ValidationProvider class="mb-4" rules="is_true" v-slot="{ errors }" tag="div">
-              <div
-                class="flex items-center cursor-pointer border p-4 transition-colors"
-                :class="{
-                  'border-danger': !form.acceptedCoachQualificationAgreement,
-                  'border-success': form.acceptedCoachQualificationAgreement,
-                  'bg-success-bg': form.acceptedCoachQualificationAgreement,
-                }"
-                @click="toggleCoachQualificationAgreement()"
-              >
-                <input type="checkbox" v-model="form.acceptedCoachQualificationAgreement">
-                <p class="ml-4">Please tick to confirm the above named coach/manager has all of the following: Minimum FA Level 1 Award in Coaching Football or equivalent, First Aid, Safeguarding & DBS</p>
-              </div>
-              <span class="text-xs text-danger mt-2">{{ errors[0] }}</span>
-            </ValidationProvider>
-            <ValidationProvider class="mb-4" rules="is_true" v-slot="{ errors }" tag="div">
-              <div
-                class="flex items-center cursor-pointer border p-4 transition-colors"
-                :class="{
-                  'border-danger': !form.acceptedOrganiserDecisionAgreement,
-                  'border-success': form.acceptedOrganiserDecisionAgreement,
-                  'bg-success-bg': form.acceptedOrganiserDecisionAgreement,
-                }"
-                @click="toggleOrganiserDecisionAgreement()"
-              >
-                <input type="checkbox" v-model="form.acceptedOrganiserDecisionAgreement">
-                <p class="ml-4">Please tick to confirm you agree to abide by all decisions of the tournament organisers</p>
-              </div>
-              <span class="text-xs text-danger mt-2">{{ errors[0] }}</span>
-            </ValidationProvider>
-          </FormSection>
-          <div v-if="stripe.elements.showBlockError" class="mb-4">
-            <p class="text-danger">Your browser appears to be blocking our payment provider, Stripe, from loading on this page. Please disable any tracking/ad blockers such as uBlock Origin or AdBlock, and then reload the page.</p>
-          </div>
-          <div id="payment-element" class="mb-4" />
-          <button
-            type="submit"
-            class="
-              py-2 px-4 bg-gold border border-black text-black uppercase font-bold transition-all
-              hover:bg-black hover:text-white
-              disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gold disabled:text-black
-            "
-            :disabled="invalid || stripe.payment.loading"
-          >
-            {{ stripe.payment.loading ? 'Processing payment...' : `Pay £${activePrice}` }}
-          </button>
-          <div class="mt-4" v-if="stripe.payment.error">
-            <span id="payment-message" class="text-danger">{{ stripe.payment.error }}</span>
-          </div>
-        </form>
-      </ValidationObserver>
+      <h2>Key Event Information</h2>
+      <div class="pb-8">
+        <ul class="list-disc list-inside">
+          <li>Dates: Saturday 13th & Sunday 14th July 2024 - Saturday 20th & Sunday 21st July 2024</li>
+          <li>Age groups: U7 - U12 Girls & Mixed (2024/25 season)</li>
+          <li>Tournament Type: Cup and Trophy</li>
+          <li>Venue: Bullocksteads Sports Hub</li>
+          <li>A reminder that the Newcastle City Juniors Summer Cup 2024 is a pre-season event for the 2024/25 season, so all age groups fall in line with next seasons dates.</li>
+        </ul>
+      </div>
+
+      <h2>Next Steps</h2>
+      <p class="mb-4">Places at the tournament can be secured on a first come, first served basis, with interest expected to be high.</p>
+      <p class="mb-8">If you would like to secure your place at the relevant age group(s), registration can be completed below. <strong>Please complete all fields.</strong></p>
+
+      <button
+        v-if="!formActive"
+        class="
+          py-2 px-4 bg-gold border border-black text-black uppercase font-bold transition-all
+          hover:bg-black hover:text-white
+        "
+        @click="showSignupForm()"
+      >
+        Register
+      </button>
+
+      <div v-if="formActive">
+        <ValidationObserver v-slot="{ invalid, handleSubmit }">
+          <form class="mt-8 md:max-w-lg" @submit.prevent="handleSubmit(completePayment)">
+            <FormSection label="Summer Cup 2023 - Registration">
+              <p class="mb-4"><em><strong>IMPORTANT:</strong> All fields are required!</em></p>
+              <ValidationProvider class="mb-4" v-slot="{ errors }" rules="required" tag="div" mode="eager">
+                <FormElement label="Club Name" v-model="form.clubName" required />
+                <span class="text-xs text-danger mt-2">{{ errors[0] }}</span>
+              </ValidationProvider>
+              <ValidationProvider class="mb-4" v-slot="{ errors }" rules="required" tag="div" mode="eager">
+                <FormElement label="Team Name" v-model="form.teamName" required />
+                <span class="text-xs text-danger mt-2">{{ errors[0] }}</span>
+              </ValidationProvider>
+              <FormSelect class="mb-4" label="Ability Level" :options="abilityLevelOptions" v-model="form.abilityLevel" required />
+              <div class="mb-4 p-4 bg-grey-200">If the tournament you wish to enter is not available in the dropdown below, unfortunately this means we no longer have any spaces available.</div>
+              <FormSelect class="mb-4" label="Tournament Entry" :options="ageGroupOptions" :help-text="ageGroupPricingInfo" v-model="form.tournamentEntry" required />
+              <ValidationProvider class="mb-4" v-slot="{ errors }" rules="required" tag="div" mode="eager">
+                <FormElement label="Name of coach/manager" v-model="form.coachName" required />
+                <span class="text-xs text-danger mt-2">{{ errors[0] }}</span>
+              </ValidationProvider>
+              <ValidationProvider class="mb-4" v-slot="{ errors }" rules="required" tag="div" mode="eager">
+                <FormElement label="Contact number" v-model="form.contactNumber" required />
+                <span class="text-xs text-danger mt-2">{{ errors[0] }}</span>
+              </ValidationProvider>
+              <ValidationProvider class="mb-4" v-slot="{ errors }" rules="required|email" tag="div" mode="eager">
+                <FormElement label="Email Address" field-type="email" help-text="This is where your payment receipt will be sent" v-model="form.emailAddress" required />
+                <span class="text-xs text-danger mt-2">{{ errors[0] }}</span>
+              </ValidationProvider>
+              <ValidationProvider class="mb-4" rules="is_true" v-slot="{ errors }" tag="div">
+                <div
+                  class="flex items-center cursor-pointer border p-4 transition-colors"
+                  :class="{
+                    'border-danger': !form.acceptedNextYearsAgeGroupAgreement,
+                    'border-success': form.acceptedNextYearsAgeGroupAgreement,
+                    'bg-success-bg': form.acceptedNextYearsAgeGroupAgreement,
+                  }"
+                  @click="toggleNextYearsAgeGroupAgreement()"
+                >
+                  <input type="checkbox" v-model="form.acceptedNextYearsAgeGroupAgreement">
+                  <p class="ml-4">Please tick to confirm you are entering the tournament based on NEXT SEASONS AGE GROUPS (2024/2025 season)</p>
+                </div>
+                <span class="text-xs text-danger mt-2">{{ errors[0] }}</span>
+              </ValidationProvider>
+              <ValidationProvider class="mb-4" rules="is_true" v-slot="{ errors }" tag="div">
+                <div
+                  class="flex items-center cursor-pointer border p-4 transition-colors"
+                  :class="{
+                    'border-danger': !form.acceptedCoachQualificationAgreement,
+                    'border-success': form.acceptedCoachQualificationAgreement,
+                    'bg-success-bg': form.acceptedCoachQualificationAgreement,
+                  }"
+                  @click="toggleCoachQualificationAgreement()"
+                >
+                  <input type="checkbox" v-model="form.acceptedCoachQualificationAgreement">
+                  <p class="ml-4">Please tick to confirm the above named coach/manager has all of the following: Minimum FA Level 1 Award in Coaching Football or equivalent, First Aid, Safeguarding & DBS</p>
+                </div>
+                <span class="text-xs text-danger mt-2">{{ errors[0] }}</span>
+              </ValidationProvider>
+              <ValidationProvider class="mb-4" rules="is_true" v-slot="{ errors }" tag="div">
+                <div
+                  class="flex items-center cursor-pointer border p-4 transition-colors"
+                  :class="{
+                    'border-danger': !form.acceptedOrganiserDecisionAgreement,
+                    'border-success': form.acceptedOrganiserDecisionAgreement,
+                    'bg-success-bg': form.acceptedOrganiserDecisionAgreement,
+                  }"
+                  @click="toggleOrganiserDecisionAgreement()"
+                >
+                  <input type="checkbox" v-model="form.acceptedOrganiserDecisionAgreement">
+                  <p class="ml-4">Please tick to confirm you agree to abide by all decisions of the tournament organisers</p>
+                </div>
+                <span class="text-xs text-danger mt-2">{{ errors[0] }}</span>
+              </ValidationProvider>
+            </FormSection>
+            <div v-if="stripe.elements.showBlockError" class="mb-4">
+              <p class="text-danger">Your browser appears to be blocking our payment provider, Stripe, from loading on this page. Please disable any tracking/ad blockers such as uBlock Origin or AdBlock, and then reload the page.</p>
+            </div>
+            <div id="payment-element" class="mb-4" />
+            <button
+              type="submit"
+              class="
+                py-2 px-4 bg-gold border border-black text-black uppercase font-bold transition-all
+                hover:bg-black hover:text-white
+                disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gold disabled:text-black
+              "
+              :disabled="invalid || stripe.payment.loading"
+            >
+              {{ stripe.payment.loading ? 'Processing payment...' : `Pay £${activePrice}` }}
+            </button>
+            <div class="mt-4" v-if="stripe.payment.error">
+              <span id="payment-message" class="text-danger">{{ stripe.payment.error }}</span>
+            </div>
+          </form>
+        </ValidationObserver>
+      </div>
     </div>
   </div>
 </template>
@@ -168,7 +183,7 @@ export default {
       clubName: null,
       teamName: null,
       abilityLevel: 'mid-low',
-      tournamentEntry: 'sat-13-july-u7-u8-girls',
+      tournamentEntry: null,
       coachName: null,
       contactNumber: null,
       emailAddress: null,
@@ -211,7 +226,17 @@ export default {
         loading: false,
       },
     },
+    placesRemaining: {},
+    disableSubmit: true,
   }),
+
+  async fetch() {
+    const { data: { data: { placesRemaining } } } = await this.$axios.get('/api/stripe/summer-cup-2024-places')
+
+    this.placesRemaining = placesRemaining
+
+    this.ageGroupOptions = this.ageGroupOptions.filter(({ key }) => placesRemaining[key] > 0)
+  },
 
   computed: {
     activePrice() {
@@ -220,17 +245,36 @@ export default {
     ageGroupPricingInfo() {
       return `This entry requires an upfront payment of £${this.activePrice}`;
     },
+    noPlacesAvailable() {
+      return this.ageGroupOptions.length === 0;
+    },
+  },
+
+  mounted() {
+    if (this.ageGroupOptions.length > 0) {
+      this.form.tournamentEntry = this.ageGroupOptions[0].key
+    }
   },
 
   watch: {
     'form.tournamentEntry': function updatePaymentIntent() {
       this.$nextTick(async () => {
-        await this.$axios.post('/api/stripe/payment-intents/summer-cup-2024', {
-          amount: this.activePrice * 100,
-          paymentIntentId: this.stripe.payment.intent,
-        });
+        this.disableSubmit = (this.placesRemaining[this.form.tournamentEntry] === 0)
 
-        this.stripe.elements.root.fetchUpdates();
+        const interval = setInterval(async () => {
+          if (this?.stripe?.elements?.root) {
+            if (this.placesRemaining[this.form.tournamentEntry] !== 0) {
+              await this.$axios.post('/api/stripe/payment-intents/summer-cup-2024', {
+                amount: this.activePrice * 100,
+                paymentIntentId: this.stripe.payment.intent,
+              });
+
+              this.stripe.elements.root.fetchUpdates();
+            }
+
+            clearInterval(interval);
+          }
+        }, 100)
       });
     },
   },
