@@ -1,6 +1,7 @@
 <template>
   <div>
-    <div v-if="$fetchState.pending">
+    Player registration is currently closed. Please return to this page when your coach contacts you!
+    <!-- <div v-if="$fetchState.pending">
       <Loader />
     </div>
     <div v-else-if="$fetchState.error">
@@ -68,7 +69,7 @@
         v-if="parentCount === 0"
         class="mt-6"
       >You have not <NuxtLink to="/portal/parents/register" class="underline">registered a parent or guardian</NuxtLink> yet. We require a parent or guardian to be added to your account before you can register a child. This is to ensure we have all of the information necessary for us to register that child with the FA as a player of our club.</div>
-    </div>
+    </div> -->
   </div>
 </template>
 

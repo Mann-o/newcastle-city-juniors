@@ -125,6 +125,9 @@
             <div v-if="stripe.elements.showBlockError" class="mb-4">
               <p class="text-danger">Your browser appears to be blocking our payment provider, Stripe, from loading on this page. Please disable any tracking/ad blockers such as uBlock Origin or AdBlock, and then reload the page.</p>
             </div>
+            <div v-if="showSoldOutError" class="mb-4">
+              <p class="text-danger">Unfortunately the session you were trying to book is now sold out. Please reach out to <a href="mailto:info@newcastlecityjuniors.co.uk">info@newcastlecityjuniors.co.uk</a> with the details provided above and we may be able to put on on a waiting list.</p>
+            </div>
             <div id="payment-element" class="mb-4" />
             <button
               type="submit"
@@ -228,6 +231,7 @@ export default {
     },
     placesRemaining: {},
     disableSubmit: true,
+    showSoldOutError: false,
   }),
 
   async fetch() {
@@ -316,10 +320,19 @@ export default {
       }
     },
     async completePayment() {
+      this.showSoldOutError = false;
       this.stripe.payment.error = null;
       this.stripe.payment.loading = true;
 
       try {
+        const { data: { data: { placesRemaining } } } = await this.$axios.get('/api/stripe/summer-cup-2024-places')
+
+        if (placesRemaining[this.form.tournamentEntry] === 0) {
+          this.showSoldOutError = true;
+          this.stripe.payment.loading = false;
+          return;
+        }
+
         await this.$axios.post('/api/stripe/payment-intents/summer-cup-2024', {
           amount: this.activePrice * 100,
           form: this.form,
