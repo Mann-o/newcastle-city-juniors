@@ -8,7 +8,12 @@
       An error occurred fetching data required for this page!
     </div>
     <div v-else>
-      <p class="mb-12 text-danger">After completing this form you will be taken to our payment page to complete the upfront payment for your chosen membership option. Payment must be made immediately for any upfront costs so please ensure you a ready to make payment before completing this form.</p>
+      <p class="p-6 bg-danger text-white flex gap-6 items-center mb-12">
+        <span class="text-3xl">
+          <FontAwesomeIcon :icon="['fad', 'circle-info']" />
+        </span>
+        <span>After completing this form you will be taken to our payment page to complete the upfront payment for your chosen membership option. Payment must be made immediately for any upfront costs, so please ensure you are ready to make payment before completing this form.</span>
+      </p>
       <ValidationObserver v-slot="{ invalid, handleSubmit }">
         <form @submit.prevent="handleSubmit(registerPlayer)">
           <div>
@@ -154,14 +159,14 @@
               tag="div"
             >
               <FormCheckbox
-                label="Please untick this box if you do not consent to your player having video/photography of them taken by the club"
+                label="Please untick this box if you DO NOT consent to your player having video/photography of them taken by the club"
                 v-model="form.mediaConsented"
               />
             </ValidationProvider>
           </div>
 
           <div class="mt-16">
-            <h2>Step 3 - Team Selection{{ freeChild ? '' : ' &amp; Membership Fees' }}</h2>
+            <h2>Step 3 - Team Selection &amp; Membership Fees</h2>
 
             <ValidationProvider
               v-slot="{ errors }"
@@ -203,12 +208,12 @@
                 label="Select secondary team"
                 :options="secondaryTeams"
                 v-model="form.secondTeam"
-                help-text="OPTIONAL - Choose a second team, e.g. if your player plays both on a Saturday and Sunday. Please note that there is an additional monthly cost of £15 to be registered to two teams."
+                help-text="OPTIONAL - Choose a second team if your player will play on both on a Saturday and Sunday. There is an additional monthly cost to be registered to two teams, details of which will be confirmed below after you have made a selection."
                 :invalid="errors.length > 0"
               />
               <span class="text-xs text-danger mt-2">{{ errors[0] }}</span>
             </ValidationProvider>
-            <template v-if="!freeChild">
+            <template>
               <ValidationProvider
                 class="mt-4"
                 v-slot="{ errors }"
@@ -257,7 +262,7 @@
                       >
                         <ul class="list-disc pl-4">
                           <li>{{ subscriptionOptions.upfront }}</li>
-                          <li><strong>£40 cheaper than the monthly subscription option</strong></li>
+                          <li><strong>£{{ subscriptionOptions.upfrontSavings }} cheaper than the monthly subscription option</strong></li>
                           <li><strong>Only available during July 2024!</strong></li>
                         </ul>
                       </td>
@@ -453,9 +458,9 @@ export default {
       sex: 'male',
       medicalConditions: null,
       mediaConsented: true,
-      ageGroup: '6',
+      ageGroup: 'u7',
       team: null,
-      secondTeam: null,
+      secondTeam: 'none',
       paymentDate: 1,
       membershipFeeOption: 'subscription',
       acceptedCodeOfConduct: false,
@@ -472,99 +477,108 @@ export default {
         key: 'u7',
         value: 'Under 7s',
         teams: [
-          { key: 'u7-boys-saturday', value: 'U7 Boys (Sat) - John Sullivan' },
           { key: 'u7-girls-saturday', value: 'U7 Girls (Sat) - Mark Hedley' },
-          { key: 'u7-milan', value: 'U7 Milan (Sun) - Jordan Holmes' },
-          { key: 'u7-juve', value: 'U7 Juve (Sun) - John Sullivan' },
-          { key: 'u7-inter', value: 'U7 Inter (Sun) - Jamie Chandler' },
-          { key: 'u7-girls', value: 'U7 Girls (Sat) - Leanne Marshall' },
+          { key: 'u7-saturday', value: 'U7s (Sat) - Matty Henry' },
+          { key: 'u7-inter', value: 'U7 Inter (Sun) - Matty Henry' },
+          { key: 'u7-juve', value: 'U7 Juve (Sun) - Matty Henry' },
+          { key: 'u7-milan', value: 'U7 Milan (Sun) - Matty Henry' },
         ],
       },
       {
         key: 'u8',
         value: 'Under 8s',
         teams: [
-          { key: 'u8-girls-saturday', value: 'U8 Girls (Sat) - Mark Hedley' },
-          { key: 'u8-milan-saturday', value: 'U8 Milan (Sat) - Jordan Holmes' },
-          { key: 'u8-milan', value: 'U8 Milan (Sun) - Joe Foalle' },
-          { key: 'u8-juve', value: 'U8 Juve (Sun) - Joe Foalle' },
-          { key: 'u8-inter', value: 'U8 Inter (Sun) - Joe Foalle' },
+          { key: 'u8-girls-saturday', value: 'U8 Girls (Sat) - Jordan Robertson' },
+          { key: 'u8-juve-saturday', value: 'U8 Juve (Sat) - John Sullivan' },
+          { key: 'u8-milan-saturday', value: 'U8 Milan (Sat) - Mattie Thompson' },
+          { key: 'u8-lazio-saturday', value: 'U8 Lazio (Sat) - James Tolchard' },
+          { key: 'u8-inter', value: 'U8 Inter (Sun) - Adam Jones' },
+          { key: 'u8-juve', value: 'U8 Juve (Sun) - John Sullivan' },
+          { key: 'u8-lazio', value: 'U8 Lazio (Sun) - James Tolchard' },
+          { key: 'u8-milan', value: 'U8 Milan (Sun) - Jordan Holmes' },
         ],
       },
       {
         key: 'u9',
         value: 'Under 9s',
         teams: [
-          { key: 'u9-girls-saturday', value: 'U9 Girls (Sat) - Mark Hedley' },
-          { key: 'u9-girls-lionesses-saturday', value: 'U9 Girls Lionesses (Sat) - Leanne Marshall' },
-          { key: 'u9-napoli-saturday', value: 'U9 Napoli (Sat) - Chris Hunn' },
-          { key: 'u9-fiorentina-saturday', value: 'U9 Fiorentina (Sat) - Paul Leadbitter' },
-          { key: 'u9-juve-saturday', value: 'U9 Juve (Sat) - James Tolchard' },
-          { key: 'u9-inter', value: 'U9 Inter (Sun) - Paul Leadbitter' },
-          { key: 'u9-atalanta', value: 'U9 Atalanta (Sun) - Mattie Thompson' },
-          { key: 'u9-juve', value: 'U9 Juve (Sun) - James Tolchard' },
-          { key: 'u9-roma', value: 'U9 Roma (Sun) - Chris Hunn' },
+          { key: 'u9-girls-lionesses-saturday', value: 'U9 Girls Lionesses (Sat) - Mark Hedley' },
+          { key: 'u9-girls-atlanta', value: 'U9 Girls Atlanta (Sun) - Joe Preston' },
+          { key: 'u9-girls-lionesses', value: 'U9 Girls Lionesses (Sun) - Mark Hedley' },
+          { key: 'u9-inter', value: 'U9 Inter (Sun) - Joe Foalle' },
+          { key: 'u9-juve', value: 'U9 Juve (Sun) - Joe Foalle' },
+          { key: 'u9-milan', value: 'U9 Milan (Sun) - Joe Foalle' },
         ],
       },
       {
         key: 'u10',
         value: 'Under 10s',
         teams: [
-          { key: 'u10-girls-lionesses-saturday', value: 'U10 Girls Lionesses (Sat)' },
-          { key: 'u10-milan', value: 'U10 Milan (Sun) - Adam Jones' },
-          { key: 'u10-juve', value: 'U10 Juve (Sun) - Adam Jones' },
-          { key: 'u10-inter', value: 'U10 Inter (Sun) - Paul Thornton' },
-          { key: 'u10-pumas', value: 'U10 Pumas (Sun) - Chloe Clifford' },
-          { key: 'u10-jaguars-girls', value: 'U10 Jaguars Girls (Sun) - Chloe Clifford' }
+          { key: 'u10-girls-lionesses-saturday', value: 'U10 Girls Lionesses (Sat) - Mark Hedley' },
+          { key: 'u10-girls-atalanta-saturday', value: 'U10 Girls Atalanta (Sat) - Stu Taylor' },
+          { key: 'u10-lionesses-saturday', value: 'U10 Lionesses (Sat) - Leanne Marshall' },
+          { key: 'u10-fiorentina-saturday', value: 'U10 Fiorentina (Sat) - Paul Leadbitter' },
+          { key: 'u10-juve-saturday', value: 'U10 Juve (Sat) - James Robertson' },
+          { key: 'u10-napoli-saturday', value: 'U10 Napoli (Sat) - Chris Hunn' },
+          { key: 'u10-girls-lionesses', value: 'U10 Girls Lionesses (Sun) - Leanne Marshall' },
+          { key: 'u10-atalanta', value: 'U10 Atalanta (Sun) - Mattie Thompson' },
+          { key: 'u10-inter', value: 'U10 Inter (Sun) - Paul Leadbitter' },
+          { key: 'u10-juve', value: 'U10 Juve (Sun) - James Tolchard' },
+          { key: 'u10-milan', value: 'U10 Milan (Sun) - Graham Watson' },
+          { key: 'u10-roma', value: 'U10 Roma (Sun) - Chris Hunn' }
         ],
       },
       {
         key: 'u11',
         value: 'Under 11s',
         teams: [
-          { key: 'u11-sparta', value: 'U11 Sparta (Sun) - David Moore' },
-          { key: 'u11-milan', value: 'U11 Milan (Sun) - David Moore' },
-          { key: 'u11-saturday', value: 'U11 Boys (Sat)'},
+          { key: 'u11-girls-atlanta-saturday', value: 'U11 Girls Atlanta (Sat) - Eddie Crozier' },
+          { key: 'u11-girls-lionesses-saturday', value: 'U11 Girls Lionesses (Sat) - Mark Hewitson' },
+          { key: 'u11-inter-saturday', value: 'U11 Inter (Sat) - Chris Carr' },
+          { key: 'u11-jaguars', value: 'U11 Jaguars (Sun) - Chloe Clifford' },
+          { key: 'u11-pumas', value: 'U11 Pumas (Sun) - Chloe Clifford' },
+          { key: 'u11-inter', value: 'U11 Inter (Sun) - Chris Carr' },
+          { key: 'u11-juve', value: 'U11 Juve (Sun) - Paul Thornton' },
+          { key: 'u11-milan', value: 'U11 Milan (Sun) - Adam Jones' },
         ],
       },
       {
         key: 'u12',
         value: 'Under 12s',
         teams: [
-          { key: 'u12', value: 'U12s (Sun) - Simon Philpott' },
           { key: 'u12-saturday', value: 'U12s (Sat) - John Stewart' },
+          { key: 'u12-milan', value: 'U12 Milan (Sun) - John Stewart' },
+          { key: 'u12-sparta', value: 'U12 Sparta (Sun) - Iain Davison' },
         ],
       },
       {
         key: 'u13',
         value: 'Under 13s',
         teams: [
-          { key: 'u13-juve', value: 'U13 Juve (Sun) - Stuart Smith' },
+          { key: 'u13-city', value: 'U13 City (Sun) - Simon Philpott' },
         ],
       },
       {
         key: 'u14',
         value: 'Under 14s',
         teams: [
-          { key: 'u14-saturday', value: 'U14s (Sat) - John Sullivan' },
-          { key: 'u14-milan', value: 'U14 Milan (Sun) - Ryan Donaldson' },
-          { key: 'u14-juve', value: 'U14 Juve (Sun) - John Sullivan' },
+          { key: 'u14-juve', value: 'U14 Juve (Sun) - Stu Smith' },
         ],
       },
       {
         key: 'u15',
         value: 'Under 15s',
         teams: [
-          { key: 'u15-saturday', value: 'U15s (Sat) - Steve Surtees' },
-          { key: 'u15-milan', value: 'U15 Milan (Sun) - Matty Henry' },
-          { key: 'u15-juve', value: 'U15 Juve (Sun) - Mark Foreman' },
+          { key: 'u15-saturday', value: 'U15s (Sat) - John Sullivan' },
+          { key: 'u15-juve', value: 'U15 Juve (Sun) - John Sullivan' },
         ],
       },
       {
         key: 'u16',
         value: 'Under 16s',
         teams: [
-          { key: 'u16', value: 'U16s (Sun) - Andrew Ferguson' },
+          { key: 'u16-saturday', value: 'U16s (Sat) - Steve Surtees' },
+          { key: 'u16-juve', value: 'U16 Juve (Sun) - Mark Foreman' },
         ],
       },
     ];
@@ -625,12 +639,16 @@ export default {
     },
     subscriptionOptions() {
       const costs = {
-        maleRegistrationFee: 60,
-        femaleRegistrationFee: 50,
-        maleSingleTeamMonthly: 30,
-        maleMultiTeamMonthly: 45,
-        femaleSingleTeamMonthly: 25,
-        femaleMultiTeamMonthly: 40,
+        maleRegistrationFee: 34,
+        femaleRegistrationFee: 30,
+        maleSingleTeamUpfront: 360,
+        maleMultiTeamUpfront: 550,
+        maleSingleTeamMonthly: 34,
+        maleMultiTeamMonthly: 51,
+        femaleSingleTeamMonthly: 30,
+        femaleMultiTeamMonthly: 45,
+        femaleSingleTeamUpfront: 320,
+        femaleMultiTeamUpfront: 475,
       };
 
       const currentDate = new Date();
@@ -639,20 +657,20 @@ export default {
         return (dateTo.getMonth() - dateFrom.getMonth()) + (12 * (dateTo.getFullYear() - dateFrom.getFullYear()))
       }
 
-      const monthlyCost = costs[`${this.form.sex}${this.hasSelectedMultipleTeams ? 'Multi' : 'Single'}TeamMonthly`];
       const registrationFee = costs[`${this.form.sex}RegistrationFee`];
+      const upfrontCost = costs[`${this.form.sex}${this.hasSelectedMultipleTeams ? 'Multi' : 'Single'}TeamUpfront`];
+      const monthlyCost = costs[`${this.form.sex}${this.hasSelectedMultipleTeams ? 'Multi' : 'Single'}TeamMonthly`];
+      const numberOfSubscriptionMonths = monthDiff(currentDate, new Date('2025-05-01'));
 
       return {
-        upfront: `£${(monthlyCost * 12) - 40} one-off payment, inclusive of membership fee`,
+        upfront: `£${upfrontCost} one-off payment, inclusive of registration fee`,
+        upfrontSavings: ((11 * monthlyCost) + registrationFee) - upfrontCost,
         monthly: {
-          upfront: `1x £${registrationFee} one-off payment (membership fee and ${currentDate.toLocaleDateString('en-gb', { month: 'long', year: 'numeric' })} subscription)`,
-          subscription: `${monthDiff(currentDate, new Date('2024-05-01'))}x £${monthlyCost} monthly payments from ${new Date(currentDate.setMonth(currentDate.getMonth() + 1)).toLocaleDateString('en-gb', { month: 'long', year: 'numeric' })} up to, and including, May 2024`,
-          total: `Total: £${((monthDiff(currentDate, new Date('2024-05-01')) + 1) * monthlyCost) + (monthlyCost * 2)}`,
+          upfront: `1x £${registrationFee + monthlyCost} one-off payment (£${registrationFee} registration fee and ${currentDate.toLocaleDateString('en-gb', { month: 'long', year: 'numeric' })} subscription payment)`,
+          subscription: `${numberOfSubscriptionMonths}x £${monthlyCost} monthly payments from ${new Date(currentDate.setMonth(currentDate.getMonth() + 1)).toLocaleDateString('en-gb', { month: 'long', year: 'numeric' })} up to, and including, May 2025`,
+          total: `Total: £${((numberOfSubscriptionMonths + 1) * monthlyCost) + registrationFee}`,
         },
       }
-    },
-    freeChild() {
-      return this.$auth.user[0].permissions.map(({ name }) => name).includes('free-child');
     },
   },
 
@@ -680,10 +698,6 @@ export default {
         text: 'An error occured whilst processing, or you have cancelled, your one-off payment - please try again.',
         sticky: true,
       });
-    }
-
-    if (this.freeChild) {
-      this.form.membershipFeeOption = 'upfront';
     }
   },
 
@@ -732,7 +746,7 @@ export default {
             this.$store.dispatch('notifications/add', {
               type: 'error',
               title: 'Error',
-              text: 'We were unable to register your player - please ensure all fields are completed and try again',
+              text: 'We were unable to register your player - please ensure all fields are completed and try again.',
               sticky: true,
             });
           }
