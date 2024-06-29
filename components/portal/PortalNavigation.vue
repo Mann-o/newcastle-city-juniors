@@ -25,11 +25,10 @@ export default {
   computed: {
     links() {
       return [
-        { label: 'Dashboard', path: '/portal' },
+        { label: 'My Account', path: '/portal' },
         { label: 'Parents/Guardians', path: '/portal/parents' },
         { label: 'Players', path: '/portal/players' },
         { label: 'Payments', path: '/portal/payments' },
-        { label: 'Account', path: '/portal/account' },
         ...(
           this.$auth?.user?.[0]?.permissions.some(({ name }) => name === 'staff')
             ? [{ label: 'Admin', path: '/portal/admin' }]

@@ -1,9 +1,7 @@
 <template>
   <div>
     <h1>NCJ Portal</h1>
-
     <PortalNavigation />
-
     <NuxtChild />
   </div>
 </template>

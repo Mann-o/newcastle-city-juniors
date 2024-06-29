@@ -532,7 +532,6 @@ export default {
         key: 'u11',
         value: 'Under 11s',
         teams: [
-          { key: 'u11-girls-atlanta-saturday', value: 'U11 Girls Atlanta (Sat) - Eddie Crozier' },
           { key: 'u11-girls-lionesses-saturday', value: 'U11 Girls Lionesses (Sat) - Mark Hewitson' },
           { key: 'u11-inter-saturday', value: 'U11 Inter (Sat) - Chris Carr' },
           { key: 'u11-jaguars', value: 'U11 Jaguars (Sun) - Chloe Clifford' },
@@ -577,7 +576,6 @@ export default {
         key: 'u16',
         value: 'Under 16s',
         teams: [
-          { key: 'u16-saturday', value: 'U16s (Sat) - Steve Surtees' },
           { key: 'u16-juve', value: 'U16 Juve (Sun) - Mark Foreman' },
         ],
       },

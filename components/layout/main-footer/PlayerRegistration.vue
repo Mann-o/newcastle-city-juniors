@@ -1,9 +1,8 @@
 <template>
   <div class="px-8 pb-16 lg:px-0 lg:pb-0">
     <h4>Player Registration</h4>
-    <p>Player registration will re-open soon!</p>
-    <!-- <p class="pb-4">
-      Has your child been selected for the 2023-24 season following our open sessions? If so you can now register your player!
+    <p class="pb-4">
+      Has your child been selected for the 2024-25 season following our open sessions? If so you can now register your player!
     </p>
     <template v-if="$auth.loggedIn">
       <p>Visit the <NuxtLink class="text-gold no-underline hover:underline" to="/portal">NCJ Portal</NuxtLink> to get started.</p>
@@ -11,7 +10,7 @@
     <template v-else>
       <p class="pb-4">Already have an account? <NuxtLink class="text-gold no-underline hover:underline" to="/login">Login here</NuxtLink>.</p>
       <p>Not registered yet? <NuxtLink class="text-gold no-underline hover:underline" to="/register">Register here</NuxtLink>.</p>
-    </template> -->
+    </template>
   </div>
 </template>
 

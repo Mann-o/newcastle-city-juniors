@@ -53,7 +53,7 @@ export default {
       default: null,
     },
     value: {
-      type: String,
+      type: String || null,
       required: false,
       default: null,
     },
@@ -106,7 +106,7 @@ export default {
 
   methods: {
     changeFieldValue (e) {
-      this.$emit('input', e.target.value === '' ? null : e.target.value)
+      this.$emit('input', (e.target.value == null || e.target.value === '') ? null : e.target.value)
     },
   },
 }

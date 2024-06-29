@@ -67,7 +67,7 @@ export default {
   computed: {
     /** @returns {boolean} */
     canLogin() {
-      return this.isValidEmailAddress && this.password.length >= 8
+      return this.isValidEmailAddress && (this.password != null) && (this.password.length >= 8)
     },
     /** @returns {string} */
     loginButtonLabel() {
@@ -77,6 +77,10 @@ export default {
     },
     /** @returns {boolean} */
     isValidEmailAddress() {
+      if (this.email == null) {
+        return false
+      }
+
       return /^.+@.+\..+$/.test(this.email)
     },
   },

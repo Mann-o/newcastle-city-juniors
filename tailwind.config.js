@@ -106,5 +106,17 @@ module.exports = {
         modifySelectors(({ className }) => `.${e(`first-of-type${separator}${className}`)}:first-of-type`)
       })
     },
+    // require('daisyui'),
   ],
+
+  // daisyui: {
+  //   themes: true,
+  //   dark: 'dark',
+  //   base: true,
+  //   styled: true,
+  //   prefix: '',
+  //   utils: true,
+  //   logs: true,
+  //   themeRoot: ':root',
+  // },
 }
