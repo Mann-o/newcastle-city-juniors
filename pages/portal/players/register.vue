@@ -545,7 +545,6 @@ export default {
         key: 'u12',
         value: 'Under 12s',
         teams: [
-          { key: 'u12-saturday', value: 'U12s (Sat) - John Stewart' },
           { key: 'u12-milan', value: 'U12 Milan (Sun) - John Stewart' },
           { key: 'u12-sparta', value: 'U12 Sparta (Sun) - Iain Davison' },
         ],
@@ -554,6 +553,7 @@ export default {
         key: 'u13',
         value: 'Under 13s',
         teams: [
+          { key: 'u13-saturday', value: 'U13s (Sat) - John Stewart' },
           { key: 'u13-city', value: 'U13 City (Sun) - Simon Philpott' },
         ],
       },
