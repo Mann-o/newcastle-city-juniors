@@ -514,7 +514,6 @@ export default {
         key: 'u10',
         value: 'Under 10s',
         teams: [
-          { key: 'u10-girls-lionesses-saturday', value: 'U10 Girls Lionesses (Sat) - Mark Hedley' },
           { key: 'u10-girls-atalanta-saturday', value: 'U10 Girls Atalanta (Sat) - Stu Taylor' },
           { key: 'u10-lionesses-saturday', value: 'U10 Lionesses (Sat) - Leanne Marshall' },
           { key: 'u10-fiorentina-saturday', value: 'U10 Fiorentina (Sat) - Paul Leadbitter' },
