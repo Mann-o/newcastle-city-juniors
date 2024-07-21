@@ -42,7 +42,7 @@
             >
               <td class="p-2 border border-grey-200 text-sm text-left">
                 <a
-                  :href="`https://dashboard.stripe.com/customers/${player.parent.user.stripeCustomerId}`"
+                  :href="`https://dashboard.stripe.com/customers/${player.parent.user.stripe_customer_id}`"
                   title="View on Stripe"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -98,7 +98,7 @@
             >
               <td class="p-2 border border-grey-200 text-sm text-left">
                 <a
-                  :href="`https://dashboard.stripe.com/customers/${player.parent.user.stripeCustomerId}`"
+                  :href="`https://dashboard.stripe.com/customers/${player.parent.user.stripe_customer_id}`"
                   title="View on Stripe"
                   target="_blank"
                   rel="noopener noreferrer"
