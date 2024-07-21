@@ -15,7 +15,7 @@
       <Loader class="mt-10"/>
     </div>
 
-    <div v-else-if="players.length === 0">
+    <div v-else-if="players.length === 0" class="mt-10">
       NO RESULTS
     </div>
 
@@ -153,11 +153,11 @@ export default {
         value: 'Under 8s',
         teams: [
           { key: 'u8-girls-saturday', value: 'U8 Girls (Sat) - Jordan Robertson' },
-          { key: 'u8-juve-saturday', value: 'U8 Juve (Sat) - John Sullivan' },
+          // { key: 'u8-juve-saturday', value: 'U8 Juve (Sat) - John Sullivan' },
           { key: 'u8-milan-saturday', value: 'U8 Milan (Sat) - Mattie Thompson' },
           { key: 'u8-lazio-saturday', value: 'U8 Lazio (Sat) - James Tolchard' },
           { key: 'u8-inter', value: 'U8 Inter (Sun) - Adam Jones' },
-          { key: 'u8-juve', value: 'U8 Juve (Sun) - John Sullivan' },
+          // { key: 'u8-juve', value: 'U8 Juve (Sun) - John Sullivan' },
           { key: 'u8-lazio', value: 'U8 Lazio (Sun) - James Tolchard' },
           { key: 'u8-milan', value: 'U8 Milan (Sun) - Jordan Holmes' },
         ],
