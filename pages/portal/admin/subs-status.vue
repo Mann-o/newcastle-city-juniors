@@ -40,7 +40,14 @@
               v-for="player in upfrontPlayers"
               :key="`player-${player.id}`"
             >
-              <td class="p-2 border border-grey-200 text-sm text-left">{{ player.full_name }}</td>
+              <td class="p-2 border border-grey-200 text-sm text-left">
+                <a
+                  :href="`https://dashboard.stripe.com/customers/${player.parent.user.stripeCustomerId}`"
+                  title="View on Stripe"
+                >
+                  {{ player.full_name }}
+                </a>
+              </td>
               <td
                 v-if="player.paymentInfo.isCoach"
                 colspan="2"
@@ -87,7 +94,14 @@
               v-for="player in subscriptionPlayers"
               :key="`player-${player.id}`"
             >
-              <td class="p-2 border border-grey-200 text-sm text-left">{{ player.full_name }}</td>
+              <td class="p-2 border border-grey-200 text-sm text-left">
+                <a
+                  :href="`https://dashboard.stripe.com/customers/${player.parent.user.stripeCustomerId}`"
+                  title="View on Stripe"
+                >
+                  {{ player.full_name }}
+                </a>
+              </td>
               <td
                 v-if="player.paymentInfo.isCoach"
                 colspan="3"
