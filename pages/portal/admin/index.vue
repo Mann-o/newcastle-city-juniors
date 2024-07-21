@@ -37,9 +37,9 @@ export default {
         ...(
           this.$auth?.user?.[0]?.permissions.some(({ name }) => name === 'view-payments')
             ? [
-              { label: 'Payments', path: '/portal/admin/payments', icon: 'credit-card-front' },
-              { label: 'Subscriptions', path: '/portal/admin/subscriptions', icon: 'arrows-repeat' },
-              { label: 'Presentation Tickets', path: '/portal/admin/presentation-tickets', icon: 'ticket' },
+              // { label: 'Payments', path: '/portal/admin/payments', icon: 'credit-card-front' },
+              { label: 'Player Subs', path: '/portal/admin/subs-status', icon: 'arrows-repeat' },
+              // { label: 'Presentation Tickets', path: '/portal/admin/presentation-tickets', icon: 'ticket' },
               // { label: 'Actions', path: '/portal/admin/actions', icon: 'rotate-right' },
             ]
             : []
