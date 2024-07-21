@@ -44,6 +44,8 @@
                 <a
                   :href="`https://dashboard.stripe.com/customers/${player.parent.user.stripeCustomerId}`"
                   title="View on Stripe"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   {{ player.full_name }}
                 </a>
@@ -98,6 +100,8 @@
                 <a
                   :href="`https://dashboard.stripe.com/customers/${player.parent.user.stripeCustomerId}`"
                   title="View on Stripe"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   {{ player.full_name }}
                 </a>
