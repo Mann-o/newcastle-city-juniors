@@ -30,30 +30,37 @@
           </tr>
         </thead>
         <tbody>
-          <tr
-            v-for="player in upfrontPlayers"
-            :key="`player-${player.id}`"
-          >
-            <td class="p-2 border border-grey-200 text-sm text-left">{{ player.full_name }}</td>
-            <td
-              v-if="player.paymentInfo.isCoach"
-              colspan="2"
-              class="p-2 border border-grey-200 text-sm text-center"
-            >
-              FREE COACH REGISTRATION
+          <tr v-if="upfrontPlayers.length === 0">
+            <td class="p-2 border border-grey-200 text-sm text-center" colspan="3">
+              No upfront players for this team
             </td>
-            <template v-else>
-              <td class="p-2 border border-grey-200 text-sm text-center">
-                <FontAwesomeIcon
-                  :icon="[
-                    'fal',
-                    player.paymentInfo.upfrontFeePaid ? 'check' : 'xmark',
-                  ]"
-                />
-              </td>
-              <td class="p-2 border border-grey-200 text-sm">&nbsp;</td>
-            </template>
           </tr>
+          <template v-else>
+            <tr
+              v-for="player in upfrontPlayers"
+              :key="`player-${player.id}`"
+            >
+              <td class="p-2 border border-grey-200 text-sm text-left">{{ player.full_name }}</td>
+              <td
+                v-if="player.paymentInfo.isCoach"
+                colspan="2"
+                class="p-2 border border-grey-200 text-sm text-center"
+              >
+                FREE COACH REGISTRATION
+              </td>
+              <template v-else>
+                <td class="p-2 border border-grey-200 text-sm text-center">
+                  <FontAwesomeIcon
+                    :icon="[
+                      'fal',
+                      player.paymentInfo.upfrontFeePaid ? 'check' : 'xmark',
+                    ]"
+                  />
+                </td>
+                <td class="p-2 border border-grey-200 text-sm">&nbsp;</td>
+              </template>
+            </tr>
+          </template>
         </tbody>
       </table>
 
@@ -68,38 +75,45 @@
           </tr>
         </thead>
         <tbody>
-          <tr
-            v-for="player in subscriptionPlayers"
-            :key="`player-${player.id}`"
-          >
-            <td class="p-2 border border-grey-200 text-sm text-left">{{ player.full_name }}</td>
-            <td
-              v-if="player.paymentInfo.isCoach"
-              colspan="3"
-              class="p-2 border border-grey-200 text-sm text-center"
-            >
-              FREE COACH REGISTRATION
+          <tr v-if="subscriptionPlayers.length === 0">
+            <td class="p-2 border border-grey-200 text-sm text-center" colspan="4">
+              No subscription players for this team
             </td>
-            <template v-else>
-              <td class="p-2 border border-grey-200 text-sm text-center">
-                <FontAwesomeIcon
-                  :icon="[
-                    'fal',
-                    player.paymentInfo.registrationFeePaid ? 'check' : 'xmark',
-                  ]"
-                />
-              </td>
-              <td class="p-2 border border-grey-200 text-sm text-center">
-                <FontAwesomeIcon
-                  :icon="[
-                    'fal',
-                    player.paymentInfo.subscriptionUpToDate ? 'check' : 'xmark',
-                  ]"
-                />
-              </td>
-              <td class="p-2 border border-grey-200 text-sm">&nbsp;</td>
-            </template>
           </tr>
+          <template v-else>
+            <tr
+              v-for="player in subscriptionPlayers"
+              :key="`player-${player.id}`"
+            >
+              <td class="p-2 border border-grey-200 text-sm text-left">{{ player.full_name }}</td>
+              <td
+                v-if="player.paymentInfo.isCoach"
+                colspan="3"
+                class="p-2 border border-grey-200 text-sm text-center"
+              >
+                FREE COACH REGISTRATION
+              </td>
+              <template v-else>
+                <td class="p-2 border border-grey-200 text-sm text-center">
+                  <FontAwesomeIcon
+                    :icon="[
+                      'fal',
+                      player.paymentInfo.registrationFeePaid ? 'check' : 'xmark',
+                    ]"
+                  />
+                </td>
+                <td class="p-2 border border-grey-200 text-sm text-center">
+                  <FontAwesomeIcon
+                    :icon="[
+                      'fal',
+                      player.paymentInfo.subscriptionUpToDate ? 'check' : 'xmark',
+                    ]"
+                  />
+                </td>
+                <td class="p-2 border border-grey-200 text-sm">&nbsp;</td>
+              </template>
+            </tr>
+          </template>
         </tbody>
       </table>
     </div>
