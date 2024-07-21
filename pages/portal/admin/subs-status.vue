@@ -37,55 +37,49 @@
             :key="`player-${player.id}`"
           >
             <td>{{ player.full_name }}</td>
-            <td>{{ player.membership_fee_option.toUpperCase() }}</td>
-            <td class="text-center">
-              <span v-if="player.paymentInfo.isCoach">
-                N/A
-              </span>
-              <span v-else-if="player.paymentInfo.registrationFeePaid">
-                <FontAwesomeIcon :icon="['fal', 'check']" />
-              </span>
-              <template v-else>
-                <FontAwesomeIcon :icon="['fal', 'times']" />
-              </template>
+            <td
+              v-if="player.paymentInfo.isCoach"
+              colspan="5"
+              class="text-center"
+            >
+              FREE COACH REGISTRATION
             </td>
-            <td class="text-center">
-              <span v-if="player.paymentInfo.isCoach">
-                N/A
-              </span>
-              <span v-else-if="player.paymentInfo.upfrontFeePaid">
-                <FontAwesomeIcon :icon="['fal', 'check']" />
-              </span>
-              <template v-else>
-                <FontAwesomeIcon :icon="['fal', 'times']" />
-              </template>
-            </td>
-            <td class="text-center">
-              <span v-if="player.paymentInfo.isCoach">
-                N/A
-              </span>
-              <span v-else-if="player.paymentInfo.registrationFeePaid">
-                <FontAwesomeIcon :icon="['fal', 'check']" />
-              </span>
-              <template v-else>
-                <FontAwesomeIcon :icon="['fal', 'times']" />
-              </template>
-            </td>
-            <td>
-              <span v-if="player.paymentInfo.isCoach">
-                Free Coach Registration
-              </span>
-              <span v-else-if="player.paymentInfo.subscriptionUpToDate">
-                <FontAwesomeIcon :icon="['fal', 'check']" />
-              </span>
-              <template v-else>
-                <FontAwesomeIcon :icon="['fal', 'times']" />
-              </template>
-            </td>
+            <template v-else>
+              <td>{{ player.membership_fee_option.toUpperCase() }}</td>
+              <td class="text-center">
+                <span v-if="player.membership_fee_option === 'subscription'">N/A</span>
+                <FontAwesomeIcon
+                  v-else
+                  :icon="[
+                    'fal',
+                    player.paymentInfo.upfrontFeePaid ? 'check' : 'times',
+                  ]"
+                />
+              </td>
+              <td class="text-center">
+                <span v-if="player.membership_fee_option === 'upfront'">N/A</span>
+                <FontAwesomeIcon
+                  v-else
+                  :icon="[
+                    'fal',
+                    player.paymentInfo.registrationFeePaid ? 'check' : 'times',
+                  ]"
+                />
+              </td>
+              <td class="text-center">
+                <span v-if="player.membership_fee_option === 'upfront'">N/A</span>
+                <FontAwesomeIcon
+                  v-else
+                  :icon="[
+                    'fal',
+                    player.paymentInfo.subscriptionUpToDate ? 'check' : 'times',
+                  ]"
+                />
+              </td>
+            </template>
           </tr>
         </tbody>
       </table>
-      <!-- {{ players }} -->
     </div>
   </div>
 </template>
