@@ -20,62 +20,84 @@
     </div>
 
     <div v-else>
-      <table class="w-full mt-10">
+      <h2 class="mt-10">Upfront Payment Players</h2>
+      <table class="w-full border-collapse border border-black">
         <thead>
           <tr>
-            <th class="text-left">Player</th>
-            <th class="text-left">Membership Option</th>
-            <th class="text-center">Paid Upfront Fee?</th>
-            <th class="text-center">Paid Registration Fee?</th>
-            <th class="text-center">Subscription Up To Date?</th>
-            <th class="text-left">Notes</th>
+            <th class="bg-black text-gold font-normal text-sm p-2 text-left">Player</th>
+            <th class="bg-black text-gold font-normal text-sm p-2 text-center">Paid?</th>
+            <th class="bg-black text-gold font-normal text-sm p-2 text-left">Notes</th>
           </tr>
         </thead>
         <tbody>
           <tr
-            v-for="player in players"
+            v-for="player in upfrontPlayers"
             :key="`player-${player.id}`"
           >
             <td>{{ player.full_name }}</td>
             <td
               v-if="player.paymentInfo.isCoach"
-              colspan="5"
-              class="text-center"
+              colspan="2"
+              class="p-2 border border-grey-200 text-sm text-center"
             >
               FREE COACH REGISTRATION
             </td>
             <template v-else>
-              <td>{{ player.membership_fee_option.toUpperCase() }}</td>
-              <td class="text-center">
-                <span v-if="player.membership_fee_option === 'subscription'">N/A</span>
+              <td class="p-2 border border-grey-200 text-sm text-center">
                 <FontAwesomeIcon
-                  v-else
                   :icon="[
                     'fal',
                     player.paymentInfo.upfrontFeePaid ? 'check' : 'xmark',
                   ]"
                 />
               </td>
-              <td class="text-center">
-                <span v-if="player.membership_fee_option === 'upfront'">N/A</span>
+              <td>&nbsp;</td>
+            </template>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2 class="mt-10">Subscription Payment Players</h2>
+      <table class="w-full">
+        <thead>
+          <tr>
+            <th class="bg-black text-gold font-normal text-sm p-2 text-left">Player</th>
+            <th class="bg-black text-gold font-normal text-sm p-2 text-center">Paid Reg Fee?</th>
+            <th class="bg-black text-gold font-normal text-sm p-2 text-center">Subs Up To Date?</th>
+            <th class="bg-black text-gold font-normal text-sm p-2 text-left">Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            v-for="player in subscriptionPlayers"
+            :key="`player-${player.id}`"
+          >
+            <td>{{ player.full_name }}</td>
+            <td
+              v-if="player.paymentInfo.isCoach"
+              colspan="3"
+              class="p-2 border border-grey-200 text-sm text-center"
+            >
+              FREE COACH REGISTRATION
+            </td>
+            <template v-else>
+              <td class="p-2 border border-grey-200 text-sm text-center">
                 <FontAwesomeIcon
-                  v-else
                   :icon="[
                     'fal',
                     player.paymentInfo.registrationFeePaid ? 'check' : 'xmark',
                   ]"
                 />
               </td>
-              <td class="text-center">
-                <span v-if="player.membership_fee_option === 'upfront'">N/A</span>
+              <td class="p-2 border border-grey-200 text-sm text-center">
                 <FontAwesomeIcon
-                  v-else
                   :icon="[
                     'fal',
                     player.paymentInfo.subscriptionUpToDate ? 'check' : 'xmark',
                   ]"
                 />
               </td>
+              <td>&nbsp;</td>
             </template>
           </tr>
         </tbody>
@@ -212,6 +234,12 @@ export default {
   computed: {
     filteredTeams() {
       return this.ageGroups.find(({ key }) => key === this.filters.ageGroup)?.teams || [];
+    },
+    upfrontPlayers() {
+      return this.players.filter(player => player.membership_fee_option === 'upfront');
+    },
+    subscriptionPlayers() {
+      return this.players.filter(player => player.membership_fee_option === 'subscription');
     },
   },
 
