@@ -57,7 +57,9 @@
                     ]"
                   />
                 </td>
-                <td class="p-2 border border-grey-200 text-sm">&nbsp;</td>
+                <td class="p-2 border border-grey-200 text-sm">
+                  {{ player.paymentInfo.notes == null ? '' : player.paymentInfo.notes }}
+                </td>
               </template>
             </tr>
           </template>
@@ -110,7 +112,9 @@
                     ]"
                   />
                 </td>
-                <td class="p-2 border border-grey-200 text-sm">&nbsp;</td>
+                <td class="p-2 border border-grey-200 text-sm">
+                  {{ player.paymentInfo.notes == null ? '' : player.paymentInfo.notes }}
+                </td>
               </template>
             </tr>
           </template>
