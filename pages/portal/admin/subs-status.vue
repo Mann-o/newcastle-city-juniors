@@ -34,7 +34,7 @@
             v-for="player in upfrontPlayers"
             :key="`player-${player.id}`"
           >
-            <td class="p-2 border border-grey-200 text-sm text-center">{{ player.full_name }}</td>
+            <td class="p-2 border border-grey-200 text-sm text-left">{{ player.full_name }}</td>
             <td
               v-if="player.paymentInfo.isCoach"
               colspan="2"
@@ -51,7 +51,7 @@
                   ]"
                 />
               </td>
-              <td class="p-2 border border-grey-200 text-sm text-center">&nbsp;</td>
+              <td class="p-2 border border-grey-200 text-sm">&nbsp;</td>
             </template>
           </tr>
         </tbody>
@@ -72,7 +72,7 @@
             v-for="player in subscriptionPlayers"
             :key="`player-${player.id}`"
           >
-            <td class="p-2 border border-grey-200 text-sm text-center">{{ player.full_name }}</td>
+            <td class="p-2 border border-grey-200 text-sm text-left">{{ player.full_name }}</td>
             <td
               v-if="player.paymentInfo.isCoach"
               colspan="3"
@@ -97,7 +97,7 @@
                   ]"
                 />
               </td>
-              <td class="p-2 border border-grey-200 text-sm text-center">&nbsp;</td>
+              <td class="p-2 border border-grey-200 text-sm">&nbsp;</td>
             </template>
           </tr>
         </tbody>
