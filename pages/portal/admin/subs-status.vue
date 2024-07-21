@@ -43,10 +43,10 @@
                 N/A
               </span>
               <span v-else-if="player.paymentInfo.registrationFeePaid">
-                <FontAwesomeIcon :icon="['fad', 'check']" />
+                <FontAwesomeIcon :icon="['fal', 'check']" />
               </span>
               <template v-else>
-                <FontAwesomeIcon :icon="['fad', 'times']" />
+                <FontAwesomeIcon :icon="['fal', 'times']" />
               </template>
             </td>
             <td class="text-center">
@@ -54,10 +54,10 @@
                 N/A
               </span>
               <span v-else-if="player.paymentInfo.upfrontFeePaid">
-                <FontAwesomeIcon :icon="['fad', 'check']" />
+                <FontAwesomeIcon :icon="['fal', 'check']" />
               </span>
               <template v-else>
-                <FontAwesomeIcon :icon="['fad', 'times']" />
+                <FontAwesomeIcon :icon="['fal', 'times']" />
               </template>
             </td>
             <td class="text-center">
@@ -65,10 +65,10 @@
                 N/A
               </span>
               <span v-else-if="player.paymentInfo.registrationFeePaid">
-                <FontAwesomeIcon :icon="['fad', 'check']" />
+                <FontAwesomeIcon :icon="['fal', 'check']" />
               </span>
               <template v-else>
-                <FontAwesomeIcon :icon="['fad', 'times']" />
+                <FontAwesomeIcon :icon="['fal', 'times']" />
               </template>
             </td>
             <td>
@@ -76,10 +76,10 @@
                 Free Coach Registration
               </span>
               <span v-else-if="player.paymentInfo.subscriptionUpToDate">
-                <FontAwesomeIcon :icon="['fad', 'check']" />
+                <FontAwesomeIcon :icon="['fal', 'check']" />
               </span>
               <template v-else>
-                <FontAwesomeIcon :icon="['fad', 'times']" />
+                <FontAwesomeIcon :icon="['fal', 'times']" />
               </template>
             </td>
           </tr>
