@@ -21,7 +21,7 @@
 
     <div v-else>
       <h2 class="mt-10">Upfront Payment Players</h2>
-      <table class="w-full border-collapse border border-black">
+      <table class="w-full">
         <thead>
           <tr>
             <th class="bg-black text-gold font-normal text-sm p-2 text-left">Player</th>
@@ -34,7 +34,7 @@
             v-for="player in upfrontPlayers"
             :key="`player-${player.id}`"
           >
-            <td>{{ player.full_name }}</td>
+            <td class="p-2 border border-grey-200 text-sm text-center">{{ player.full_name }}</td>
             <td
               v-if="player.paymentInfo.isCoach"
               colspan="2"
@@ -51,7 +51,7 @@
                   ]"
                 />
               </td>
-              <td>&nbsp;</td>
+              <td class="p-2 border border-grey-200 text-sm text-center">&nbsp;</td>
             </template>
           </tr>
         </tbody>
@@ -72,7 +72,7 @@
             v-for="player in subscriptionPlayers"
             :key="`player-${player.id}`"
           >
-            <td>{{ player.full_name }}</td>
+            <td class="p-2 border border-grey-200 text-sm text-center">{{ player.full_name }}</td>
             <td
               v-if="player.paymentInfo.isCoach"
               colspan="3"
@@ -97,7 +97,7 @@
                   ]"
                 />
               </td>
-              <td>&nbsp;</td>
+              <td class="p-2 border border-grey-200 text-sm text-center">&nbsp;</td>
             </template>
           </tr>
         </tbody>
