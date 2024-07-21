@@ -10,6 +10,7 @@
       :options="filteredTeams"
       v-model="filters.team"
     />
+    <button class="hidden" @click="setDefaultPaymentMethod()">Set Default Payment Method</button>
 
     <div v-if="loading">
       <Loader class="mt-10"/>
@@ -303,6 +304,10 @@ export default {
       this.players = players;
 
       this.loading = false;
+    },
+    async setDefaultPaymentMethod() {
+      const response = await this.$axios.post('/api/admin/set-default-payment-method');
+      console.log(response);
     },
   },
 };
