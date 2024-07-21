@@ -17,7 +17,6 @@ export const fontawesome = {
       'faEnvelope',
       'faMinus',
       'faPlus',
-      'faTimes',
       'faXmark',
     ],
     duotone: [

@@ -52,7 +52,7 @@
                   v-else
                   :icon="[
                     'fal',
-                    player.paymentInfo.upfrontFeePaid ? 'check' : 'times',
+                    player.paymentInfo.upfrontFeePaid ? 'check' : 'xmark',
                   ]"
                 />
               </td>
@@ -62,7 +62,7 @@
                   v-else
                   :icon="[
                     'fal',
-                    player.paymentInfo.registrationFeePaid ? 'check' : 'times',
+                    player.paymentInfo.registrationFeePaid ? 'check' : 'xmark',
                   ]"
                 />
               </td>
@@ -72,7 +72,7 @@
                   v-else
                   :icon="[
                     'fal',
-                    player.paymentInfo.subscriptionUpToDate ? 'check' : 'times',
+                    player.paymentInfo.subscriptionUpToDate ? 'check' : 'xmark',
                   ]"
                 />
               </td>
