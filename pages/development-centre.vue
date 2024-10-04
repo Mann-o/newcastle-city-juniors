@@ -5,8 +5,8 @@
     <div class="mb-16 text-center">
       <img
         class="mx-auto max-w-3xl"
-        src="https://images.ctfassets.net/yv1glylq11v9/1L4ZOciRQ23jVSVO8JBlQY/369dfee5c301bb526f1af05788b08478/NCJ_Football_Development_Advert_2022-23.jpg"
-        alt="Poster for Football Development at Newcastle City Juniors in the 2022-23 season"
+        src="https://images.ctfassets.net/yv1glylq11v9/1L4ZOciRQ23jVSVO8JBlQY/62a748c8b2c208e5fb538a0892ca6ea4/image__4___1_.png"
+        alt="Poster for Football Development at Newcastle City Juniors in the 2024-25 season"
       >
     </div>
 
@@ -22,7 +22,7 @@
         It's a great opportunity for all those who wish to take their first steps into football and play the game we love every Friday!
       </p>
       <p class="mb-8 lg:mb-4">
-        Your child's first session is free and then £3 per session. All parents/guardians must register their child before attending any sessions.
+        Your child's first session is free and then £5 per session. All parents/guardians must register their child before attending any sessions.
       </p>
       <p>For more information and to register contact Adam on <a href="tel:+447518389898">07518389898</a> or email: <a href="mailto:ncj.adamjones@hotmail.com">ncj.adamjones@hotmail.com</a></p>
     </div>
@@ -31,14 +31,6 @@
       class="mx-auto"
       src="/images/etc/development-camps-3.jpg"
     >
-
-    <div class="mt-16 text-center">
-      <img
-        class="mx-auto max-w-3xl"
-        src="https://images.ctfassets.net/yv1glylq11v9/46R1Aj1uV5kcppHCu6DsiJ/0f3c64d169f2209fa86c6816f3412509/ncj-development-iorder-form.jpeg"
-        alt="Order form for Newcastle City Juniors Football Development sportswear"
-      >
-    </div>
   </div>
 </template>
 
