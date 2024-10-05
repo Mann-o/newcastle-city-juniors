@@ -10,6 +10,13 @@
     <div v-else>
       <div class="grid gap-8 lg:grid-cols-5">
         <ArticleCard
+          :image="trialsImage.file.url"
+          title="NCJ Footy Talk-In 2024"
+          subtext="Newcastle City Juniors are happy to announce our upcoming Football Talk-In!"
+          date="2024-10-05"
+          link="/news-and-events/footy-talk-in-2024"
+        />
+        <ArticleCard
           :image="trophyDayImage.file.url"
           title="Presentation For The 2023-24 Season"
           subtext="Newcastle City Juniors are happy to announce that tickets are now available for our Presentation 2023-24 Season!"
