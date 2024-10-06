@@ -11,7 +11,7 @@
     <div class="pb-8">
       <ul class="list-disc list-inside">
         <li>Friday, 15th November 2024</li>
-        <li>An evening with Lee Clark and Kevin Ball</li>
+        <li>An evening with Robert Lee</li>
         <li>Pies and Peas included</li>
         <li>Drinks package</li>
         <li>Raffle Prizes</li>
@@ -37,7 +37,7 @@
     <div v-if="formActive">
       <ValidationObserver v-slot="{ invalid, handleSubmit }">
         <form class="mt-8 md:max-w-lg" @submit.prevent="handleSubmit(completePayment)">
-          <FormSection label="Summer Cup 2023 - Registration">
+          <FormSection label="Football Talk-In 2024 - Registration">
             <p class="mb-8"><em><strong>IMPORTANT:</strong> All fields are required!</em></p>
             <ValidationProvider class="mb-4" v-slot="{ errors }" rules="required" tag="div" mode="eager">
               <FormElement label="Full Name" v-model="form.fullName" required />
