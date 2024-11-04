@@ -31,7 +31,10 @@ export default {
       return [
         ...(
           this.$auth?.user?.[0]?.permissions.some(({ name }) => name === 'view-players')
-            ? [{ label: 'Players', path: '/portal/admin/players', icon: 'users-between-lines' }]
+            ? [
+              { label: 'Players', path: '/portal/admin/players', icon: 'users-between-lines' },
+              { label: 'Parent Emails', path: '/portal/admin/parent-emails', icon: 'envelope' },
+            ]
             : []
         ),
         ...(
