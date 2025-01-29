@@ -179,7 +179,7 @@ export default {
           // { key: 'u8-juve-saturday', value: 'U8 Juve (Sat) - John Sullivan' },
           { key: 'u8-milan-saturday', value: 'U8 Milan (Sat) - Mattie Thompson' },
           { key: 'u8-lazio-saturday', value: 'U8 Lazio (Sat) - James Tolchard' },
-          { key: 'u8-inter', value: 'U8 Inter (Sun) - Adam Jones' },
+          { key: 'u8-inter', value: 'U8 Inter (Sun) - Daniel Laws' },
           // { key: 'u8-juve', value: 'U8 Juve (Sun) - John Sullivan' },
           { key: 'u8-lazio', value: 'U8 Lazio (Sun) - James Tolchard' },
           { key: 'u8-milan', value: 'U8 Milan (Sun) - Jordan Holmes' },
@@ -190,11 +190,13 @@ export default {
         value: 'Under 9s',
         teams: [
           { key: 'u9-girls-lionesses-saturday', value: 'U9 Girls Lionesses (Sat) - Mark Hedley' },
+          { key: 'u9-juve-saturday', value: 'U9 Juve (Sat) - Graham Watson' },
           { key: 'u9-girls-atlanta', value: 'U9 Girls Atlanta (Sun) - Joe Preston' },
           { key: 'u9-girls-lionesses', value: 'U9 Girls Lionesses (Sun) - Mark Hedley' },
           { key: 'u9-inter', value: 'U9 Inter (Sun) - Joe Foalle' },
           { key: 'u9-juve', value: 'U9 Juve (Sun) - Joe Foalle' },
           { key: 'u9-milan', value: 'U9 Milan (Sun) - Joe Foalle' },
+          { key: 'u9-pumas', value: 'U9 Pumas (Sun) - Joe Preston' },
         ],
       },
       {
