@@ -18,7 +18,7 @@
         class="block text-sm w-full focus:outline-none"
         :is="fieldElement"
         v-bind="fieldElementAttributes"
-        :value="value"
+        :value="value == null ? '' : value"
         @input="changeFieldValue"
       />
     </div>
@@ -53,7 +53,7 @@ export default {
       default: null,
     },
     value: {
-      type: String || null,
+      type: [String, null],
       required: false,
       default: null,
     },
@@ -104,8 +104,17 @@ export default {
     },
   },
 
+  watch: {
+    value(newValue) {
+      if (newValue == null) {
+        this.$emit('input', null)
+      }
+    },
+  },
+
   methods: {
     changeFieldValue (e) {
+      console.log('emitting')
       this.$emit('input', (e.target.value == null || e.target.value === '') ? null : e.target.value)
     },
   },
