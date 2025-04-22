@@ -370,7 +370,24 @@
           </div>
 
           <div class="mt-16">
-            <h2>Step 5 - Declaration</h2>
+            <h2>Step 5 - Gift Aid</h2>
+            <div
+              class="flex items-center cursor-pointer border p-4 transition-colors"
+              :class="{
+                'border-grey-400': !form.giftAidDeclarationAccepted,
+                'border-success': form.giftAidDeclarationAccepted,
+                'bg-grey-200': !form.giftAidDeclarationAccepted,
+                'bg-success-bg': form.giftAidDeclarationAccepted,
+              }"
+              @click="toggleGiftAidDeclarationAcceptance()"
+            >
+              <input type="checkbox" v-model="form.giftAidDeclarationAccepted">
+              <p class="ml-4">By ticking this box, I am certifying that I want to Gift Aid any payments/donations to Newcastle City Juniors. This includes any payments/donations that I make in the future, or may have made in the past. I am also certifying that I am a UK taxpayer and understand that if I pay less Income Tax and/or Capital Gains Tax than the amount of Gift Aid claimed on all my payments/donations in any given tax year, it is my responsibility to pay the difference.</p>
+            </div>
+          </div>
+
+          <div class="mt-16">
+            <h2>Step 6 - Declaration</h2>
             <ValidationProvider
               rules="is_true"
               v-slot="{ errors }"
@@ -390,6 +407,7 @@
               </div>
               <span class="text-xs text-danger mt-2">{{ errors[0] }}</span>
             </ValidationProvider>
+
             <button
               type="submit"
               :disabled="invalid || registering"
@@ -465,6 +483,7 @@ export default {
       membershipFeeOption: 'subscription',
       acceptedCodeOfConduct: false,
       acceptedDeclaration: false,
+      giftAidDeclarationAccepted: true,
       parentId: null,
     },
     registering: false,
@@ -612,6 +631,7 @@ export default {
       this.form.paymentDate = this.player.payment_date;
       this.form.acceptedCodeOfConduct = true;
       this.form.acceptedDeclaration = true;
+      this.form.giftAidDeclarationAccepted = true;
     }
   },
 
@@ -706,6 +726,9 @@ export default {
     },
     toggleDeclarationAcceptance() {
       this.form.acceptedDeclaration = !this.form.acceptedDeclaration
+    },
+    toggleGiftAidDeclarationAcceptance() {
+      this.form.giftAidDeclarationAccepted = !this.form.giftAidDeclarationAccepted
     },
     async registerPlayer() {
       this.registering = true;

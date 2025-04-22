@@ -108,6 +108,19 @@
                 </td>
               </tr>
               <tr>
+                <th class="text-left p-2">Gift Aid Opt-In<span class="text-danger ml-0.5">*</span></th>
+                <td class="p-2">
+                  <ValidationProvider
+                    v-slot="{ errors }"
+                    rules="required"
+                    tag="div"
+                  >
+                    <input type="checkbox" v-model="player.gift_aid_declaration_accepted">
+                    <span class="text-xs text-danger mt-2">{{ errors[0] }}</span>
+                  </ValidationProvider>
+                </td>
+              </tr>
+              <tr>
                 <th class="text-left p-2">Identity Verification Photo</th>
                 <td
                   v-if="player.identity_verification_photo"
@@ -256,6 +269,7 @@ export default {
       playerForm.append('dateOfBirth', this.player.date_of_birth);
       playerForm.append('sex', this.player.sex);
       playerForm.append('medicalConditions', this.player.medical_conditions);
+      playerForm.append('giftAidDeclarationAccepted', this.player.gift_aid_declaration_accepted);
 
       if (this.$refs.identityVerificationPhotoNew) {
         playerForm.append('identityVerificationPhoto', this.$refs.identityVerificationPhotoNew.files[0]);
