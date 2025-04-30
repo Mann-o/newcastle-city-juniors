@@ -114,7 +114,6 @@ export default {
 
   methods: {
     changeFieldValue (e) {
-      console.log('emitting')
       this.$emit('input', (e.target.value == null || e.target.value === '') ? null : e.target.value)
     },
   },

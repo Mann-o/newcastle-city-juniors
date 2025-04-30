@@ -10,6 +10,13 @@
     <div v-else>
       <div class="grid gap-8 lg:grid-cols-5">
         <ArticleCard
+          :image="trophyDayImage.file.url"
+          title="Presentation For The 2024-25 Season"
+          subtext="Newcastle City Juniors are happy to announce that tickets are now available for our Presentation 2024-25 Season!"
+          date="2025-04-30"
+          link="/news-and-events/presentation-2024"
+        />
+        <ArticleCard
           :image="trialsImage.file.url"
           title="NCJ Summer Cup 2025"
           subtext="Newcastle City Juniors are happy to announce our upcoming Newcastle City Juniors Summer Cup 2025!"
