@@ -45,7 +45,7 @@
       <div v-if="formActive">
         <ValidationObserver v-slot="{ invalid, handleSubmit }">
           <form class="mt-8 md:max-w-2xl" @submit.prevent="handleSubmit(completePayment)">
-            <FormSection label="NCJ Presentation (2023-2024 Season) - Ticket Purchase">
+            <FormSection label="NCJ Presentation (2024-2025 Season) - Ticket Purchase">
               <p class="mb-8"><em><strong>IMPORTANT:</strong> All fields are required!</em></p>
               <ValidationProvider class="mb-4" v-slot="{ errors }" rules="required" tag="div" mode="eager">
                 <FormElement label="Child Name" v-model="form.childName" required />
@@ -114,7 +114,7 @@
 import { ValidationObserver, ValidationProvider } from 'vee-validate';
 
 export default {
-  name: 'PageNewsAndEventsPresentation2023',
+  name: 'PageNewsAndEventsPresentation2024',
 
   scrollToTop: true,
 
