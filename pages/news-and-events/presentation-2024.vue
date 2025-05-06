@@ -187,7 +187,7 @@ export default {
       { key: 'u9-juve-saturday', value: 'Juve (Saturday)', ageGroup: 'under-9s', session: 'late' },
       { key: 'u9-milan', value: 'Milan', ageGroup: 'under-9s', session: 'late' },
       { key: 'u9-pumas', value: 'Pumas', ageGroup: 'under-9s', session: 'early' },
-      { key: 'u10-atalanta', value: 'Atalanta', ageGroup: 'under-10s', session: 'late' },
+      { key: 'u10-atalanta', value: 'Atalanta (Boys)', ageGroup: 'under-10s', session: 'late' },
       { key: 'u10-girls-atalanta-saturday', value: 'Girls Atalanta (Saturday)', ageGroup: 'under-10s', session: 'early' },
       { key: 'u10-girls-lionesses', value: 'Girls Lionesses', ageGroup: 'under-10s', session: 'early' },
       { key: 'u10-girls-lionesses-saturday', value: 'Girls Lionesses (Saturday)', ageGroup: 'under-10s', session: 'early' },
