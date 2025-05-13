@@ -205,7 +205,6 @@ export default {
       { key: 'u13', value: 'Under 13s', ageGroup: 'under-13s', session: 'late' },
       { key: 'u13-saturday', value: 'Under 13s (Saturday)', ageGroup: 'under-13s', session: 'late' },
       { key: 'u14-juve', value: 'Juve', ageGroup: 'under-14s', session: 'late' },
-      { key: 'u15-juve', value: 'Juve', ageGroup: 'under-15s', session: 'late' },
       { key: 'u15-saturday', value: 'Under 15s (Saturday)', ageGroup: 'under-15s', session: 'late' },
       { key: 'u16-juve', value: 'Juve', ageGroup: 'under-16s', session: 'late' },
     ],
