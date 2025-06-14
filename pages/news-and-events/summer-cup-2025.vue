@@ -251,7 +251,7 @@ export default {
       return this.ageGroupOptions?.find(({ key }) => key === this.form.tournamentEntry)?.price ?? 55;
     },
     ageGroupPricingInfo() {
-      return `This entry requires an upfront payment of £${this.activePrice}`;
+      return `This entry requires an upfront payment of £${this.activePrice.toFixed(2)}`;
     },
     noPlacesAvailable() {
       return this.ageGroupOptions.length === 0;
