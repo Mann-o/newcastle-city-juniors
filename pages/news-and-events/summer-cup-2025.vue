@@ -20,7 +20,7 @@
         <img src="https://images.ctfassets.net/yv1glylq11v9/2SzVYqYfkRGqxhiVuqNGgq/0cd7416c0318ae0df34d6bd9a3cfbdee/image__1___1_.png">
       </div>
 
-      <p class="p-6 bg-info text-white flex gap-6 items-center mb-12">
+      <p class="p-6 bg-info text-white inline-flex gap-6 items-center mt-12">
         <span class="text-3xl">
           <FontAwesomeIcon :icon="['fad', 'circle-info']" />
         </span>
