@@ -20,6 +20,13 @@
         <img src="https://images.ctfassets.net/yv1glylq11v9/2SzVYqYfkRGqxhiVuqNGgq/0cd7416c0318ae0df34d6bd9a3cfbdee/image__1___1_.png">
       </div>
 
+      <p class="p-6 bg-info text-white flex gap-6 items-center mb-12">
+        <span class="text-3xl">
+          <FontAwesomeIcon :icon="['fad', 'circle-info']" />
+        </span>
+        <span>LIMITED TIME OFFER - 25% OFF!</span>
+      </p>
+
       <p class="my-8">Thanks for your enquiry about the Newcastle City Juniors Summer Cup 2025, set to be hosted at Bullocksteads Sports Hub state-of-the-art facilities in July 2025.</p>
 
       <h2>Key Event Information</h2>
@@ -195,19 +202,19 @@ export default {
       acceptedOrganiserDecisionAgreement: false,
     },
     ageGroupOptions: [
-      { key: 'sat-5-july-u7-u8-girls', value: 'Sat 5th July - U7/U8 Girls', price: 45 },
-      { key: 'sat-5-july-u9-girls', value: 'Sat 5th July - U9 Girls', price: 50 },
-      { key: 'sat-5-july-u10-girls', value: 'Sat 5th July - U10 Girls', price: 50 },
-      { key: 'sat-5-july-u11-girls', value: 'Sat 5th July - U11 Girls', price: 50 },
-      { key: 'sat-5-july-u12-girls', value: 'Sat 5th July - U12 Girls', price: 55 },
-      { key: 'sun-6-july-u7-mixed-mid-low', value: 'Sun 6th July - U7 Mixed (Mid/Low)', price: 45 },
-      { key: 'sun-6-july-u7-mixed-high', value: 'Sun 6th July - U7 Mixed (High)', price: 45 },
-      { key: 'sun-6-july-u8-mixed-mid-low', value: 'Sun 6th July - U8 Mixed (Mid/Low)', price: 45 },
-      { key: 'sun-6-july-u8-mixed-high', value: 'Sun 6th July - U8 Mixed (High)', price: 45 },
-      { key: 'sun-6-july-u9-mixed-mid-low', value: 'Sun 6th July - U9 Mixed (Mid/Low)', price: 50 },
-      { key: 'sun-6-july-u9-mixed-high', value: 'Sun 6th July - U9 Mixed (High)', price: 50 },
-      { key: 'sun-6-july-u10-mixed-mid-low', value: 'Sun 6th July - U10 Mixed (Mid/Low)', price: 50 },
-      { key: 'sun-6-july-u10-mixed-high', value: 'Sun 6th July - U10 Mixed (High)', price: 50 },
+      { key: 'sat-5-july-u7-u8-girls', value: 'Sat 5th July - U7/U8 Girls', price: 33.75 },
+      { key: 'sat-5-july-u9-girls', value: 'Sat 5th July - U9 Girls', price: 37.50 },
+      { key: 'sat-5-july-u10-girls', value: 'Sat 5th July - U10 Girls', price: 37.50 },
+      { key: 'sat-5-july-u11-girls', value: 'Sat 5th July - U11 Girls', price: 37.50 },
+      { key: 'sat-5-july-u12-girls', value: 'Sat 5th July - U12 Girls', price: 41.25 },
+      { key: 'sun-6-july-u7-mixed-mid-low', value: 'Sun 6th July - U7 Mixed (Mid/Low)', price: 33.75 },
+      { key: 'sun-6-july-u7-mixed-high', value: 'Sun 6th July - U7 Mixed (High)', price: 33.75 },
+      { key: 'sun-6-july-u8-mixed-mid-low', value: 'Sun 6th July - U8 Mixed (Mid/Low)', price: 33.75 },
+      { key: 'sun-6-july-u8-mixed-high', value: 'Sun 6th July - U8 Mixed (High)', price: 33.75 },
+      { key: 'sun-6-july-u9-mixed-mid-low', value: 'Sun 6th July - U9 Mixed (Mid/Low)', price: 37.50 },
+      { key: 'sun-6-july-u9-mixed-high', value: 'Sun 6th July - U9 Mixed (High)', price: 37.50 },
+      { key: 'sun-6-july-u10-mixed-mid-low', value: 'Sun 6th July - U10 Mixed (Mid/Low)', price: 37.50 },
+      { key: 'sun-6-july-u10-mixed-high', value: 'Sun 6th July - U10 Mixed (High)', price: 37.50 },
     ],
     abilityLevelOptions: [
       { key: 'mid-low', value: 'Mid/Low (Division 4 or lower)' },
@@ -241,7 +248,7 @@ export default {
 
   computed: {
     activePrice() {
-      return this.ageGroupOptions.find(({ key }) => key === this.form.tournamentEntry).price;
+      return this.ageGroupOptions?.find(({ key }) => key === this.form.tournamentEntry)?.price ?? 55;
     },
     ageGroupPricingInfo() {
       return `This entry requires an upfront payment of £${this.activePrice}`;
