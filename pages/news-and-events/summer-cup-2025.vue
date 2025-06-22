@@ -208,13 +208,9 @@ export default {
       { key: 'sat-5-july-u11-girls', value: 'Sat 5th July - U11 Girls', price: 37.50 },
       { key: 'sat-5-july-u12-girls', value: 'Sat 5th July - U12 Girls', price: 41.25 },
       { key: 'sun-6-july-u7-mixed-mid-low', value: 'Sun 6th July - U7 Mixed (Mid/Low)', price: 33.75 },
-      { key: 'sun-6-july-u7-mixed-high', value: 'Sun 6th July - U7 Mixed (High)', price: 33.75 },
       { key: 'sun-6-july-u8-mixed-mid-low', value: 'Sun 6th July - U8 Mixed (Mid/Low)', price: 33.75 },
-      { key: 'sun-6-july-u8-mixed-high', value: 'Sun 6th July - U8 Mixed (High)', price: 33.75 },
       { key: 'sun-6-july-u9-mixed-mid-low', value: 'Sun 6th July - U9 Mixed (Mid/Low)', price: 37.50 },
-      { key: 'sun-6-july-u9-mixed-high', value: 'Sun 6th July - U9 Mixed (High)', price: 37.50 },
       { key: 'sun-6-july-u10-mixed-mid-low', value: 'Sun 6th July - U10 Mixed (Mid/Low)', price: 37.50 },
-      { key: 'sun-6-july-u10-mixed-high', value: 'Sun 6th July - U10 Mixed (High)', price: 37.50 },
     ],
     abilityLevelOptions: [
       { key: 'mid-low', value: 'Mid/Low (Division 4 or lower)' },
