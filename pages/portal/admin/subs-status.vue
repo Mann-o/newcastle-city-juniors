@@ -161,7 +161,7 @@ export default {
     filters: {
       ageGroup: 'u7',
       sex: 'female',
-      team: 'u7-girls-saturday',
+      team: 'u7-saturday-lionesses',
     },
     loading: true,
     players: [],
@@ -335,7 +335,7 @@ export default {
 
   computed: {
     filteredTeams() {
-      return this.ageGroups.find(({ key }) => key === this.filters.ageGroup)?.teams[this.filters.sex] || [];
+      return this.ageGroups.find(({ key }) => key === this.filters.ageGroup)?.teams?.[this.filters.sex] || [];
     },
     upfrontPlayers() {
       return this.players.filter(player => player.membership_fee_option === 'upfront');
@@ -348,11 +348,24 @@ export default {
   watch: {
     'filters.ageGroup': function watchAgeGroup() {
       this.$nextTick(() => {
-        this.filters.team = this.filteredTeams[0].key;
+        if (this.filteredTeams.length > 0) {
+          this.filters.team = this.filteredTeams[0].key;
+          this.fetchSubsStatus();
+        }
       });
     },
     'filters.team': async function watchTeam() {
-      this.fetchSubsStatus();
+      if (this.filters.team) {
+        this.fetchSubsStatus();
+      }
+    },
+    'filters.sex': async function watchSex() {
+      this.$nextTick(() => {
+        if (this.filteredTeams.length > 0) {
+          this.filters.team = this.filteredTeams[0].key;
+          this.fetchSubsStatus();
+        }
+      });
     },
   },
 
