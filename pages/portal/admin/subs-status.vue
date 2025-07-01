@@ -6,7 +6,7 @@
       v-model="filters.ageGroup"
     />
     <FormSelect
-      label="Sex",
+      label="Sex"
       :options="sexes"
       v-model="filters.sex"
     />
