@@ -6,11 +6,16 @@
       v-model="filters.ageGroup"
     />
     <FormSelect
+      label="Sex",
+      :options="sexes"
+      v-model="filters.sex"
+    />
+    <FormSelect
       label="Team"
       :options="filteredTeams"
       v-model="filters.team"
     />
-    <button class="hidden" @click="setDefaultPaymentMethod()">Set Default Payment Method</button>
+    <!-- <button class="hidden" @click="setDefaultPaymentMethod()">Set Default Payment Method</button> -->
 
     <div v-if="loading">
       <Loader class="mt-10"/>
@@ -155,124 +160,182 @@ export default {
   data: () => ({
     filters: {
       ageGroup: 'u7',
+      sex: 'female',
       team: 'u7-girls-saturday',
     },
     loading: true,
     players: [],
+    sexes: [
+      { key: 'male', value: 'Male' },
+      { key: 'female', value: 'Female' },
+    ],
     ageGroups: [
       {
         key: 'u7',
         value: 'Under 7s',
-        teams: [
-          { key: 'u7-girls-saturday', value: 'U7 Girls (Sat) - Mark Hedley' },
-          { key: 'u7-saturday', value: 'U7s (Sat) - Matty Henry' },
-          { key: 'u7-inter', value: 'U7 Inter (Sun) - Matty Henry' },
-          { key: 'u7-juve', value: 'U7 Juve (Sun) - Matty Henry' },
-          { key: 'u7-milan', value: 'U7 Milan (Sun) - Matty Henry' },
-        ],
+        teams: {
+          female: [
+            { key: 'u7-saturday-lionesses', value: 'U7 Lionesses (Saturday) - Sarah Burn' },
+            { key: 'u7-sunday-lionesses', value: 'U7 Lionesses (Sunday) - Mark Ferguson' },
+          ],
+          male: [
+            { key: 'u7-saturday-inter', value: 'U7 Inter (Saturday) - Michael Parr' },
+            { key: 'u7-saturday-juve', value: 'U7 Juve (Saturday) - Ben Scott' },
+            { key: 'u7-saturday-milan', value: 'U7 Milan (Saturday) - Mickey Richards' },
+            { key: 'u7-sunday-atalanta', value: 'U7 Atalanta (Sunday) - Charlie Loughlen' },
+            { key: 'u7-sunday-inter', value: 'U7 Inter (Sunday) - Michael Parr' },
+            { key: 'u7-sunday-juve', value: 'U7 Juve (Sunday) - Liam Moody' },
+            { key: 'u7-sunday-milan', value: 'U7 Milan (Sunday) - Mickey Richards' },
+            { key: 'u7-sunday-napoli', value: 'U7 Napoli (Sunday) - John Sullivan' },
+          ],
+        },
       },
       {
         key: 'u8',
         value: 'Under 8s',
-        teams: [
-          { key: 'u8-girls-saturday', value: 'U8 Girls (Sat) - Jordan Robertson' },
-          // { key: 'u8-juve-saturday', value: 'U8 Juve (Sat) - John Sullivan' },
-          { key: 'u8-milan-saturday', value: 'U8 Milan (Sat) - Mattie Thompson' },
-          { key: 'u8-lazio-saturday', value: 'U8 Lazio (Sat) - James Tolchard' },
-          { key: 'u8-inter', value: 'U8 Inter (Sun) - Daniel Laws' },
-          // { key: 'u8-juve', value: 'U8 Juve (Sun) - John Sullivan' },
-          { key: 'u8-lazio', value: 'U8 Lazio (Sun) - James Tolchard' },
-          { key: 'u8-milan', value: 'U8 Milan (Sun) - Jordan Holmes' },
-        ],
+        teams: {
+          female: [
+            { key: 'u8-saturday-lionesses', value: 'U8 Lionesses (Saturday) - Chloe Clifford' },
+            { key: 'u8-sunday-lionesses', value: 'U8 Lionesses (Sunday) - David Bland' },
+          ],
+          male: [
+            { key: 'u8-saturday', value: 'U8 (Saturday) - Rob Charlton' },
+            { key: 'u8-sunday-inter', value: 'U8 Inter (Sunday) - Rob Charlton' },
+            { key: 'u8-sunday-juve', value: 'U8 Juve (Sunday) - Matty Henry' },
+            { key: 'u8-sunday-milan', value: 'U8 Milan (Sunday) - Matty Henry' },
+            { key: 'u8-sunday-napoli', value: 'U8 Napoli (Sunday) - Carl Johnson' },
+          ],
+        },
       },
       {
         key: 'u9',
         value: 'Under 9s',
-        teams: [
-          { key: 'u9-girls-lionesses-saturday', value: 'U9 Girls Lionesses (Sat) - Mark Hedley' },
-          { key: 'u9-juve-saturday', value: 'U9 Juve (Sat) - Graham Watson' },
-          { key: 'u9-girls-atlanta', value: 'U9 Girls Atlanta (Sun) - Joe Preston' },
-          { key: 'u9-girls-lionesses', value: 'U9 Girls Lionesses (Sun) - Mark Hedley' },
-          { key: 'u9-inter', value: 'U9 Inter (Sun) - Joe Foalle' },
-          { key: 'u9-juve', value: 'U9 Juve (Sun) - Joe Foalle' },
-          { key: 'u9-milan', value: 'U9 Milan (Sun) - Joe Foalle' },
-          { key: 'u9-pumas', value: 'U9 Pumas (Sun) - Joe Preston' },
-        ],
+        teams: {
+          female: [
+            { key: 'u9-saturday-lionesses', value: 'U9 Lionesses (Saturday) - Stu Taylor' },
+          ],
+          male: [
+            { key: 'u9-saturday', value: 'U9 (Saturday) - Matty Henry' },
+            { key: 'u9-saturday-juve', value: 'U9 Juve (Saturday) - Alex Gray' },
+            { key: 'u9-saturday-lazio', value: 'U9 Lazio (Saturday) - James Tolchard' },
+            { key: 'u9-sunday-inter', value: 'U9 Inter (Sunday) - Matty Henry' },
+            { key: 'u9-sunday-juve', value: 'U9 Juve (Sunday) - Alex Gray' },
+            { key: 'u9-sunday-lazio', value: 'U9 Lazio (Sunday) - James Tolchard' },
+            { key: 'u9-sunday-milan', value: 'U9 Milan (Sunday) - Jordan Holmes' },
+          ],
+        },
       },
       {
         key: 'u10',
         value: 'Under 10s',
-        teams: [
-          { key: 'u10-girls-atalanta-saturday', value: 'U10 Girls Atalanta (Sat) - Stu Taylor' },
-          { key: 'u10-lionesses-saturday', value: 'U10 Lionesses (Sat) - Leanne Marshall' },
-          { key: 'u10-fiorentina-saturday', value: 'U10 Fiorentina (Sat) - Paul Leadbitter' },
-          { key: 'u10-juve-saturday', value: 'U10 Juve (Sat) - James Robertson' },
-          { key: 'u10-napoli-saturday', value: 'U10 Napoli (Sat) - Chris Hunn' },
-          { key: 'u10-girls-lionesses', value: 'U10 Girls Lionesses (Sun) - Leanne Marshall' },
-          { key: 'u10-atalanta', value: 'U10 Atalanta (Sun) - Mattie Thompson' },
-          { key: 'u10-inter', value: 'U10 Inter (Sun) - Paul Leadbitter' },
-          { key: 'u10-juve', value: 'U10 Juve (Sun) - James Tolchard' },
-          { key: 'u10-milan', value: 'U10 Milan (Sun) - Graham Watson' },
-          { key: 'u10-roma', value: 'U10 Roma (Sun) - Chris Hunn' }
-        ],
+        teams: {
+          female: [
+            { key: 'u10-saturday-atalanta', value: 'U10 Atalanta (Saturday) - Jordan Robertson' },
+            { key: 'u10-saturday-lionesses', value: 'U10 Lionesses (Saturday) - Mark Hedley' },
+            { key: 'u10-sunday-atalanta', value: 'U10 Atalanta (Sunday) - Joe Preston' },
+            { key: 'u10-sunday-lionesses', value: 'U10 Lionesses (Sunday) - Mark Hedley' },
+            { key: 'u10-sunday-pumas', value: 'U10 Pumas (Sunday) - Joe Preston' },
+          ],
+          male: [
+            { key: 'u10-saturday-milan', value: 'U10 Milan (Saturday) - Mattie Thompson' },
+            { key: 'u10-saturday-roma', value: 'U10 Roma (Saturday) - Chris Bush' },
+            { key: 'u10-sunday-inter', value: 'U10 Inter (Sunday) - Darryl Faichen' },
+            { key: 'u10-sunday-juve', value: 'U10 Juve (Sunday) - Stephen Welsh' },
+            { key: 'u10-sunday-milan', value: 'U10 Milan (Sunday) - Joe Foalle' },
+            { key: 'u10-sunday-napoli', value: 'U10 Napoli (Sunday) - Ray Armstrong' },
+          ],
+        },
       },
       {
         key: 'u11',
         value: 'Under 11s',
-        teams: [
-          { key: 'u11-girls-lionesses-saturday', value: 'U11 Girls Lionesses (Sat) - Mark Hewitson' },
-          { key: 'u11-inter-saturday', value: 'U11 Inter (Sat) - Chris Carr' },
-          { key: 'u11-jaguars', value: 'U11 Jaguars (Sun) - Chloe Clifford' },
-          { key: 'u11-pumas', value: 'U11 Pumas (Sun) - Chloe Clifford' },
-          { key: 'u11-inter', value: 'U11 Inter (Sun) - Chris Carr' },
-          { key: 'u11-juve', value: 'U11 Juve (Sun) - Paul Thornton' },
-          { key: 'u11-milan', value: 'U11 Milan (Sun) - Adam Jones' },
-        ],
+        teams: {
+          female: [
+            { key: 'u11-saturday-atalanta', value: 'U11 Atalanta (Saturday) - Stu Taylor' },
+            { key: 'u11-saturday-lionesses', value: 'U11 Lionesses (Saturday) - Jordan Robertson' },
+            { key: 'u11-sunday-atalanta', value: 'U11 Atalanta (Sunday) - Stu Taylor' },
+            { key: 'u11-sunday-lionesses', value: 'U11 Lionesses (Sunday) - Leanne Marshall' },
+          ],
+          male: [
+            { key: 'u11-saturday-sparta', value: 'U11 Sparta (Saturday) - Peter Lappin' },
+            { key: 'u11-saturday-sparta-96', value: 'U11 Sparta 96 (Saturday) - Peter Lappin' },
+            { key: 'u11-sunday-milan', value: 'U11 Milan (Sunday) - Sam Gibson' },
+            { key: 'u11-sunday-roma', value: 'U11 Roma (Sunday) - Chris Hunn' },
+            { key: 'u11-sunday-sparta', value: 'U11 Sparta (Sunday) - Peter Lappin' },
+            { key: 'u11-sunday-sparta-96', value: 'U11 Sparta 96 (Sunday) - Peter Lappin' },
+          ],
+        },
       },
       {
         key: 'u12',
         value: 'Under 12s',
-        teams: [
-          { key: 'u12-milan', value: 'U12 Milan (Sun) - John Stewart' },
-          { key: 'u12-sparta', value: 'U12 Sparta (Sun) - Iain Davison' },
-        ],
+        teams: {
+          female: [
+            { key: 'u12-saturday-lionesses', value: 'U12 Lionesses (Saturday) - Mark Hewitson' },
+            { key: 'u12-sunday-jaguars', value: 'U12 Jaguars (Sunday) - Chloe Clifford' },
+            { key: 'u12-sunday-pumas', value: 'U12 Pumas (Sunday) - Chloe Clifford' },
+          ],
+          male: [
+            { key: 'u12-saturday-inter', value: 'U12 Inter (Saturday) - Chris Carr' },
+            { key: 'u12-sunday-inter', value: 'U12 Inter (Sunday) - Chris Carr' },
+            { key: 'u12-sunday-milan', value: 'U12 Milan (Sunday) - Adam Jones' },
+            { key: 'u12-sunday-napoli', value: 'U12 Napoli (Sunday) - Adam Jones' },
+          ],
+        },
       },
       {
         key: 'u13',
         value: 'Under 13s',
-        teams: [
-          { key: 'u13-saturday', value: 'U13s (Sat) - John Stewart' },
-          { key: 'u13-city', value: 'U13 City (Sun) - Simon Philpott' },
-        ],
+        teams: {
+          female: [
+            { key: 'u13-sunday-lionesses', value: 'U13 Lionesses (Sunday) - Mark Foreman' },
+          ],
+          male: [
+            { key: 'u13-saturday-milan', value: 'U13 Milan (Saturday) - John Stewart' },
+            { key: 'u13-sunday-milan', value: 'U13 Milan (Sunday) - John Stewart' },
+            { key: 'u13-sunday-sparta', value: 'U13 Sparta (Sunday) - Iain Davison' },
+          ],
+        },
       },
       {
         key: 'u14',
         value: 'Under 14s',
-        teams: [
-          { key: 'u14-juve', value: 'U14 Juve (Sun) - Stu Smith' },
-        ],
+        teams: {
+          female: [
+            { key: 'u14-saturday-lionesses', value: 'U14 Lionesses (Saturday) - Abbie Johnson' },
+          ],
+          male: [
+            { key: 'u14-saturday', value: 'U14 (Saturday) - Simon Philpott' },
+            { key: 'u14-sunday', value: 'U14 (Sunday) - Simon Philpott' },
+          ],
+        },
       },
       {
         key: 'u15',
         value: 'Under 15s',
-        teams: [
-          { key: 'u15-saturday', value: 'U15s (Sat) - John Sullivan' },
-          { key: 'u15-juve', value: 'U15 Juve (Sun) - John Sullivan' },
-        ],
+        teams: {
+          female: [],
+          male: [
+            { key: 'u15-sunday-juve', value: 'U15 Juve (Sunday) - Stu Smith' },
+          ],
+        },
       },
       {
         key: 'u16',
         value: 'Under 16s',
-        teams: [
-          { key: 'u16-juve', value: 'U16 Juve (Sun) - Mark Foreman' },
-        ],
+        teams: {
+          female: [],
+          male: [
+            { key: 'u16-saturday-juve', value: 'U16 Juve (Saturday) - John Sullivan' },
+          ],
+        },
       },
     ],
   }),
 
   computed: {
     filteredTeams() {
-      return this.ageGroups.find(({ key }) => key === this.filters.ageGroup)?.teams || [];
+      return this.ageGroups.find(({ key }) => key === this.filters.ageGroup)?.teams[this.filters.sex] || [];
     },
     upfrontPlayers() {
       return this.players.filter(player => player.membership_fee_option === 'upfront');
@@ -307,10 +370,10 @@ export default {
 
       this.loading = false;
     },
-    async setDefaultPaymentMethod() {
-      const response = await this.$axios.post('/api/admin/set-default-payment-method');
-      console.log(response);
-    },
+    // async setDefaultPaymentMethod() {
+    //   const response = await this.$axios.post('/api/admin/set-default-payment-method');
+    //   console.log(response);
+    // },
   },
 };
 </script>
