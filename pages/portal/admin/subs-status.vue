@@ -176,7 +176,7 @@ export default {
         teams: {
           female: [
             { key: 'u7-saturday-lionesses', value: 'U7 Lionesses (Saturday) - Sarah Burn' },
-            { key: 'u7-sunday-lionesses', value: 'U7 Lionesses (Sunday) - Mark Ferguson' },
+            { key: 'u7-saturday-girls-atalanta', value: 'U7 Girls Atalanta (Saturday) - Mark Ferguson' },
           ],
           male: [
             { key: 'u7-saturday-inter', value: 'U7 Inter (Saturday) - Michael Parr' },
