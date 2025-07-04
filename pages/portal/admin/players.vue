@@ -61,7 +61,7 @@
                   <button
                     v-if="player.identity_verification_photo"
                     class="underline"
-                    @click="viewImage(player.identity_verification_photo)"
+                    @click="viewImage('identity-verification-photos', player.identity_verification_photo)"
                   >
                     View
                   </button>
@@ -71,7 +71,7 @@
                   <button
                     v-if="player.age_verification_photo"
                     class="underline"
-                    @click="viewImage(player.age_verification_photo)"
+                    @click="viewImage('age-verification-photos', player.age_verification_photo)"
                   >
                     View
                   </button>
@@ -140,8 +140,8 @@ export default {
   },
 
   methods: {
-    async viewImage(path) {
-      const { data: { data: image} } = await this.$axios.get(`/api/admin/verification-photos/${path}`);
+    async viewImage(folder, filename) {
+      const { data: { data: image} } = await this.$axios.get(`/api/admin/verification-photos/${folder}/${filename}`);
 
       const link = document.createElement('a');
       link.href = image;
