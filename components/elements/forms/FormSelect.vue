@@ -20,6 +20,8 @@
           v-for="(option, index) in options"
           :key="index"
           :value="option[keyField]"
+          :disabled="option.disabled"
+          :style="option.disabled ? 'color: #9CA3AF; font-style: italic;' : ''"
         >
           {{ option[valueField] }}
         </option>

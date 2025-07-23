@@ -37,6 +37,7 @@ export const fontawesome = {
       'faShirt',
       'faSignature',
       'faTicket',
+      'faTriangleExclamation',
       'faUser',
       'faUsers',
       'faUsersBetweenLines',
