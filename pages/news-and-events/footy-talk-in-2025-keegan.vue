@@ -158,7 +158,7 @@ export default {
       script: [
         {
           hid: 'stripe',
-          src: 'https://js.stripe.com/basil/stripe.js/stripe.js',
+          src: 'https://js.stripe.com/basil/stripe.js',
           defer: true,
         },
       ],
