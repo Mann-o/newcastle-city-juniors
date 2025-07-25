@@ -53,6 +53,9 @@
           </tr>
         </tbody>
       </table>
+      <div class="mt-8 italic">
+        <p>NOTE: It may sometimes take a few minutes for a player you have registered to appear here. If you have registered a player and they are not yet showing on this page, please wait a little while and refresh this page. If the registered player still does not appear, please reach out to us: <a href="mailto:info@newcastlecityjuniors.co.uk">info@newcastlecityjuniors.co.uk</a></p>
+      </div>
       <button
         @click="handleRegisterPlayerButton()"
         :disabled="parentCount === 0"
