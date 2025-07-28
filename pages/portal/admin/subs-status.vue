@@ -48,12 +48,14 @@
             >
               <td class="p-2 border border-grey-200 text-sm text-left">
                 <a
-                  :href="`https://dashboard.stripe.com/customers/${player.parent.user.stripe_customer_id}`"
+                  :href="`https://dashboard.stripe.com/customers/${player.stripeCustomerId}`"
                   title="View on Stripe"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  {{ player.full_name }}
+                  {{ player.firstName }}
+                  {{ player.middleNames ? ` ${player.middleNames}` : '' }}
+                  {{ player.lastName ? ` ${player.lastName}` : '' }}
                 </a>
               </td>
               <td
@@ -104,12 +106,14 @@
             >
               <td class="p-2 border border-grey-200 text-sm text-left">
                 <a
-                  :href="`https://dashboard.stripe.com/customers/${player.parent.user.stripe_customer_id}`"
+                  :href="`https://dashboard.stripe.com/customers/${player.stripeCustomerId}`"
                   title="View on Stripe"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  {{ player.full_name }}
+                  {{ player.firstName }}
+                  {{ player.middleNames ? ` ${player.middleNames}` : '' }}
+                  {{ player.lastName ? ` ${player.lastName}` : '' }}
                 </a>
               </td>
               <td
@@ -338,10 +342,10 @@ export default {
       return this.ageGroups.find(({ key }) => key === this.filters.ageGroup)?.teams?.[this.filters.sex] || [];
     },
     upfrontPlayers() {
-      return this.players.filter(player => player.membership_fee_option === 'upfront');
+      return this.players.filter(player => player.membershipFeeOption === 'upfront');
     },
     subscriptionPlayers() {
-      return this.players.filter(player => player.membership_fee_option === 'subscription');
+      return this.players.filter(player => player.membershipFeeOption === 'subscription');
     },
   },
 
