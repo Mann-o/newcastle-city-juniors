@@ -377,7 +377,7 @@ export default {
     async fetchSubsStatus() {
       this.loading = true;
 
-      const { data: players } = await this.$axios.post('/api/admin/subs-status', this.filters);
+      const { data: { data: players } } = await this.$axios.post('/api/admin/subs-status', this.filters);
 
       this.players = players;
 
