@@ -761,6 +761,12 @@ export default {
         this.form.secondTeam = 'none';
       });
     },
+    'form.sex': function watchSex() {
+      this.$nextTick(() => {
+        this.form.team = this.teams[0]?.key ?? null;
+        this.form.secondTeam = 'none';
+      });
+    },
   },
 
   mounted() {
