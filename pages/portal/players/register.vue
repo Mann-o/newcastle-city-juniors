@@ -707,7 +707,7 @@ export default {
         : 'Register Player'
     },
     upfrontDisabled() {
-      return new Date() > new Date('2025-07-31');
+      return new Date() >= new Date('2025-08-01');
     },
     subscriptionOptions() {
       const costs = {
