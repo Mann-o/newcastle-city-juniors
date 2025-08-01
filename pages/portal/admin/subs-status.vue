@@ -38,7 +38,7 @@
         </thead>
         <tbody>
           <tr v-if="upfrontPlayers.length === 0">
-            <td class="p-2 border border-grey-200 text-sm text-center" colspan="3">
+            <td class="p-2 border border-grey-200 text-sm text-center" colspan="4">
               No upfront players for this team
             </td>
           </tr>
@@ -92,6 +92,7 @@
         <thead>
           <tr>
             <th class="bg-black text-gold font-normal text-sm p-2 text-left">Player</th>
+            <th class="bg-black text-gold font-normal text-sm p-2 text-left">Date Registered</th>
             <th class="bg-black text-gold font-normal text-sm p-2 text-center">Paid Reg Fee?</th>
             <th class="bg-black text-gold font-normal text-sm p-2 text-center">Subs Up To Date?</th>
             <th class="bg-black text-gold font-normal text-sm p-2 text-left">Notes</th>
@@ -99,7 +100,7 @@
         </thead>
         <tbody>
           <tr v-if="subscriptionPlayers.length === 0">
-            <td class="p-2 border border-grey-200 text-sm text-center" colspan="4">
+            <td class="p-2 border border-grey-200 text-sm text-center" colspan="5">
               No subscription players for this team
             </td>
           </tr>
@@ -128,6 +129,9 @@
                 FREE COACH REGISTRATION
               </td>
               <template v-else>
+                <td class="p-2 border border-grey-200 text-sm text-center">
+                  {{ player.createdAt | formatDate('dd/MM/yyyy - HH:mm') }}
+                </td>
                 <td class="p-2 border border-grey-200 text-sm text-center">
                   <FontAwesomeIcon
                     :icon="[
