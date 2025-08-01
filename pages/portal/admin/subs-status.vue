@@ -31,7 +31,7 @@
         <thead>
           <tr>
             <th class="bg-black text-gold font-normal text-sm p-2 text-left">Player</th>
-            <th class="bg-black text-gold font-normal text-sm p-2 text-left">Date Registered</th>
+            <th class="bg-black text-gold font-normal text-sm p-2 text-center">Date Registered</th>
             <th class="bg-black text-gold font-normal text-sm p-2 text-center">Paid?</th>
             <th class="bg-black text-gold font-normal text-sm p-2 text-left">Notes</th>
           </tr>
@@ -64,7 +64,7 @@
               </td>
               <td
                 v-if="player.paymentInfo.isCoach"
-                colspan="2"
+                colspan="3"
                 class="p-2 border border-grey-200 text-sm text-center"
               >
                 FREE COACH REGISTRATION
@@ -92,7 +92,7 @@
         <thead>
           <tr>
             <th class="bg-black text-gold font-normal text-sm p-2 text-left">Player</th>
-            <th class="bg-black text-gold font-normal text-sm p-2 text-left">Date Registered</th>
+            <th class="bg-black text-gold font-normal text-sm p-2 text-center">Date Registered</th>
             <th class="bg-black text-gold font-normal text-sm p-2 text-center">Paid Reg Fee?</th>
             <th class="bg-black text-gold font-normal text-sm p-2 text-center">Subs Up To Date?</th>
             <th class="bg-black text-gold font-normal text-sm p-2 text-left">Notes</th>
@@ -123,7 +123,7 @@
               </td>
               <td
                 v-if="player.paymentInfo.isCoach"
-                colspan="3"
+                colspan="4"
                 class="p-2 border border-grey-200 text-sm text-center"
               >
                 FREE COACH REGISTRATION
