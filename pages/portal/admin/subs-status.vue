@@ -31,6 +31,7 @@
         <thead>
           <tr>
             <th class="bg-black text-gold font-normal text-sm p-2 text-left">Player</th>
+            <th class="bg-black text-gold font-normal text-sm p-2 text-left">Date Registered</th>
             <th class="bg-black text-gold font-normal text-sm p-2 text-center">Paid?</th>
             <th class="bg-black text-gold font-normal text-sm p-2 text-left">Notes</th>
           </tr>
@@ -57,6 +58,9 @@
                   {{ player.middleNames ? ` ${player.middleNames}` : '' }}
                   {{ player.lastName ? ` ${player.lastName}` : '' }}
                 </a>
+              </td>
+              <td class="p-2 border border-grey-200 text-sm text-center">
+                {{ player.createdAt | formatDate('dd/MM/yyyy - HH:mm') }}
               </td>
               <td
                 v-if="player.paymentInfo.isCoach"
