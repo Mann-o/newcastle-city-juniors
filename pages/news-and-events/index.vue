@@ -10,6 +10,13 @@
     <div v-else>
       <div class="grid gap-8 lg:grid-cols-5">
         <ArticleCard
+          image="https://images.ctfassets.net/yv1glylq11v9/1FH2FspB3cEVF94C8uJZ0z/a8ae871f60db0029f3d1095e314f19e7/WhatsApp_Image_2025-08-07_at_19.49.51.jpeg?h=250"
+          title="NCJ Halloween Party"
+          subtext="Newcastle City Juniors are happy to announce that tickets are now available for our 2025 Halloween Party!"
+          date="2025-08-13"
+          link="/news-and-events/halloween-2025"
+        />
+        <ArticleCard
           :image="trialsImage.file.url"
           title="NCJ Footy Talk-In"
           subtext="Newcastle City Juniors are happy to announce our upcoming Football Talk-In!"

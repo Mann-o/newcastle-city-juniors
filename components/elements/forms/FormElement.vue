@@ -53,7 +53,7 @@ export default {
       default: null,
     },
     value: {
-      type: [String, null],
+      type: [String, Number, null],
       required: false,
       default: null,
     },
@@ -66,6 +66,21 @@ export default {
       type: Boolean,
       required: false,
       default: false,
+    },
+    min: {
+      type: [String, Number],
+      required: false,
+      default: null,
+    },
+    max: {
+      type: [String, Number],
+      required: false,
+      default: null,
+    },
+    step: {
+      type: [String, Number],
+      required: false,
+      default: null,
     },
   },
 
@@ -92,6 +107,12 @@ export default {
           ...this.fieldType === 'date' && {
             type: 'date',
           },
+          ...this.fieldType === 'number' && {
+            type: 'number',
+            ...this.min !== null && { min: this.min },
+            ...this.max !== null && { max: this.max },
+            ...this.step !== null && { step: this.step },
+          },
           ...this.required && {
             required: true,
           },
@@ -114,7 +135,47 @@ export default {
 
   methods: {
     changeFieldValue (e) {
-      this.$emit('input', (e.target.value == null || e.target.value === '') ? null : e.target.value)
+      let value = e.target.value;
+      
+      // Handle empty values
+      if (value == null || value === '') {
+        this.$emit('input', null);
+        return;
+      }
+      
+      // Convert to number for numeric inputs
+      if (this.fieldType === 'number') {
+        const numValue = parseFloat(value);
+        
+        // Check if it's a valid number
+        if (!isNaN(numValue)) {
+          // Apply min/max constraints
+          let constrainedValue = numValue;
+          
+          if (this.min !== null && numValue < this.min) {
+            constrainedValue = this.min;
+          }
+          
+          if (this.max !== null && numValue > this.max) {
+            constrainedValue = this.max;
+          }
+          
+          // If we had to constrain the value, update the input
+          if (constrainedValue !== numValue) {
+            this.$nextTick(() => {
+              e.target.value = constrainedValue;
+            });
+          }
+          
+          this.$emit('input', constrainedValue);
+        } else {
+          // If not a valid number, emit null
+          this.$emit('input', null);
+        }
+      } else {
+        // For non-numeric inputs, emit as string
+        this.$emit('input', value);
+      }
     },
   },
 }
