@@ -89,100 +89,133 @@
       </table>
 
       <h2 class="mt-10">Subscription Payment Players</h2>
-      <div v-for="player in subscriptionPlayers" :key="`subscription-player-${player.id}`" class="mb-8">
-        <div class="bg-gray-50 p-4 rounded-lg">
-          <h3 class="text-lg font-semibold mb-2">
-            <a
-              :href="`https://dashboard.stripe.com/customers/${player.stripeCustomerId}`"
-              title="View on Stripe"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="text-blue-600 hover:text-blue-800"
-            >
-              {{ player.firstName }}
-              {{ player.middleNames ? ` ${player.middleNames}` : '' }}
-              {{ player.lastName ? ` ${player.lastName}` : '' }}
-            </a>
-          </h3>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-            <div>
-              <strong>Registered:</strong> {{ player.createdAt | formatDate('dd/MM/yyyy - HH:mm') }}
-            </div>
-            <div v-if="!player.paymentInfo.isCoach">
-              <strong>Registration Fee:</strong>
-              <FontAwesomeIcon
-                :icon="['fal', player.paymentInfo.registrationFeePaid ? 'check' : 'xmark']"
-                :class="player.paymentInfo.registrationFeePaid ? 'text-green-600' : 'text-red-600'"
-              />
-            </div>
-            <div v-if="!player.paymentInfo.isCoach">
-              <strong>Subscription Status:</strong>
-              <FontAwesomeIcon
-                :icon="['fal', player.paymentInfo.subscriptionUpToDate ? 'check' : 'xmark']"
-                :class="player.paymentInfo.subscriptionUpToDate ? 'text-green-600' : 'text-red-600'"
-              />
+      <div v-for="player in subscriptionPlayers" :key="`subscription-player-${player.id}`" class="mb-6">
+        <div class="bg-white border border-gray-300 rounded-lg shadow-md p-6">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-xl font-semibold">
+              <a
+                :href="`https://dashboard.stripe.com/customers/${player.stripeCustomerId}`"
+                title="View on Stripe"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-blue-600 hover:text-blue-800 hover:underline"
+              >
+                {{ player.firstName }}
+                {{ player.middleNames ? ` ${player.middleNames}` : '' }}
+                {{ player.lastName ? ` ${player.lastName}` : '' }}
+              </a>
+            </h3>
+            <div class="text-sm text-gray-500">
+              Registered: {{ player.createdAt | formatDate('dd/MM/yyyy') }}
             </div>
           </div>
 
-          <div v-if="player.paymentInfo.isCoach" class="text-center py-4 bg-green-100 rounded-lg">
-            <strong>FREE COACH REGISTRATION</strong>
+          <div v-if="player.paymentInfo.isCoach" class="text-center py-6 bg-green-50 border border-green-200 rounded-lg">
+            <div class="text-green-800 font-semibold text-lg">🏆 FREE COACH REGISTRATION</div>
+            <div class="text-green-600 text-sm mt-1">No payment required for coaching staff</div>
           </div>
 
-          <div v-else-if="player.paymentInfo.notes" class="mb-4 p-2 bg-yellow-100 rounded">
-            <strong>Notes:</strong> {{ player.paymentInfo.notes }}
-          </div>
+          <div v-else>
+            <!-- Payment Status Summary -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+              <div class="flex items-center space-x-2">
+                <span class="font-medium text-gray-700">Registration Fee:</span>
+                <FontAwesomeIcon
+                  :icon="['fal', player.paymentInfo.registrationFeePaid ? 'check-circle' : 'times-circle']"
+                  :class="player.paymentInfo.registrationFeePaid ? 'text-green-600' : 'text-red-600'"
+                  class="text-lg"
+                />
+                <span :class="player.paymentInfo.registrationFeePaid ? 'text-green-600' : 'text-red-600'" class="font-medium">
+                  {{ player.paymentInfo.registrationFeePaid ? 'Paid' : 'Unpaid' }}
+                </span>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="font-medium text-gray-700">Subscription Status:</span>
+                <FontAwesomeIcon
+                  :icon="['fal', player.paymentInfo.subscriptionUpToDate ? 'check-circle' : 'times-circle']"
+                  :class="player.paymentInfo.subscriptionUpToDate ? 'text-green-600' : 'text-red-600'"
+                  class="text-lg"
+                />
+                <span :class="player.paymentInfo.subscriptionUpToDate ? 'text-green-600' : 'text-red-600'" class="font-medium">
+                  {{ player.paymentInfo.subscriptionUpToDate ? 'Up to Date' : 'Issues Found' }}
+                </span>
+              </div>
+            </div>
 
-          <!-- Monthly Payments Table -->
-          <div v-if="!player.paymentInfo.isCoach && player.paymentInfo.monthlyPayments && player.paymentInfo.monthlyPayments.length > 0" class="mt-4">
-            <h4 class="font-semibold mb-2">Monthly Payment Status</h4>
-            <div class="overflow-x-auto">
-              <table class="w-full text-sm">
-                <thead>
-                  <tr>
-                    <th class="bg-black text-gold font-normal text-xs p-2 text-left">Month</th>
-                    <th class="bg-black text-gold font-normal text-xs p-2 text-center">Status</th>
-                    <th class="bg-black text-gold font-normal text-xs p-2 text-center">Amount</th>
-                    <th class="bg-black text-gold font-normal text-xs p-2 text-left">Details</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr v-for="monthPayment in player.paymentInfo.monthlyPayments" :key="monthPayment.monthKey">
-                    <td class="p-2 border border-gray-200 text-xs">
-                      {{ monthPayment.month }} {{ monthPayment.year }}
-                    </td>
-                    <td class="p-2 border border-gray-200 text-xs text-center">
-                      <span
-                        :class="getPaymentStatusClass(monthPayment.status)"
-                        class="px-2 py-1 rounded text-xs font-medium"
-                      >
-                        {{ getPaymentStatusText(monthPayment.status) }}
-                      </span>
-                    </td>
-                    <td class="p-2 border border-gray-200 text-xs text-center">
-                      <div v-if="monthPayment.amount !== null">
-                        £{{ monthPayment.amount.toFixed(2) }}
-                        <div v-if="monthPayment.refunded" class="text-red-600">
-                          (Refunded: £{{ monthPayment.refunded.toFixed(2) }})
-                        </div>
-                      </div>
-                      <span v-else>-</span>
-                    </td>
-                    <td class="p-2 border border-gray-200 text-xs">
-                      {{ monthPayment.reason }}
-                      <div v-if="monthPayment.dueDate" class="text-gray-600">
-                        Due: {{ monthPayment.dueDate | formatDate('dd/MM/yyyy') }}
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+            <div v-if="player.paymentInfo.notes" class="mb-4 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
+              <div class="flex items-start space-x-2">
+                <FontAwesomeIcon :icon="['fal', 'exclamation-triangle']" class="text-yellow-600 mt-0.5" />
+                <div>
+                  <span class="font-medium text-yellow-800">Notes:</span>
+                  <span class="text-yellow-700 ml-1">{{ player.paymentInfo.notes }}</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Expandable Monthly Payments -->
+            <div v-if="player.paymentInfo.monthlyPayments && player.paymentInfo.monthlyPayments.length > 0" class="mt-4">
+              <button
+                @click="toggleMonthlyView(player.id)"
+                class="flex items-center justify-between w-full p-3 bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-lg transition-colors duration-200"
+              >
+                <span class="font-medium text-gray-700">Monthly Payment Details</span>
+                <FontAwesomeIcon
+                  :icon="['fal', isMonthlyViewExpanded(player.id) ? 'chevron-up' : 'chevron-down']"
+                  class="text-gray-500"
+                />
+              </button>
+
+              <div v-if="isMonthlyViewExpanded(player.id)" class="mt-3 border border-gray-200 rounded-lg overflow-hidden">
+                <div class="overflow-x-auto">
+                  <table class="w-full text-sm">
+                    <thead>
+                      <tr class="bg-gray-50">
+                        <th class="px-4 py-3 text-left font-medium text-gray-700">Month</th>
+                        <th class="px-4 py-3 text-center font-medium text-gray-700">Status</th>
+                        <th class="px-4 py-3 text-center font-medium text-gray-700">Amount</th>
+                        <th class="px-4 py-3 text-left font-medium text-gray-700">Details</th>
+                      </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+                      <tr v-for="monthPayment in player.paymentInfo.monthlyPayments" :key="monthPayment.monthKey" class="hover:bg-gray-50">
+                        <td class="px-4 py-3 font-medium text-gray-900">
+                          {{ monthPayment.month }} {{ monthPayment.year }}
+                        </td>
+                        <td class="px-4 py-3 text-center">
+                          <span
+                            :class="getPaymentStatusClass(monthPayment.status)"
+                            class="inline-block px-3 py-1 rounded-full text-xs font-medium"
+                          >
+                            {{ getPaymentStatusText(monthPayment.status) }}
+                          </span>
+                        </td>
+                        <td class="px-4 py-3 text-center">
+                          <div v-if="monthPayment.amount !== null">
+                            <span class="font-medium">£{{ monthPayment.amount.toFixed(2) }}</span>
+                            <div v-if="monthPayment.refunded" class="text-red-600 text-xs mt-1">
+                              Refunded: £{{ monthPayment.refunded.toFixed(2) }}
+                            </div>
+                          </div>
+                          <span v-else class="text-gray-400">-</span>
+                        </td>
+                        <td class="px-4 py-3">
+                          <div class="text-gray-700">{{ monthPayment.reason }}</div>
+                          <div v-if="monthPayment.dueDate" class="text-gray-500 text-xs mt-1">
+                            Due: {{ monthPayment.dueDate | formatDate('dd/MM/yyyy') }}
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div v-if="subscriptionPlayers.length === 0" class="mt-4 p-4 bg-gray-100 rounded-lg text-center">
-        No subscription players for this team
+      <div v-if="subscriptionPlayers.length === 0" class="mt-4 p-6 bg-gray-50 border border-gray-200 rounded-lg text-center">
+        <div class="text-gray-500">No subscription players for this team</div>
       </div>
     </div>
   </div>
@@ -207,6 +240,7 @@ export default {
     players: [],
     seasonMonths: [],
     seasonInfo: null,
+    expandedMonthlyViews: [],
     sexes: [
       { key: 'male', value: 'Male' },
       { key: 'female', value: 'Female' },
@@ -475,6 +509,17 @@ export default {
         default:
           return status;
       }
+    },
+    toggleMonthlyView(playerId) {
+      const index = this.expandedMonthlyViews.indexOf(playerId);
+      if (index > -1) {
+        this.expandedMonthlyViews.splice(index, 1);
+      } else {
+        this.expandedMonthlyViews.push(playerId);
+      }
+    },
+    isMonthlyViewExpanded(playerId) {
+      return this.expandedMonthlyViews.includes(playerId);
     },
     // async setDefaultPaymentMethod() {
     //   const response = await this.$axios.post('/api/admin/set-default-payment-method');
