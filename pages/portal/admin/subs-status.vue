@@ -15,6 +15,7 @@
       :options="filteredTeams"
       v-model="filters.team"
     />
+
     <!-- <button class="hidden" @click="setDefaultPaymentMethod()">Set Default Payment Method</button> -->
 
     <div v-if="loading">
@@ -88,74 +89,101 @@
       </table>
 
       <h2 class="mt-10">Subscription Payment Players</h2>
-      <table class="w-full">
-        <thead>
-          <tr>
-            <th class="bg-black text-gold font-normal text-sm p-2 text-left">Player</th>
-            <th class="bg-black text-gold font-normal text-sm p-2 text-center">Date Registered</th>
-            <th class="bg-black text-gold font-normal text-sm p-2 text-center">Paid Reg Fee?</th>
-            <th class="bg-black text-gold font-normal text-sm p-2 text-center">Subs Up To Date?</th>
-            <th class="bg-black text-gold font-normal text-sm p-2 text-left">Notes</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-if="subscriptionPlayers.length === 0">
-            <td class="p-2 border border-grey-200 text-sm text-center" colspan="5">
-              No subscription players for this team
-            </td>
-          </tr>
-          <template v-else>
-            <tr
-              v-for="player in subscriptionPlayers"
-              :key="`player-${player.id}`"
+      <div v-for="player in subscriptionPlayers" :key="`subscription-player-${player.id}`" class="mb-8">
+        <div class="bg-gray-50 p-4 rounded-lg">
+          <h3 class="text-lg font-semibold mb-2">
+            <a
+              :href="`https://dashboard.stripe.com/customers/${player.stripeCustomerId}`"
+              title="View on Stripe"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-blue-600 hover:text-blue-800"
             >
-              <td class="p-2 border border-grey-200 text-sm text-left">
-                <a
-                  :href="`https://dashboard.stripe.com/customers/${player.stripeCustomerId}`"
-                  title="View on Stripe"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {{ player.firstName }}
-                  {{ player.middleNames ? ` ${player.middleNames}` : '' }}
-                  {{ player.lastName ? ` ${player.lastName}` : '' }}
-                </a>
-              </td>
-              <td
-                v-if="player.paymentInfo.isCoach"
-                colspan="4"
-                class="p-2 border border-grey-200 text-sm text-center"
-              >
-                FREE COACH REGISTRATION
-              </td>
-              <template v-else>
-                <td class="p-2 border border-grey-200 text-sm text-center">
-                  {{ player.createdAt | formatDate('dd/MM/yyyy - HH:mm') }}
-                </td>
-                <td class="p-2 border border-grey-200 text-sm text-center">
-                  <FontAwesomeIcon
-                    :icon="[
-                      'fal',
-                      player.paymentInfo.registrationFeePaid ? 'check' : 'xmark',
-                    ]"
-                  />
-                </td>
-                <td class="p-2 border border-grey-200 text-sm text-center">
-                  <FontAwesomeIcon
-                    :icon="[
-                      'fal',
-                      player.paymentInfo.subscriptionUpToDate ? 'check' : 'xmark',
-                    ]"
-                  />
-                </td>
-                <td class="p-2 border border-grey-200 text-sm">
-                  {{ player.paymentInfo.notes == null ? '' : player.paymentInfo.notes }}
-                </td>
-              </template>
-            </tr>
-          </template>
-        </tbody>
-      </table>
+              {{ player.firstName }}
+              {{ player.middleNames ? ` ${player.middleNames}` : '' }}
+              {{ player.lastName ? ` ${player.lastName}` : '' }}
+            </a>
+          </h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+            <div>
+              <strong>Registered:</strong> {{ player.createdAt | formatDate('dd/MM/yyyy - HH:mm') }}
+            </div>
+            <div v-if="!player.paymentInfo.isCoach">
+              <strong>Registration Fee:</strong>
+              <FontAwesomeIcon
+                :icon="['fal', player.paymentInfo.registrationFeePaid ? 'check' : 'xmark']"
+                :class="player.paymentInfo.registrationFeePaid ? 'text-green-600' : 'text-red-600'"
+              />
+            </div>
+            <div v-if="!player.paymentInfo.isCoach">
+              <strong>Subscription Status:</strong>
+              <FontAwesomeIcon
+                :icon="['fal', player.paymentInfo.subscriptionUpToDate ? 'check' : 'xmark']"
+                :class="player.paymentInfo.subscriptionUpToDate ? 'text-green-600' : 'text-red-600'"
+              />
+            </div>
+          </div>
+
+          <div v-if="player.paymentInfo.isCoach" class="text-center py-4 bg-green-100 rounded-lg">
+            <strong>FREE COACH REGISTRATION</strong>
+          </div>
+
+          <div v-else-if="player.paymentInfo.notes" class="mb-4 p-2 bg-yellow-100 rounded">
+            <strong>Notes:</strong> {{ player.paymentInfo.notes }}
+          </div>
+
+          <!-- Monthly Payments Table -->
+          <div v-if="!player.paymentInfo.isCoach && player.paymentInfo.monthlyPayments && player.paymentInfo.monthlyPayments.length > 0" class="mt-4">
+            <h4 class="font-semibold mb-2">Monthly Payment Status</h4>
+            <div class="overflow-x-auto">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr>
+                    <th class="bg-black text-gold font-normal text-xs p-2 text-left">Month</th>
+                    <th class="bg-black text-gold font-normal text-xs p-2 text-center">Status</th>
+                    <th class="bg-black text-gold font-normal text-xs p-2 text-center">Amount</th>
+                    <th class="bg-black text-gold font-normal text-xs p-2 text-left">Details</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="monthPayment in player.paymentInfo.monthlyPayments" :key="monthPayment.monthKey">
+                    <td class="p-2 border border-gray-200 text-xs">
+                      {{ monthPayment.month }} {{ monthPayment.year }}
+                    </td>
+                    <td class="p-2 border border-gray-200 text-xs text-center">
+                      <span
+                        :class="getPaymentStatusClass(monthPayment.status)"
+                        class="px-2 py-1 rounded text-xs font-medium"
+                      >
+                        {{ getPaymentStatusText(monthPayment.status) }}
+                      </span>
+                    </td>
+                    <td class="p-2 border border-gray-200 text-xs text-center">
+                      <div v-if="monthPayment.amount !== null">
+                        £{{ monthPayment.amount.toFixed(2) }}
+                        <div v-if="monthPayment.refunded" class="text-red-600">
+                          (Refunded: £{{ monthPayment.refunded.toFixed(2) }})
+                        </div>
+                      </div>
+                      <span v-else>-</span>
+                    </td>
+                    <td class="p-2 border border-gray-200 text-xs">
+                      {{ monthPayment.reason }}
+                      <div v-if="monthPayment.dueDate" class="text-gray-600">
+                        Due: {{ monthPayment.dueDate | formatDate('dd/MM/yyyy') }}
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div v-if="subscriptionPlayers.length === 0" class="mt-4 p-4 bg-gray-100 rounded-lg text-center">
+        No subscription players for this team
+      </div>
     </div>
   </div>
 </template>
@@ -177,6 +205,8 @@ export default {
     },
     loading: true,
     players: [],
+    seasonMonths: [],
+    seasonInfo: null,
     sexes: [
       { key: 'male', value: 'Male' },
       { key: 'female', value: 'Female' },
@@ -389,11 +419,62 @@ export default {
     async fetchSubsStatus() {
       this.loading = true;
 
-      const { data: { data: players } } = await this.$axios.post('/api/admin/subs-status', this.filters);
+      const { data: { data } } = await this.$axios.post('/api/admin/subs-status', {
+        team: this.filters.team
+      });
 
-      this.players = players;
+      this.players = data.players;
+      this.seasonMonths = data.seasonMonths;
+      this.seasonInfo = data.seasonInfo;
 
       this.loading = false;
+    },
+    getCurrentMonthName(monthNumber) {
+      const months = [
+        'January', 'February', 'March', 'April', 'May', 'June',
+        'July', 'August', 'September', 'October', 'November', 'December'
+      ];
+      return months[monthNumber - 1];
+    },
+    getPaymentStatusClass(status) {
+      switch (status) {
+        case 'paid':
+          return 'bg-green-500 text-white';
+        case 'pending':
+          return 'bg-amber-500 text-white';
+        case 'overdue':
+          return 'bg-red-600 text-white';
+        case 'failed':
+          return 'bg-red-600 text-white';
+        case 'missing':
+          return 'bg-gray-500 text-white';
+        case 'void':
+          return 'bg-gray-400 text-white';
+        case 'N/A':
+          return 'bg-blue-500 text-white';
+        default:
+          return 'bg-gray-500 text-white';
+      }
+    },
+    getPaymentStatusText(status) {
+      switch (status) {
+        case 'paid':
+          return 'Paid';
+        case 'pending':
+          return 'Pending';
+        case 'overdue':
+          return 'Overdue';
+        case 'failed':
+          return 'Failed';
+        case 'missing':
+          return 'Missing';
+        case 'void':
+          return 'Void';
+        case 'N/A':
+          return 'N/A';
+        default:
+          return status;
+      }
     },
     // async setDefaultPaymentMethod() {
     //   const response = await this.$axios.post('/api/admin/set-default-payment-method');

@@ -136,37 +136,37 @@ export default {
   methods: {
     changeFieldValue (e) {
       let value = e.target.value;
-      
+
       // Handle empty values
       if (value == null || value === '') {
         this.$emit('input', null);
         return;
       }
-      
+
       // Convert to number for numeric inputs
       if (this.fieldType === 'number') {
         const numValue = parseFloat(value);
-        
+
         // Check if it's a valid number
         if (!isNaN(numValue)) {
           // Apply min/max constraints
           let constrainedValue = numValue;
-          
+
           if (this.min !== null && numValue < this.min) {
             constrainedValue = this.min;
           }
-          
+
           if (this.max !== null && numValue > this.max) {
             constrainedValue = this.max;
           }
-          
+
           // If we had to constrain the value, update the input
           if (constrainedValue !== numValue) {
             this.$nextTick(() => {
               e.target.value = constrainedValue;
             });
           }
-          
+
           this.$emit('input', constrainedValue);
         } else {
           // If not a valid number, emit null
