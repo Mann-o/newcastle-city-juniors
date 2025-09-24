@@ -74,7 +74,7 @@
               <span class="text-xs text-danger mt-2">{{ errors[0] }}</span>
             </ValidationProvider>
             <div
-              class="flex items-center cursor-pointer border p-4 transition-colors"
+              class="flex items-center cursor-pointer border p-4 transition-colors mb-4"
               :class="{
                 'border-grey-400': giftAidDeclarationAccepted,
                 'border-success': giftAidDeclarationAccepted,
