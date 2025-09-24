@@ -21,13 +21,12 @@
       </ul>
     </div>
 
-    <!-- <p><strong>This event is in the past and can no longer be booked.</strong></p> -->
+    <p><strong>This event is in the past and can no longer be booked.</strong></p>
 
-    <p class="pb-8"><strong>Full payment is required up-front to secure your booking.</strong></p>
+    <!-- <p class="pb-8"><strong>Full payment is required up-front to secure your booking.</strong></p>
 
     <p class="pb-8">To book a table or individual ticket, simply tap the button below, complete all fields, and make payment!</p>
 
-    <!-- Ticket availability indicator -->
     <div v-if="!ticketAvailability.table.available || !ticketAvailability.individual.available" class="mb-6 p-4 border rounded-lg">
       <div v-if="!ticketAvailability.table.available && !ticketAvailability.individual.available" class="bg-red-100 border-red-400 text-red-700 p-3 rounded flex gap-4 items-center">
         <FontAwesomeIcon :icon="['fad', 'triangle-exclamation']" class="mr-2 text-xl" />
@@ -72,7 +71,6 @@
                 v-model="form.ticketOption"
               />
               <span class="text-xs text-danger mt-2">{{ errors[0] }}</span>
-              <!-- Show availability warnings -->
               <div v-if="!ticketAvailability.table.available && !ticketAvailability.individual.available" class="mt-2 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
                 <strong>All ticket types are currently sold out.</strong>
               </div>
@@ -131,12 +129,12 @@
           </div>
         </form>
       </ValidationObserver>
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script>
-import { ValidationObserver, ValidationProvider } from 'vee-validate';
+// import { ValidationObserver, ValidationProvider } from 'vee-validate';
 
 export default {
   name: 'PageNewsAndEventsFootyTalkIn2025Keegan',
@@ -144,233 +142,233 @@ export default {
   scrollToTop: true,
 
   components: {
-    Loader: () => import('@/components/layout/Loader.vue'),
-    FormSection: () => import('@/components/elements/forms/FormSection.vue'),
-    FormElement: () => import('@/components/elements/forms/FormElement.vue'),
-    FormSelect: () => import('@/components/elements/forms/FormSelect.vue'),
-    FormTotalCost: () => import('@/components/elements/forms/FormTotalCost.vue'),
-    ValidationObserver,
-    ValidationProvider,
+    // Loader: () => import('@/components/layout/Loader.vue'),
+    // FormSection: () => import('@/components/elements/forms/FormSection.vue'),
+    // FormElement: () => import('@/components/elements/forms/FormElement.vue'),
+    // FormSelect: () => import('@/components/elements/forms/FormSelect.vue'),
+    // FormTotalCost: () => import('@/components/elements/forms/FormTotalCost.vue'),
+    // ValidationObserver,
+    // ValidationProvider,
   },
 
-  head () {
-    return {
-      script: [
-        {
-          hid: 'stripe',
-          src: 'https://js.stripe.com/basil/stripe.js',
-          defer: true,
-        },
-      ],
-    }
-  },
+  // head () {
+  //   return {
+  //     script: [
+  //       {
+  //         hid: 'stripe',
+  //         src: 'https://js.stripe.com/basil/stripe.js',
+  //         defer: true,
+  //       },
+  //     ],
+  //   }
+  // },
 
-  data: () => ({
-    formActive: false,
-    ticketAvailability: {
-      table: { available: true, remaining: null },
-      individual: { available: true, remaining: null },
-    },
-    form: {
-      ticketOption: 'table',
-      fullName: null,
-      houseNameAndNumber: null,
-      city: null,
-      contactNumber: null,
-      emailAddress: null,
-    },
-    stripe: {
-      client: null,
-      elements: {
-        root: null,
-        payment: null,
-        showBlockError: false,
-      },
-      payment: {
-        intent: null,
-        error: null,
-        loading: false,
-      },
-    },
-  }),
+  // data: () => ({
+  //   formActive: false,
+  //   ticketAvailability: {
+  //     table: { available: true, remaining: null },
+  //     individual: { available: true, remaining: null },
+  //   },
+  //   form: {
+  //     ticketOption: 'table',
+  //     fullName: null,
+  //     houseNameAndNumber: null,
+  //     city: null,
+  //     contactNumber: null,
+  //     emailAddress: null,
+  //   },
+  //   stripe: {
+  //     client: null,
+  //     elements: {
+  //       root: null,
+  //       payment: null,
+  //       showBlockError: false,
+  //     },
+  //     payment: {
+  //       intent: null,
+  //       error: null,
+  //       loading: false,
+  //     },
+  //   },
+  // }),
 
-  computed: {
-    paymentAmount() {
-      return this.form.ticketOption === 'table' ? 60000 : 6500;
-    },
-    ticketOptions() {
-      return [
-        {
-          key: 'table',
-          value: this.ticketAvailability.table.available
-            ? 'Table of 10 (£600)'
-            : 'Table of 10 (£600) - SOLD OUT',
-          disabled: !this.ticketAvailability.table.available
-        },
-        {
-          key: 'individual',
-          value: this.ticketAvailability.individual.available
-            ? 'Individual (£65)'
-            : 'Individual (£65) - SOLD OUT',
-          disabled: !this.ticketAvailability.individual.available
-        },
-      ];
-    },
-    availableTicketOptions() {
-      return this.ticketOptions.filter(option => !option.disabled);
-    },
-    isSelectedOptionAvailable() {
-      return this.ticketAvailability[this.form.ticketOption]?.available;
-    },
-  },
+  // computed: {
+  //   paymentAmount() {
+  //     return this.form.ticketOption === 'table' ? 60000 : 6500;
+  //   },
+  //   ticketOptions() {
+  //     return [
+  //       {
+  //         key: 'table',
+  //         value: this.ticketAvailability.table.available
+  //           ? 'Table of 10 (£600)'
+  //           : 'Table of 10 (£600) - SOLD OUT',
+  //         disabled: !this.ticketAvailability.table.available
+  //       },
+  //       {
+  //         key: 'individual',
+  //         value: this.ticketAvailability.individual.available
+  //           ? 'Individual (£65)'
+  //           : 'Individual (£65) - SOLD OUT',
+  //         disabled: !this.ticketAvailability.individual.available
+  //       },
+  //     ];
+  //   },
+  //   availableTicketOptions() {
+  //     return this.ticketOptions.filter(option => !option.disabled);
+  //   },
+  //   isSelectedOptionAvailable() {
+  //     return this.ticketAvailability[this.form.ticketOption]?.available;
+  //   },
+  // },
 
-  watch: {
-    'form.ticketOption': function updatePaymentIntent() {
-      this.$nextTick(async () => {
-        try {
-          await this.$axios.post('/api/stripe/payment-intents/footy-talk-in-2025-keegan', {
-            amount: this.paymentAmount,
-            form: this.form,
-            paymentIntentId: this.stripe.payment.intent,
-          });
+  // watch: {
+  //   'form.ticketOption': function updatePaymentIntent() {
+  //     this.$nextTick(async () => {
+  //       try {
+  //         await this.$axios.post('/api/stripe/payment-intents/footy-talk-in-2025-keegan', {
+  //           amount: this.paymentAmount,
+  //           form: this.form,
+  //           paymentIntentId: this.stripe.payment.intent,
+  //         });
 
-          this.stripe.elements.root.fetchUpdates();
-        } catch (error) {
-          this.handleTicketLimitError(error);
-        }
-      });
-    },
-  },
+  //         this.stripe.elements.root.fetchUpdates();
+  //       } catch (error) {
+  //         this.handleTicketLimitError(error);
+  //       }
+  //     });
+  //   },
+  // },
 
-  async mounted() {
-    await this.checkTicketAvailability();
-  },
+  // async mounted() {
+  //   await this.checkTicketAvailability();
+  // },
 
-  methods: {
-    async checkTicketAvailability() {
-      try {
-        // Make a lightweight request to check availability without creating a payment intent
-        const { data } = await this.$axios.get('/api/stripe/footy-talk-keegan-availability');
+  // methods: {
+  //   async checkTicketAvailability() {
+  //     try {
+  //       // Make a lightweight request to check availability without creating a payment intent
+  //       const { data } = await this.$axios.get('/api/stripe/footy-talk-keegan-availability');
 
-        if (data?.availability?.table != null) {
-          this.ticketAvailability.table.available = data.availability.table.available;
-          this.ticketAvailability.table.remaining = data.availability.table.remaining;
-        }
+  //       if (data?.availability?.table != null) {
+  //         this.ticketAvailability.table.available = data.availability.table.available;
+  //         this.ticketAvailability.table.remaining = data.availability.table.remaining;
+  //       }
 
-        if (data?.availability?.individual != null) {
-          this.ticketAvailability.individual.available = data.availability.individual.available;
-          this.ticketAvailability.individual.remaining = data.availability.individual.remaining;
-        }
+  //       if (data?.availability?.individual != null) {
+  //         this.ticketAvailability.individual.available = data.availability.individual.available;
+  //         this.ticketAvailability.individual.remaining = data.availability.individual.remaining;
+  //       }
 
-        // Auto-select first available option if current selection is unavailable
-        if (!this.isSelectedOptionAvailable && this.availableTicketOptions.length > 0) {
-          this.form.ticketOption = this.availableTicketOptions[0].key;
-        }
-      } catch (error) {
-        // If the availability check endpoint doesn't exist, we'll rely on error handling during payment intent creation
-        console.log('Ticket availability check not available, will check during payment process');
-      }
-    },
-    async showSignupForm() {
-      if (!this.formActive) {
-        this.formActive = true;
+  //       // Auto-select first available option if current selection is unavailable
+  //       if (!this.isSelectedOptionAvailable && this.availableTicketOptions.length > 0) {
+  //         this.form.ticketOption = this.availableTicketOptions[0].key;
+  //       }
+  //     } catch (error) {
+  //       // If the availability check endpoint doesn't exist, we'll rely on error handling during payment intent creation
+  //       console.log('Ticket availability check not available, will check during payment process');
+  //     }
+  //   },
+  //   async showSignupForm() {
+  //     if (!this.formActive) {
+  //       this.formActive = true;
 
-        // Check availability before showing form
-        await this.checkTicketAvailability();
+  //       // Check availability before showing form
+  //       await this.checkTicketAvailability();
 
-        try {
-          this.stripe.client = window.Stripe(this.$config.stripeApiKey);
+  //       try {
+  //         this.stripe.client = window.Stripe(this.$config.stripeApiKey);
 
-          const { data: { paymentIntent } } = await this.$axios.post('/api/stripe/payment-intents/footy-talk-in-2025-keegan', {
-            amount: this.paymentAmount,
-            form: this.form,
-            paymentIntentId: this.stripe.payment.intent,
-          });
+  //         const { data: { paymentIntent } } = await this.$axios.post('/api/stripe/payment-intents/footy-talk-in-2025-keegan', {
+  //           amount: this.paymentAmount,
+  //           form: this.form,
+  //           paymentIntentId: this.stripe.payment.intent,
+  //         });
 
-          this.stripe.payment.intent = paymentIntent.id;
+  //         this.stripe.payment.intent = paymentIntent.id;
 
-          this.stripe.elements.root = this.stripe.client.elements({
-            clientSecret: paymentIntent.client_secret,
-          });
+  //         this.stripe.elements.root = this.stripe.client.elements({
+  //           clientSecret: paymentIntent.client_secret,
+  //         });
 
-          this.stripe.elements.payment = this.stripe.elements.root.create('payment', { layout: 'tabs' });
-          this.stripe.elements.payment.mount('#payment-element');
-        } catch (error) {
-          if (error.response?.status === 400 && error.response?.data?.status === 'Ticket Limit Reached') {
-            this.handleTicketLimitError(error);
-          } else {
-            this.stripe.elements.showBlockError = true;
-          }
-        }
-      }
-    },
-    handleTicketLimitError(error) {
-      const errorData = error.response?.data;
-      if (errorData?.status === 'Ticket Limit Reached') {
-        // Update availability based on the error message
-        if (errorData.message.toLowerCase().includes('table')) {
-          this.ticketAvailability.table.available = false;
-          this.ticketAvailability.table.remaining = errorData.remaining;
-        }
-        if (errorData.message.toLowerCase().includes('individual')) {
-          this.ticketAvailability.individual.available = false;
-          this.ticketAvailability.individual.remaining = errorData.remaining;
-        }
+  //         this.stripe.elements.payment = this.stripe.elements.root.create('payment', { layout: 'tabs' });
+  //         this.stripe.elements.payment.mount('#payment-element');
+  //       } catch (error) {
+  //         if (error.response?.status === 400 && error.response?.data?.status === 'Ticket Limit Reached') {
+  //           this.handleTicketLimitError(error);
+  //         } else {
+  //           this.stripe.elements.showBlockError = true;
+  //         }
+  //       }
+  //     }
+  //   },
+  //   handleTicketLimitError(error) {
+  //     const errorData = error.response?.data;
+  //     if (errorData?.status === 'Ticket Limit Reached') {
+  //       // Update availability based on the error message
+  //       if (errorData.message.toLowerCase().includes('table')) {
+  //         this.ticketAvailability.table.available = false;
+  //         this.ticketAvailability.table.remaining = errorData.remaining;
+  //       }
+  //       if (errorData.message.toLowerCase().includes('individual')) {
+  //         this.ticketAvailability.individual.available = false;
+  //         this.ticketAvailability.individual.remaining = errorData.remaining;
+  //       }
 
-        // Auto-select the first available option
-        const availableOptions = this.availableTicketOptions;
-        if (availableOptions.length > 0 && !this.isSelectedOptionAvailable) {
-          this.form.ticketOption = availableOptions[0].key;
-        }
+  //       // Auto-select the first available option
+  //       const availableOptions = this.availableTicketOptions;
+  //       if (availableOptions.length > 0 && !this.isSelectedOptionAvailable) {
+  //         this.form.ticketOption = availableOptions[0].key;
+  //       }
 
-        // Show user-friendly error message
-        this.stripe.payment.error = errorData.message;
-      }
-    },
-    async completePayment() {
-      // Prevent submission if selected option is not available
-      if (!this.isSelectedOptionAvailable) {
-        this.stripe.payment.error = 'The selected ticket type is no longer available. Please select a different option.';
-        return;
-      }
+  //       // Show user-friendly error message
+  //       this.stripe.payment.error = errorData.message;
+  //     }
+  //   },
+  //   async completePayment() {
+  //     // Prevent submission if selected option is not available
+  //     if (!this.isSelectedOptionAvailable) {
+  //       this.stripe.payment.error = 'The selected ticket type is no longer available. Please select a different option.';
+  //       return;
+  //     }
 
-      this.stripe.payment.error = null;
-      this.stripe.payment.loading = true;
+  //     this.stripe.payment.error = null;
+  //     this.stripe.payment.loading = true;
 
-      try {
-        await this.$axios.post('/api/stripe/payment-intents/footy-talk-in-2025-keegan', {
-          amount: this.paymentAmount,
-          form: this.form,
-          paymentIntentId: this.stripe.payment.intent,
-        });
+  //     try {
+  //       await this.$axios.post('/api/stripe/payment-intents/footy-talk-in-2025-keegan', {
+  //         amount: this.paymentAmount,
+  //         form: this.form,
+  //         paymentIntentId: this.stripe.payment.intent,
+  //       });
 
-        await this.stripe.elements.root.fetchUpdates();
+  //       await this.stripe.elements.root.fetchUpdates();
 
-        const { error } = await this.stripe.client.confirmPayment({
-          elements: this.stripe.elements.root,
-          confirmParams: {
-            receipt_email: this.form.emailAddress,
-            return_url: `${window.location.origin}/payment-success`,
-          },
-        });
+  //       const { error } = await this.stripe.client.confirmPayment({
+  //         elements: this.stripe.elements.root,
+  //         confirmParams: {
+  //           receipt_email: this.form.emailAddress,
+  //           return_url: `${window.location.origin}/payment-success`,
+  //         },
+  //       });
 
-        if (error.type === 'card_error' || error.type === 'validation_error') {
-          this.stripe.payment.error = error.message;
-        } else {
-          this.stripe.payment.error = 'An unexpected error occurred, please try again';
-        }
+  //       if (error.type === 'card_error' || error.type === 'validation_error') {
+  //         this.stripe.payment.error = error.message;
+  //       } else {
+  //         this.stripe.payment.error = 'An unexpected error occurred, please try again';
+  //       }
 
-        this.stripe.payment.loading = false;
-      } catch (error) {
-        this.stripe.payment.loading = false;
+  //       this.stripe.payment.loading = false;
+  //     } catch (error) {
+  //       this.stripe.payment.loading = false;
 
-        if (error.response?.status === 400 && error.response?.data?.status === 'Ticket Limit Reached') {
-          this.handleTicketLimitError(error);
-        } else {
-          console.log(error);
-        }
-      }
-    },
-  },
+  //       if (error.response?.status === 400 && error.response?.data?.status === 'Ticket Limit Reached') {
+  //         this.handleTicketLimitError(error);
+  //       } else {
+  //         console.log(error);
+  //       }
+  //     }
+  //   },
+  // },
 };
 </script>

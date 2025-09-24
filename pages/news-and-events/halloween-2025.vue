@@ -73,6 +73,19 @@
               />
               <span class="text-xs text-danger mt-2">{{ errors[0] }}</span>
             </ValidationProvider>
+            <div
+              class="flex items-center cursor-pointer border p-4 transition-colors"
+              :class="{
+                'border-grey-400': giftAidDeclarationAccepted,
+                'border-success': giftAidDeclarationAccepted,
+                'bg-grey-200': giftAidDeclarationAccepted,
+                'bg-success-bg': giftAidDeclarationAccepted,
+              }"
+              @click="toggleGiftAidDeclarationAcceptance()"
+            >
+              <input type="checkbox" v-model="giftAidDeclarationAccepted">
+              <p class="ml-4">By ticking this box, I am certifying that I want to Gift Aid any payments/donations to Newcastle City Juniors. This includes any payments/donations that I make in the future, or may have made in the past. I am also certifying that I am a UK taxpayer and understand that if I pay less Income Tax and/or Capital Gains Tax than the amount of Gift Aid claimed on all my payments/donations in any given tax year, it is my responsibility to pay the difference.</p>
+            </div>
           </FormSection>
           <div v-if="stripe.elements.showBlockError" class="mb-4">
             <p class="text-danger">Your browser appears to be blocking our payment provider, Stripe, from loading on this page. Please disable any tracking/ad blockers such as uBlock Origin or AdBlock and reload the page.</p>
@@ -135,6 +148,7 @@ export default {
 
   data: () => ({
     formActive: false,
+    giftAidDeclarationAccepted: false,
     ticketAvailability: {
       available: true,
       remaining: null,
